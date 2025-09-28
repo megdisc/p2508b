@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>p2508b_工賃管理システム</title>
+    <!-- Font Awesome (アイコン) の読み込み -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* UI/UX要件で定義されたテーマカラー */
+        :root {
+            --main-color: #001f3f; /* 夜の海の色 */
+            --sub-color: #FFFFFF; /* 波しぶきの色 */
+            --accent-color: #FFD700; /* 北極星の輝き */
+            --base-color: #f4f7fa; /* 補助カラーより少し明るい背景色 */
+            --border-color: #E6E6E6; /* 羅針盤の目盛り */
+            --danger-color: #E53935; /* 灯台の光 */
+            --text-color: #333;
+            --text-light-color: #f1f1f1;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* 基本スタイル */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Helvetica Neue', 'Arial', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
+            background-color: var(--base-color);
+            color: var(--text-color);
+        }
+
+        /* 全体レイアウト */
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ヘッダー (左側ナビゲーション) */
+        .header {
+            width: 260px;
+            background-color: var(--main-color);
+            color: var(--text-light-color);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .system-title {
+            font-size: 1.5em;
+            margin: 0 0 40px 0;
+            text-align: center;
+        }
+        .system-title .fa-coins {
+            color: var(--accent-color);
+        }
+
+        .header-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .header-nav li a {
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: var(--text-light-color);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .header-nav li a:hover,
+        .header-nav li.active a {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .header-nav li a i {
+            margin-right: 15px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .account-info {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        .account-info .account-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .account-info .account-role {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        /* メインコンテンツ */
+        .main-content {
+            flex-grow: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .section-title {
+            font-size: 2em;
+            margin-top: 0;
+            margin-bottom: 30px;
+            color: var(--main-color);
+        }
+
+        /* カードスタイル */
+        .card {
+            background-color: var(--sub-color);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-header h3 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        /* フィルターフォーム */
+        .filter-form label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .filter-form input[type="number"] {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1em;
+        }
+
+        /* サマリー表示 */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 30px;
+        }
+        .summary-period {
+            grid-column: 1 / -1;
+            font-size: 1.2em;
+            font-weight: bold;
+            padding: 15px;
+            background-color: var(--base-color);
+            border-radius: 8px;
+        }
+        .summary-item {
+            background-color: var(--sub-color);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid;
+        }
+        .summary-item.income { border-color: #28a745; }
+        .summary-item.expense { border-color: #dc3545; }
+        .summary-item.savings { border-color: #17a2b8; }
+        .summary-item h4 { margin-top: 0; }
+        .summary-item p { margin: 5px 0 0; }
+
+        /* テーブル */
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        thead th {
+            background-color: var(--base-color);
+            font-weight: bold;
+        }
+        tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        /* ボタン */
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+        .btn:hover {
+            opacity: 0.8;
+        }
+        .btn-detail {
+            background-color: var(--accent-color);
+            color: var(--main-color);
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .header {
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 20px;
+            }
+            .system-title {
+                font-size: 1.2em;
+                margin: 0;
+            }
+            .header-nav { display: none; } /* 省略のため非表示 */
+            .account-info {
+                margin: 0;
+                padding: 0;
+                border: none;
+                text-align: right;
+            }
+            .main-content {
+                padding: 20px;
+            }
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .filter-form {
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー (画面左側に配置) -->
+        <header class="header">
+            <h1 class="system-title">
+                <i class="fas fa-coins"></i> p2508b_工賃管理システム
+            </h1>
+            <!-- ヘッダーナビゲーション -->
+            <nav class="header-nav">
+                <ul>
+                    <li class="active"><a href="#"><i class="fas fa-chart-pie"></i> 収支管理</a></li>
+                    <li><a href="#"><i class="fas fa-tasks"></i> 案件管理</a></li>
+                    <li><a href="#"><i class="fas fa-users"></i> 利用者情報</a></li>
+                    <li><a href="#"><i class="fas fa-cogs"></i> 各種設定</a></li>
+                </ul>
+            </nav>
+            <!-- アカウント情報表示ブロック -->
+            <div class="account-info">
+                <div class="account-name"><i class="fas fa-user-circle"></i> 恵</div>
+                <div class="account-role">スタッフ</div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ (画面右側に配置) -->
+        <main class="main-content">
+            <!-- 収支一覧画面 -->
+            <section id="dashboard" class="content-section">
+                <h2 class="section-title"><i class="fas fa-chart-pie"></i> 収支一覧</h2>
+                
+                <!-- 収支情報一覧セクション -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-list-alt"></i> 収支情報一覧</h3>
+                        <!-- 表示条件選択フォーム -->
+                        <form class="filter-form">
+                            <label for="year-select">事業年度:</label>
+                            <input type="number" id="year-select" name="year" value="2025" min="2020" max="2030">
+                        </form>
+                    </div>
+
+                    <div class="card-body">
+                        <!-- サマリー表示ブロック -->
+                        <div class="summary-grid">
+                            <div class="summary-period">
+                                <i class="fas fa-calendar-alt"></i>
+                                <strong>時期:</strong>
+                                <span id="summary-period-text">2025年4月～2026年3月</span>
+                            </div>
+                            <div class="summary-item income">
+                                <h4><i class="fas fa-arrow-up"></i> 収入</h4>
+                                <p><strong>売上:</strong> &yen;12,000,000</p>
+                            </div>
+                            <div class="summary-item expense">
+                                <h4><i class="fas fa-arrow-down"></i> 支出</h4>
+                                <p><strong>外注費:</strong> &yen;1,500,000</p>
+                                <p><strong>支払い工賃:</strong> &yen;6,000,000</p>
+                            </div>
+                            <div class="summary-item savings">
+                                <h4><i class="fas fa-piggy-bank"></i> 積立</h4>
+                                <p><strong>工賃積立金:</strong> &yen;1,200,000</p>
+                                <p><strong>その他積立金:</strong> &yen;300,000</p>
+                            </div>
+                        </div>
+
+                        <!-- 収支情報テーブル -->
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>時期</th>
+                                        <th>収入 (売上)</th>
+                                        <th>支出 (外注費)</th>
+                                        <th>支出 (支払い工賃)</th>
+                                        <th>積立 (工賃積立金)</th>
+                                        <th>積立 (その他)</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- ダミーデータ -->
+                                    <tr>
+                                        <td>2025年4月</td>
+                                        <td>&yen;1,000,000</td>
+                                        <td>&yen;120,000</td>
+                                        <td>&yen;500,000</td>
+                                        <td>&yen;100,000</td>
+                                        <td>&yen;25,000</td>
+                                        <td><button class="btn btn-detail">詳細</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2025年5月</td>
+                                        <td>&yen;950,000</td>
+                                        <td>&yen;110,000</td>
+                                        <td>&yen;480,000</td>
+                                        <td>&yen;100,000</td>
+                                        <td>&yen;25,000</td>
+                                        <td><button class="btn btn-detail">詳細</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2025年6月</td>
+                                        <td>&yen;1,100,000</td>
+                                        <td>&yen;150,000</td>
+                                        <td>&yen;550,000</td>
+                                        <td>&yen;100,000</td>
+                                        <td>&yen;25,000</td>
+                                        <td><button class="btn btn-detail">詳細</button></td>
+                                    </tr>
+                                     <tr>
+                                        <td>2025年7月</td>
+                                        <td>&yen;1,050,000</td>
+                                        <td>&yen;130,000</td>
+                                        <td>&yen;520,000</td>
+                                        <td>&yen;100,000</td>
+                                        <td>&yen;25,000</td>
+                                        <td><button class="btn btn-detail">詳細</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        /**
+         * DOM読み込み完了後に実行されるイベントリスナー
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // --- 要素の取得 ---
+            const yearSelect = document.getElementById('year-select');
+            const summaryPeriodText = document.getElementById('summary-period-text');
+            const detailButtons = document.querySelectorAll('.btn-detail');
+
+            /**
+             * 事業年度の選択が変更されたときのイベント
+             */
+            yearSelect.addEventListener('change', function() {
+                // 選択された年度を取得
+                const selectedYear = parseInt(this.value, 10);
+                
+                // サマリー表示の期間を更新
+                // 例: 2025年度が選択されたら「2025年4月～2026年3月」と表示
+                if (!isNaN(selectedYear)) {
+                    const startMonth = 4;
+                    const endMonth = 3;
+                    const endYear = selectedYear + 1;
+                    summaryPeriodText.textContent = `${selectedYear}年${startMonth}月～${endYear}年${endMonth}月`;
+                    
+                    // TODO: ここに、選択された年度に応じてテーブルのデータを再描画する処理を実装します。
+                    // (今回はモックアップのため、コンソールにメッセージを表示するのみ)
+                    console.log(`事業年度が ${selectedYear} 年度に変更されました。データの再取得と描画が必要です。`);
+                }
+            });
+
+            /**
+             * 「詳細」ボタンがクリックされたときのイベント
+             */
+            detailButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // クリックされたボタンの行から時期（年月）を取得
+                    const row = this.closest('tr');
+                    const period = row.querySelector('td:first-child').textContent;
+                    
+                    alert(`「${period}」の詳細画面へ遷移します。\n（これはモックアップの動作です）`);
+                    
+                    // TODO: ここに、詳細画面へ遷移する処理を実装します。
+                    console.log(`詳細ボタンがクリックされました。対象期間: ${period}`);
+                });
+            });
+
+            // 初期化メッセージ
+            console.log('工賃管理システムのスクリプトが読み込まれました。');
+
+        });
+    </script>
+</body>
+</html>
+
