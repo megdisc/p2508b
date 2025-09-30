@@ -3,335 +3,388 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compath 工賃管理システム モックアップ</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>収支一覧 - 工賃管理システム Compath</title>
     <style>
-        /* UI/UX要件で定義されたカスタムカラー */
+        /* --- 基本設定とカラーパレット --- */
         :root {
             --main-color: #001F3F; /* 夜の海の色 */
-            --sub-color: #FFFFFF; /* 波しぶきの色 */
-            --accent-color: #FFD700; /* 北極星の輝き */
-            --support-color: #E6E6E6; /* 羅針盤の目盛り */
-            --danger-color: #E53935; /* 灯台の光 */
+            --sub-color: #FFFFFF;  /* 波しぶきの色 */
+            --accent-color: #FFD700;/* 北極星の輝き */
+            --aux-color: #E6E6E6;   /* 羅針盤の目盛り */
+            --alert-color: #E53935; /* 灯台の光 */
+            --text-color: #333333;
+            --border-color: #DDDDDD;
+            --sidebar-width: 240px;
         }
+
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            background-color: #f4f7fa;
+            color: var(--text-color);
         }
-        .bg-main { background-color: var(--main-color); }
-        .text-main { color: var(--main-color); }
-        .bg-accent { background-color: var(--accent-color); }
-        .text-accent { color: var(--accent-color); }
-        .border-support { border-color: var(--support-color); }
-        .bg-danger { background-color: var(--danger-color); }
+
+        /* --- レイアウト: 左側ヘッダー（サイドバー） --- */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--main-color);
+            color: var(--sub-color);
+            height: 100vh;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+        }
+
+        .sidebar-header {
+            padding: 0 20px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar-header h2 {
+            margin: 0;
+            font-size: 24px;
+            color: var(--accent-color);
+        }
+
+        .sidebar-nav {
+            flex-grow: 1;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-nav li a {
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: var(--sub-color);
+            transition: background-color 0.3s;
+        }
+
+        .sidebar-nav li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
         
-        /* ナビゲーションのアクティブスタイル */
-        .nav-item.active {
-            background-color: var(--accent-color);
-            color: var(--main-color);
+        .sidebar-nav li a.active {
+            background-color: rgba(255, 215, 0, 0.2);
+            border-right: 4px solid var(--accent-color);
             font-weight: bold;
         }
-        .nav-item.active i {
-            color: var(--main-color);
-        }
-    </style>
-</head>
-<body class="bg-gray-100">
 
-    <!-- ========== ログイン画面 ========== -->
-    <div id="login-page" class="flex items-center justify-center min-h-screen bg-main">
-        <div class="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-xl">
-            <div class="text-center">
-                <h1 class="text-4xl font-bold text-main">Compath</h1>
-                <p class="mt-2 text-gray-600">工賃管理システム</p>
-            </div>
-            <form class="space-y-6" onsubmit="login(event)">
-                <div>
-                    <label for="email" class="text-sm font-bold text-gray-600">メールアドレス</label>
-                    <input type="email" id="email" name="email" required class="w-full px-4 py-2 mt-2 border rounded-md border-support focus:outline-none focus:ring-2 focus:ring-accent" value="user@example.com">
-                </div>
-                <div>
-                    <label for="password" class="text-sm font-bold text-gray-600">パスワード</label>
-                    <input type="password" id="password" name="password" required class="w-full px-4 py-2 mt-2 border rounded-md border-support focus:outline-none focus:ring-2 focus:ring-accent" value="password">
-                </div>
-                <div>
-                    <button type="submit" class="w-full px-4 py-2 font-bold text-main transition duration-300 rounded-md bg-accent hover:bg-yellow-400">
-                        ログイン
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- ========== メインアプリケーション ========== -->
-    <div id="main-app" class="hidden">
-        <div class="flex h-screen bg-gray-100">
-            <!-- サイドナビゲーション -->
-            <nav class="flex flex-col w-64 text-white bg-main">
-                <div class="flex items-center justify-center h-20 shadow-md">
-                    <h1 class="text-3xl font-bold text-accent">Compath</h1>
-                </div>
-                <ul class="flex flex-col flex-grow p-4 space-y-2">
-                    <li><a href="#" class="nav-item flex items-center p-3 rounded-lg hover:bg-accent hover:text-main transition-colors duration-200 active" onclick="showContent('dashboard', this)"><i class="w-6 mr-3 text-lg fas fa-tachometer-alt"></i>ダッシュボード</a></li>
-                    <li><a href="#" class="nav-item flex items-center p-3 rounded-lg hover:bg-accent hover:text-main transition-colors duration-200" onclick="showContent('settings', this)"><i class="w-6 mr-3 text-lg fas fa-cogs"></i>各種設定</a></li>
-                    <li><a href="#" class="nav-item flex items-center p-3 rounded-lg hover:bg-accent hover:text-main transition-colors duration-200" onclick="showContent('clients', this)"><i class="w-6 mr-3 text-lg fas fa-briefcase"></i>取引先管理</a></li>
-                    <li><a href="#" class="nav-item flex items-center p-3 rounded-lg hover:bg-accent hover:text-main transition-colors duration-200" onclick="showContent('users', this)"><i class="w-6 mr-3 text-lg fas fa-users"></i>利用者管理</a></li>
-                    <li><a href="#" class="nav-item flex items-center p-3 rounded-lg hover:bg-accent hover:text-main transition-colors duration-200" onclick="showContent('projects', this)"><i class="w-6 mr-3 text-lg fas fa-tasks"></i>案件管理</a></li>
-                    <li><a href="#" class="nav-item flex items-center p-3 rounded-lg hover:bg-accent hover:text-main transition-colors duration-200" onclick="showContent('attendance', this)"><i class="w-6 mr-3 text-lg fas fa-calendar-alt"></i>勤怠管理</a></li>
-                    <li><a href="#" class="nav-item flex items-center p-3 rounded-lg hover:bg-accent hover:text-main transition-colors duration-200" onclick="showContent('finance', this)"><i class="w-6 mr-3 text-lg fas fa-chart-line"></i>収支管理</a></li>
-                </ul>
-                <div class="p-4">
-                     <a href="#" class="flex items-center p-3 text-red-300 rounded-lg hover:bg-danger hover:text-white transition-colors duration-200" onclick="logout(event)">
-                        <i class="w-6 mr-3 text-lg fas fa-sign-out-alt"></i>ログアウト
-                    </a>
-                </div>
-            </nav>
-
-            <!-- メインコンテンツ -->
-            <div class="flex flex-col flex-1">
-                <!-- ヘッダー -->
-                <header class="flex items-center justify-between h-20 px-6 bg-white shadow-md">
-                    <h2 id="page-title" class="text-2xl font-semibold text-gray-800">ダッシュボード</h2>
-                    <div class="flex items-center">
-                        <span class="mr-4 text-gray-600">ようこそ、<span class="font-bold">山田 太郎</span> さん</span>
-                        <div class="px-3 py-1 text-sm text-white rounded-full bg-main">管理者</div>
-                    </div>
-                </header>
-
-                <!-- コンテンツエリア -->
-                <main class="flex-1 p-6 overflow-y-auto">
-                    
-                    <!-- ▼ ダッシュボード ▼ -->
-                    <div id="dashboard-content" class="content-panel">
-                        <div class="p-6 text-white rounded-lg bg-main">
-                            <h3 class="text-xl font-bold">リマインダー</h3>
-                            <p class="mt-2">現在、新しい通知はありません。</p>
-                        </div>
-                    </div>
-
-                    <!-- ▼ 各種設定 ▼ -->
-                    <div id="settings-content" class="hidden content-panel">
-                        <div class="grid grid-cols-4 gap-6">
-                            <div class="col-span-1">
-                                <ul class="space-y-2 bg-white rounded-lg shadow">
-                                    <li><a href="#" class="block px-4 py-3 font-semibold text-white rounded-t-lg bg-main">施設情報</a></li>
-                                    <li><a href="#" class="block px-4 py-3 text-gray-700 hover:bg-gray-100">ベース設定</a></li>
-                                    <li><a href="#" class="block px-4 py-3 text-gray-700 hover:bg-gray-100">加算設定</a></li>
-                                    <li><a href="#" class="block px-4 py-3 text-gray-700 rounded-b-lg hover:bg-gray-100">控除設定</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-span-3 p-6 bg-white rounded-lg shadow">
-                                <h3 class="mb-4 text-xl font-bold border-b-2 text-main border-support pb-2">施設情報設定</h3>
-                                <div class="space-y-4">
-                                    <div>
-                                        <label class="font-semibold text-gray-700">法人情報</label>
-                                        <input type="text" class="w-full p-2 mt-1 border rounded border-support" value="社会福祉法人 Compath福祉会">
-                                    </div>
-                                    <div>
-                                        <label class="font-semibold text-gray-700">事業所情報</label>
-                                        <input type="text" class="w-full p-2 mt-1 border rounded border-support" value="Compath広島事業所">
-                                    </div>
-                                    <div>
-                                        <label class="font-semibold text-gray-700">利用可能時期</label>
-                                        <div class="flex items-center space-x-2">
-                                            <input type="date" class="w-full p-2 mt-1 border rounded border-support" value="2025-01-01">
-                                            <span>〜</span>
-                                            <input type="date" class="w-full p-2 mt-1 border rounded border-support">
-                                        </div>
-                                    </div>
-                                    <div class="flex justify-end pt-4">
-                                        <button class="px-6 py-2 font-bold text-main rounded-md bg-accent hover:bg-yellow-400">保存</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ▼ 取引先管理 ▼ -->
-                    <div id="clients-content" class="hidden content-panel">
-                        <div class="p-6 mb-6 bg-white rounded-lg shadow">
-                            <h3 class="mb-4 text-xl font-bold border-b-2 text-main border-support pb-2">顧客一覧</h3>
-                             <!-- ...顧客一覧テーブル... -->
-                        </div>
-                         <div class="p-6 bg-white rounded-lg shadow">
-                            <h3 class="mb-4 text-xl font-bold border-b-2 text-main border-support pb-2">外注先一覧</h3>
-                             <!-- ...外注先一覧テーブル... -->
-                        </div>
-                    </div>
-
-                    <!-- ▼ 利用者管理 ▼ -->
-                    <div id="users-content" class="hidden content-panel">
-                        <div class="p-6 bg-white rounded-lg shadow">
-                            <div class="flex items-center justify-between mb-4 border-b-2 border-support pb-2">
-                                <h3 class="text-xl font-bold text-main">利用者一覧</h3>
-                                <button class="px-4 py-2 font-bold text-main rounded-md bg-accent hover:bg-yellow-400" onclick="showContent('user-detail', this, true)">
-                                    <i class="fas fa-plus mr-2"></i>新規作成
-                                </button>
-                            </div>
-                            <div class="mb-4">
-                                <!-- 検索ブロック -->
-                                <input type="text" placeholder="利用者名で検索..." class="p-2 border rounded border-support">
-                            </div>
-                            <table class="w-full text-left bg-white">
-                                <thead class="bg-main text-white">
-                                    <tr>
-                                        <th class="p-3">氏名</th>
-                                        <th class="p-3">受給者証番号</th>
-                                        <th class="p-3">状態</th>
-                                        <th class="p-3">操作</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="border-b border-support">
-                                        <td class="p-3">鈴木 一郎</td>
-                                        <td class="p-3">1234567890</td>
-                                        <td class="p-3"><span class="px-2 py-1 text-sm text-green-800 bg-green-200 rounded-full">利用中</span></td>
-                                        <td class="p-3 space-x-2">
-                                            <button class="px-3 py-1 text-sm font-bold text-white rounded bg-main hover:bg-blue-900" onclick="showContent('user-detail', this)">詳細</button>
-                                            <button class="px-3 py-1 text-sm font-bold text-white rounded bg-danger hover:bg-red-700">削除</button>
-                                        </td>
-                                    </tr>
-                                    <!-- 他の利用者データ -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    
-                    <!-- ▼ 利用者詳細 ▼ -->
-                    <div id="user-detail-content" class="hidden content-panel">
-                        <div class="p-6 bg-white rounded-lg shadow">
-                             <div class="flex items-center justify-between mb-4 border-b-2 border-support pb-2">
-                                <h3 class="text-xl font-bold text-main">利用者詳細</h3>
-                                <button class="px-6 py-2 font-bold text-main rounded-md bg-accent hover:bg-yellow-400">
-                                    <i class="fas fa-save mr-2"></i>保存
-                                </button>
-                            </div>
-                            <div class="space-y-6">
-                                <div class="p-4 border rounded border-support">
-                                    <h4 class="font-semibold text-main">利用者基本情報</h4>
-                                    <!-- ...フォーム項目... -->
-                                </div>
-                                <div class="p-4 border rounded border-support">
-                                    <h4 class="font-semibold text-main">障害福祉サービス受給者証情報</h4>
-                                    <!-- ...フォーム項目... -->
-                                </div>
-                                <div class="p-4 border rounded border-support">
-                                    <h4 class="font-semibold text-main">基本シフト</h4>
-                                    <!-- ...フォーム項目... -->
-                                </div>
-                                 <div class="p-4 border rounded border-support">
-                                    <h4 class="font-semibold text-main">習得スキル</h4>
-                                    <!-- ...フォーム項目... -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ▼ 案件管理 ▼ -->
-                    <div id="projects-content" class="hidden content-panel">
-                         <div class="p-6 bg-white rounded-lg shadow">
-                             <div class="flex items-center justify-between mb-4 border-b-2 border-support pb-2">
-                                <h3 class="text-xl font-bold text-main">案件一覧</h3>
-                                <button class="px-4 py-2 font-bold text-main rounded-md bg-accent hover:bg-yellow-400" onclick="showContent('project-detail', this, true)">
-                                    <i class="fas fa-plus mr-2"></i>新規作成
-                                </button>
-                            </div>
-                             <!-- ...案件一覧テーブル... -->
-                        </div>
-                    </div>
-                    
-                     <!-- ▼ 案件詳細 ▼ -->
-                    <div id="project-detail-content" class="hidden content-panel">
-                        <div class="p-6 bg-white rounded-lg shadow">
-                             <div class="flex items-center justify-between mb-4 border-b-2 border-support pb-2">
-                                <h3 class="text-xl font-bold text-main">案件詳細</h3>
-                                <button class="px-6 py-2 font-bold text-main rounded-md bg-accent hover:bg-yellow-400">
-                                    <i class="fas fa-save mr-2"></i>保存
-                                </button>
-                            </div>
-                             <!-- ...案件詳細フォーム... -->
-                        </div>
-                    </div>
-                    
-                    <!-- ▼ 勤怠管理 (プレースホルダー) ▼ -->
-                    <div id="attendance-content" class="hidden content-panel">
-                        <!-- ...勤怠管理コンテンツ... -->
-                    </div>
-
-                    <!-- ▼ 収支管理 (プレースホルダー) ▼ -->
-                    <div id="finance-content" class="hidden content-panel">
-                        <!-- ...収支管理コンテンツ... -->
-                    </div>
-
-                </main>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const pageTitles = {
-            'dashboard': 'ダッシュボード',
-            'settings': '各種設定',
-            'clients': '取引先管理',
-            'users': '利用者管理',
-            'user-detail': '利用者詳細',
-            'projects': '案件管理',
-            'project-detail': '案件詳細',
-            'attendance': '勤怠管理',
-            'finance': '収支管理',
-        };
-
-        function showContent(contentId, navElement, isCreation = false) {
-            // すべてのコンテンツパネルを非表示にする
-            document.querySelectorAll('.content-panel').forEach(panel => {
-                panel.classList.add('hidden');
-            });
-
-            // 対象のコンテンツパネルを表示する
-            const targetPanelId = contentId.includes('-detail') ? contentId + '-content' : contentId + '-content';
-            const targetPanel = document.getElementById(targetPanelId);
-            if (targetPanel) {
-                targetPanel.classList.remove('hidden');
-            }
-
-            // ページタイトルを更新
-            let titleKey = contentId;
-            if (isCreation) {
-                titleKey = contentId.replace('-detail', '');
-            }
-             const pageTitle = document.getElementById('page-title');
-            if(pageTitles[titleKey]){
-                 pageTitle.textContent = pageTitles[titleKey] + (isCreation ? ' (新規作成)' : '');
-            }
-
-
-            // ナビゲーションのアクティブ状態を更新
-            if (navElement && !contentId.includes('-detail')) {
-                document.querySelectorAll('.nav-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-                navElement.classList.add('active');
-            }
-        }
-
-        function login(event) {
-            event.preventDefault(); // フォームの実際の送信を防ぐ
-            document.getElementById('login-page').classList.add('hidden');
-            document.getElementById('main-app').classList.remove('hidden');
-            showContent('dashboard', document.querySelector('.nav-item.active'));
+        .sidebar-footer {
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
         
-        function logout(event) {
-            event.preventDefault();
-            document.getElementById('main-app').classList.add('hidden');
-            document.getElementById('login-page').classList.remove('hidden');
+        .user-info {
+            margin-bottom: 20px;
+        }
+        
+        .user-info .user-name {
+            font-weight: bold;
+        }
+        
+        .user-info .user-role {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .logout-link {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            text-decoration: none;
+            color: var(--sub-color);
+            transition: background-color 0.3s;
+        }
+        
+        .logout-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
         }
 
-        // 初期表示
-        document.addEventListener('DOMContentLoaded', () => {
-             // デフォルトはログイン画面を表示
-        });
-    </script>
+        /* --- レイアウト: 右側メインコンテンツ --- */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            width: calc(100% - var(--sidebar-width));
+            padding: 30px;
+        }
 
+        h1 {
+            font-size: 28px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-top: 0;
+        }
+        
+        /* --- 画面内メニュー（タブ） --- */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 25px;
+        }
+
+        .tabs a {
+            padding: 12px 20px;
+            text-decoration: none;
+            color: var(--text-color);
+            border-bottom: 3px solid transparent;
+            margin-bottom: -1px; /* To align with the container's border */
+        }
+        
+        .tabs a.active {
+            border-bottom-color: var(--main-color);
+            font-weight: bold;
+        }
+
+        /* --- 各セクションのスタイル --- */
+        .content-section {
+            background-color: var(--sub-color);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-header h3 {
+            margin: 0;
+            font-size: 20px;
+        }
+        
+        /* 事業年度選択ブロック */
+        .year-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .year-selector button {
+            background-color: var(--aux-color);
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .year-selector .year-display {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* 累計表示ブロック */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--main-color);
+            padding: 20px;
+            border-radius: 5px;
+        }
+        
+        .card.income { border-left-color: #4CAF50; }
+        .card.expense { border-left-color: #F44336; }
+        .card.retained { border-left-color: #2196F3; }
+
+        .card p {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .card .amount {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        /* テーブル */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-table th, .data-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .data-table thead {
+            background-color: var(--aux-color);
+        }
+        
+        .data-table th {
+            font-weight: bold;
+        }
+        
+        .data-table tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* ボタン */
+        .btn {
+            background-color: var(--main-color);
+            color: var(--sub-color);
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2>Compath</h2>
+        </div>
+        <div class="sidebar-nav">
+            <ul>
+                <li><a href="#">ダッシュボード</a></li>
+                <li><a href="#">各種設定</a></li>
+                <li><a href="#">取引先管理</a></li>
+                <li><a href="#">利用者管理</a></li>
+                <li><a href="#">案件管理</a></li>
+                <li><a href="#">勤怠管理</a></li>
+                <li><a href="#" class="active">収支管理</a></li>
+            </ul>
+        </div>
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <p class="user-name">恵</p>
+                <p class="user-role">管理者</p>
+            </div>
+            <a href="#" class="logout-link">ログアウト</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h1>収支管理</h1>
+
+        <div class="tabs">
+            <a href="#" class="active">収支一覧</a>
+            <a href="#">平均工賃一覧</a>
+            <a href="#">支払い工賃一覧</a>
+        </div>
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>収支一覧</h3>
+                <div class="year-selector">
+                    <button>&lt;</button>
+                    <span class="year-display">2025年度</span>
+                    <button>&gt;</button>
+                </div>
+            </div>
+            
+            <div class="summary-cards">
+                <div class="card income">
+                    <p>収入 売上</p>
+                    <h4 class="amount">&yen; 5,480,000</h4>
+                </div>
+                <div class="card expense">
+                    <p>支出 外注費</p>
+                    <h4 class="amount">&yen; 1,230,000</h4>
+                </div>
+                <div class="card expense">
+                    <p>支出 工賃</p>
+                    <h4 class="amount">&yen; 2,950,000</h4>
+                </div>
+                <div class="card retained">
+                    <p>留保 積立金</p>
+                    <h4 class="amount">&yen; 1,300,000</h4>
+                </div>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>時期（年月）</th>
+                        <th>収入 売上</th>
+                        <th>支出 外注費</th>
+                        <th>支出 工賃</th>
+                        <th>留保 積立金</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2025年09月</td>
+                        <td>&yen; 480,000</td>
+                        <td>&yen; 110,000</td>
+                        <td>&yen; 250,000</td>
+                        <td>&yen; 120,000</td>
+                        <td><button class="btn">詳細</button></td>
+                    </tr>
+                    <tr>
+                        <td>2025年08月</td>
+                        <td>&yen; 520,000</td>
+                        <td>&yen; 150,000</td>
+                        <td>&yen; 260,000</td>
+                        <td>&yen; 110,000</td>
+                        <td><button class="btn">詳細</button></td>
+                    </tr>
+                    <tr>
+                        <td>2025年07月</td>
+                        <td>&yen; 450,000</td>
+                        <td>&yen; 90,000</td>
+                        <td>&yen; 245,000</td>
+                        <td>&yen; 115,000</td>
+                        <td><button class="btn">詳細</button></td>
+                    </tr>
+                    <tr>
+                        <td>2025年06月</td>
+                        <td>&yen; 550,000</td>
+                        <td>&yen; 120,000</td>
+                        <td>&yen; 280,000</td>
+                        <td>&yen; 150,000</td>
+                        <td><button class="btn">詳細</button></td>
+                    </tr>
+                    <tr>
+                        <td>2025年05月</td>
+                        <td>&yen; 490,000</td>
+                        <td>&yen; 130,000</td>
+                        <td>&yen; 255,000</td>
+                        <td>&yen; 105,000</td>
+                        <td><button class="btn">詳細</button></td>
+                    </tr>
+                    <tr>
+                        <td>2025年04月</td>
+                        <td>&yen; 470,000</td>
+                        <td>&yen; 100,000</td>
+                        <td>&yen; 250,000</td>
+                        <td>&yen; 120,000</td>
+                        <td><button class="btn">詳細</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
 </body>
 </html>
