@@ -214,7 +214,7 @@
                                     <button class="primary-button p-2 rounded-full text-lg">&lt;</button>
                                     <div class="text-center">
                                         <p class="text-4xl font-bold text-[var(--main-color)]">2025年度</p>
-                                        <p class="text-sm text-gray-500">2025年4月1日～2026年3月31日</p>
+                                        <p class="text-sm text-gray-500">2025年5月1日～2025年9月30日</p>
                                     </div>
                                     <button class="primary-button p-2 rounded-full text-lg">&gt;</button>
                                 </div>
@@ -252,7 +252,7 @@
                                     </thead>
                                     <tbody class="text-gray-700">
                                         <tr class="border-b">
-                                            <td class="py-3 px-4">2025年9月</td>
+                                            <td class="py-3 px-4">9月</td>
                                             <td class="py-3 px-4 text-right">¥450,000</td>
                                             <td class="py-3 px-4 text-right">- ¥40,000</td>
                                             <td class="py-3 px-4 text-right">- ¥250,000</td>
@@ -260,7 +260,7 @@
                                             <td class="py-3 px-4 text-center"><button class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button></td>
                                         </tr>
                                         <tr class="border-b bg-gray-50">
-                                             <td class="py-3 px-4">2025年8月</td>
+                                             <td class="py-3 px-4">8月</td>
                                             <td class="py-3 px-4 text-right">¥480,000</td>
                                             <td class="py-3 px-4 text-right">- ¥50,000</td>
                                             <td class="py-3 px-4 text-right">- ¥260,000</td>
@@ -275,15 +275,139 @@
 
                     <div class="finance-tab-content hidden" id="finance-average-wage">
                         <div class="card rounded-lg p-6 shadow-sm">
-                            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">平均工賃一覧</h2>
-                            <p>平均工賃一覧のコンテンツがここに表示されます。</p>
+                            <h2 class="text-xl font-bold mb-6 text-[var(--main-color)]">平均工賃一覧</h2>
+                            
+                             <div class="mb-8">
+                                <h3 class="text-lg font-semibold mb-2 text-gray-800 text-center">会計年度</h3>
+                                <div class="flex items-center justify-center space-x-4 mb-4">
+                                    <button class="primary-button p-2 rounded-full text-lg">&lt;</button>
+                                    <div class="text-center">
+                                        <p class="text-4xl font-bold text-[var(--main-color)]">2025年度</p>
+                                        <p class="text-sm text-gray-500">2025年4月1日～2025年9月30日</p>
+                                    </div>
+                                    <button class="primary-button p-2 rounded-full text-lg">&gt;</button>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 text-center">
+                                    <div class="p-4 rounded-lg bg-gray-100">
+                                        <p class="text-sm font-semibold text-gray-600">平均工賃</p>
+                                        <p class="text-2xl font-bold text-[var(--main-color)]">¥16,000</p>
+                                    </div>
+                                    <div class="p-4 rounded-lg bg-gray-100">
+                                        <p class="text-sm font-semibold text-gray-600">工賃</p>
+                                        <p class="text-2xl font-bold text-[var(--main-color)]">¥3,000,000</p>
+                                    </div>
+                                    <div class="p-4 rounded-lg bg-gray-100">
+                                        <p class="text-sm font-semibold text-gray-600">平均利用者数/日</p>
+                                        <p class="text-2xl font-bold text-[var(--main-color)]">15.6人</p>
+                                    </div>
+                                    <div class="p-4 rounded-lg bg-gray-100">
+                                        <p class="text-sm font-semibold text-gray-600">延べ利用者数</p>
+                                        <p class="text-2xl font-bold text-[var(--main-color)]">3,580人</p>
+                                    </div>
+                                    <div class="p-4 rounded-lg bg-gray-100">
+                                        <p class="text-sm font-semibold text-gray-600">開所日数</p>
+                                        <p class="text-2xl font-bold text-[var(--main-color)]">230日</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full bg-white">
+                                    <thead class="bg-[var(--main-color)] text-white">
+                                        <tr>
+                                            <th class="py-3 px-4 text-left">時期</th>
+                                            <th class="py-3 px-4 text-right">平均工賃</th>
+                                            <th class="py-3 px-4 text-right">工賃</th>
+                                            <th class="py-3 px-4 text-right">平均利用者数/日</th>
+                                            <th class="py-3 px-4 text-right">延べ利用者数</th>
+                                            <th class="py-3 px-4 text-right">開所日数</th>
+                                            <th class="py-3 px-4 text-center">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-gray-700">
+                                        <tr class="border-b">
+                                            <td class="py-3 px-4">9月</td>
+                                            <td class="py-3 px-4 text-right">¥15,800</td>
+                                            <td class="py-3 px-4 text-right">¥250,000</td>
+                                            <td class="py-3 px-4 text-right">15.8人</td>
+                                            <td class="py-3 px-4 text-right">316人</td>
+                                            <td class="py-3 px-4 text-right">20日</td>
+                                            <td class="py-3 px-4 text-center"><button class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button></td>
+                                        </tr>
+                                        <tr class="border-b bg-gray-50">
+                                             <td class="py-3 px-4">8月</td>
+                                            <td class="py-3 px-4 text-right">¥16,200</td>
+                                            <td class="py-3 px-4 text-right">¥260,000</td>
+                                            <td class="py-3 px-4 text-right">16.0人</td>
+                                            <td class="py-3 px-4 text-right">352人</td>
+                                            <td class="py-3 px-4 text-right">22日</td>
+                                            <td class="py-3 px-4 text-center"><button class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button></td>
+                                        </tr>
+                                         </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
                     <div class="finance-tab-content hidden" id="finance-payment-list">
                          <div class="card rounded-lg p-6 shadow-sm">
-                            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">支払い工賃一覧</h2>
-                            <p>支払い工賃一覧のコンテンツがここに表示されます。</p>
+                            <h2 class="text-xl font-bold mb-6 text-[var(--main-color)]">支払い工賃一覧</h2>
+
+                            <div class="mb-8">
+                                <h3 class="text-lg font-semibold mb-2 text-gray-800 text-center">事業年度</h3>
+                                <div class="flex items-center justify-center space-x-4 mb-4">
+                                    <button class="primary-button p-2 rounded-full text-lg">&lt;</button>
+                                    <div class="text-center">
+                                        <p class="text-4xl font-bold text-[var(--main-color)]">2025年度9月</p>
+                                        <p class="text-sm text-gray-500">2025年9月1日～2025年9月30日</p>
+                                    </div>
+                                    <button class="primary-button p-2 rounded-full text-lg">&gt;</button>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                                    <div class="p-4 rounded-lg bg-gray-100">
+                                        <p class="text-sm font-semibold text-gray-600">支払い工賃</p>
+                                        <p class="text-2xl font-bold text-[var(--main-color)]">¥240,000</p>
+                                    </div>
+                                    <div class="p-4 rounded-lg bg-gray-100">
+                                        <p class="text-sm font-semibold text-gray-600">工賃</p>
+                                        <p class="text-2xl font-bold text-[var(--main-color)]">¥250,000</p>
+                                    </div>
+                                    <div class="p-4 rounded-lg bg-gray-100">
+                                        <p class="text-sm font-semibold text-gray-600">控除</p>
+                                        <p class="text-2xl font-bold text-[var(--main-color)]">- ¥10,000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full bg-white">
+                                    <thead class="bg-[var(--main-color)] text-white">
+                                        <tr>
+                                            <th class="py-3 px-4 text-left">利用者名</th>
+                                            <th class="py-3 px-4 text-right">支払い工賃</th>
+                                            <th class="py-3 px-4 text-right">工賃</th>
+                                            <th class="py-3 px-4 text-right">控除</th>
+                                            <th class="py-3 px-4 text-center">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-gray-700">
+                                        <tr class="border-b">
+                                            <td class="py-3 px-4">利用者A</td>
+                                            <td class="py-3 px-4 text-right">¥15,500</td>
+                                            <td class="py-3 px-4 text-right">¥16,000</td>
+                                            <td class="py-3 px-4 text-right">- ¥500</td>
+                                            <td class="py-3 px-4 text-center"><button class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button></td>
+                                        </tr>
+                                        <tr class="border-b bg-gray-50">
+                                            <td class="py-3 px-4">利用者B</td>
+                                            <td class="py-3 px-4 text-right">¥14,500</td>
+                                            <td class="py-3 px-4 text-right">¥15,000</td>
+                                            <td class="py-3 px-4 text-right">- ¥500</td>
+                                            <td class="py-3 px-4 text-center"><button class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
