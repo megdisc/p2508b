@@ -198,153 +198,302 @@
                     <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">収支管理</h1>
                     <div class="mb-6 border-b border-gray-200">
                         <nav id="finance-sub-nav" class="-mb-px flex space-x-6">
-                            <a href="#" onclick="showFinanceTab('finance-summary', this)" class="sub-nav-link active py-4 px-1 text-gray-500 hover:text-gray-700">収支一覧</a>
-                            <a href="#" onclick="showFinanceTab('finance-average-wage', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">平均工賃一覧</a>
-                            <a href="#" onclick="showFinanceTab('finance-payment-list', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">支払い工賃一覧</a>
+                            <a href="#" onclick="showFinanceTab('finance-summary-wrapper', this)" class="sub-nav-link active py-4 px-1 text-gray-500 hover:text-gray-700">収支一覧</a>
+                            <a href="#" onclick="showFinanceTab('finance-average-wage-wrapper', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">平均工賃一覧</a>
+                            <a href="#" onclick="showFinanceTab('finance-payment-list-wrapper', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">支払い工賃一覧</a>
                         </nav>
                     </div>
 
-                    <div class="finance-tab-content" id="finance-summary">
-                        <div class="card rounded-lg p-6 shadow-sm">
-                            <h2 class="text-xl font-bold mb-6 text-[var(--main-color)]">収支一覧</h2>
-                            
-                            <div class="mb-8">
-                                <h3 class="text-lg font-semibold mb-2 text-gray-800 text-center">事業年度</h3>
-                                <div class="flex items-center justify-center space-x-4 mb-4">
-                                    <button class="primary-button p-2 rounded-full text-lg">&lt;</button>
-                                    <div class="text-center">
-                                        <p class="text-4xl font-bold text-[var(--main-color)]">2025年度</p>
-                                        <p class="text-sm text-gray-500">2025年5月1日～2025年9月30日</p>
+                    <div class="finance-tab-content" id="finance-summary-wrapper">
+                        <div id="finance-summary">
+                            <div class="card rounded-lg p-6 shadow-sm">
+                                <h2 class="text-xl font-bold mb-6 text-[var(--main-color)]">収支一覧</h2>
+                                
+                                <div class="mb-8">
+                                    <h3 class="text-lg font-semibold mb-2 text-gray-800 text-center">事業年度</h3>
+                                    <div class="flex items-center justify-center space-x-4 mb-4">
+                                        <button class="primary-button p-2 rounded-full text-lg">&lt;</button>
+                                        <div class="text-center">
+                                            <p class="text-4xl font-bold text-[var(--main-color)]">2025年度</p>
+                                            <p class="text-sm text-gray-500">2025年5月1日～2025年9月30日</p>
+                                        </div>
+                                        <button class="primary-button p-2 rounded-full text-lg">&gt;</button>
                                     </div>
-                                    <button class="primary-button p-2 rounded-full text-lg">&gt;</button>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+                                        <div class="p-4 rounded-lg bg-gray-100">
+                                            <p class="text-sm font-semibold text-gray-600">売上</p>
+                                            <p class="text-2xl font-bold text-[var(--main-color)]">¥5,000,000</p>
+                                        </div>
+                                        <div class="p-4 rounded-lg bg-gray-100">
+                                            <p class="text-sm font-semibold text-gray-600">外注費</p>
+                                            <p class="text-2xl font-bold text-[var(--main-color)]">- ¥500,000</p>
+                                        </div>
+                                        <div class="p-4 rounded-lg bg-gray-100">
+                                            <p class="text-sm font-semibold text-gray-600">工賃</p>
+                                            <p class="text-2xl font-bold text-[var(--main-color)]">- ¥3,000,000</p>
+                                        </div>
+                                        <div class="p-4 rounded-lg bg-gray-100">
+                                            <p class="text-sm font-semibold text-gray-600">積立金</p>
+                                            <p class="text-2xl font-bold text-[var(--main-color)]">¥1,500,000</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
-                                    <div class="p-4 rounded-lg bg-gray-100">
-                                        <p class="text-sm font-semibold text-gray-600">売上</p>
-                                        <p class="text-2xl font-bold text-[var(--main-color)]">¥5,000,000</p>
-                                    </div>
-                                    <div class="p-4 rounded-lg bg-gray-100">
-                                        <p class="text-sm font-semibold text-gray-600">外注費</p>
-                                        <p class="text-2xl font-bold text-[var(--main-color)]">- ¥500,000</p>
-                                    </div>
-                                    <div class="p-4 rounded-lg bg-gray-100">
-                                        <p class="text-sm font-semibold text-gray-600">工賃</p>
-                                        <p class="text-2xl font-bold text-[var(--main-color)]">- ¥3,000,000</p>
-                                    </div>
-                                    <div class="p-4 rounded-lg bg-gray-100">
-                                        <p class="text-sm font-semibold text-gray-600">積立金</p>
-                                        <p class="text-2xl font-bold text-[var(--main-color)]">¥1,500,000</p>
-                                    </div>
+
+                                <div class="overflow-x-auto">
+                                    <table class="min-w-full bg-white">
+                                        <thead class="bg-[var(--main-color)] text-white">
+                                            <tr>
+                                                <th class="py-3 px-4 text-left">時期</th>
+                                                <th class="py-3 px-4 text-right">売上</th>
+                                                <th class="py-3 px-4 text-right">外注費</th>
+                                                <th class="py-3 px-4 text-right">工賃</th>
+                                                <th class="py-3 px-4 text-right">積立金</th>
+                                                <th class="py-3 px-4 text-center">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-gray-700">
+                                            <tr class="border-b">
+                                                <td class="py-3 px-4">9月</td>
+                                                <td class="py-3 px-4 text-right">¥450,000</td>
+                                                <td class="py-3 px-4 text-right">- ¥40,000</td>
+                                                <td class="py-3 px-4 text-right">- ¥250,000</td>
+                                                <td class="py-3 px-4 text-right">¥160,000</td>
+                                                <td class="py-3 px-4 text-center"><button onclick="showIncomeExpenditureDetail(true)" class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button></td>
+                                            </tr>
+                                            <tr class="border-b bg-gray-50">
+                                                 <td class="py-3 px-4">8月</td>
+                                                <td class="py-3 px-4 text-right">¥480,000</td>
+                                                <td class="py-3 px-4 text-right">- ¥50,000</td>
+                                                <td class="py-3 px-4 text-right">- ¥260,000</td>
+                                                <td class="py-3 px-4 text-right">¥170,000</td>
+                                                <td class="py-3 px-4 text-center"><button onclick="showIncomeExpenditureDetail(true)" class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button></td>
+                                            </tr>
+                                             </tbody>
+                                    </table>
                                 </div>
                             </div>
+                        </div>
+                        <div id="finance-income-expenditure-detail" class="hidden">
+                            <div class="card rounded-lg p-6 shadow-sm">
+                                <div class="flex justify-between items-center mb-6">
+                                    <h2 class="text-xl font-bold text-[var(--main-color)]">収支詳細</h2>
+                                    <button onclick="showIncomeExpenditureDetail(false)" class="detail-button font-bold py-2 px-4 rounded">戻る</button>
+                                </div>
+                                
+                                <div class="mb-8">
+                                    <h3 class="text-lg font-semibold mb-2 text-gray-800 text-center">事業年度</h3>
+                                    <div class="flex items-center justify-center space-x-4 mb-4">
+                                        <button class="primary-button p-2 rounded-full text-lg">&lt;</button>
+                                        <div class="text-center">
+                                            <p class="text-4xl font-bold text-[var(--main-color)]">2025年度9月</p>
+                                            <p class="text-sm text-gray-500">2025年9月1日～2025年9月30日</p>
+                                        </div>
+                                        <button class="primary-button p-2 rounded-full text-lg">&gt;</button>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+                                        <div class="p-4 rounded-lg bg-gray-100">
+                                            <p class="text-sm font-semibold text-gray-600">売上</p>
+                                            <p class="text-2xl font-bold text-[var(--main-color)]">¥450,000</p>
+                                        </div>
+                                        <div class="p-4 rounded-lg bg-gray-100">
+                                            <p class="text-sm font-semibold text-gray-600">外注費</p>
+                                            <p class="text-2xl font-bold text-[var(--main-color)]">- ¥40,000</p>
+                                        </div>
+                                        <div class="p-4 rounded-lg bg-gray-100">
+                                            <p class="text-sm font-semibold text-gray-600">工賃</p>
+                                            <p class="text-2xl font-bold text-[var(--main-color)]">- ¥250,000</p>
+                                        </div>
+                                        <div class="p-4 rounded-lg bg-gray-100">
+                                            <p class="text-sm font-semibold text-gray-600">積立金</p>
+                                            <p class="text-2xl font-bold text-[var(--main-color)]">¥160,000</p>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <div class="overflow-x-auto">
-                                <table class="min-w-full bg-white">
-                                    <thead class="bg-[var(--main-color)] text-white">
-                                        <tr>
-                                            <th class="py-3 px-4 text-left">時期</th>
-                                            <th class="py-3 px-4 text-right">売上</th>
-                                            <th class="py-3 px-4 text-right">外注費</th>
-                                            <th class="py-3 px-4 text-right">工賃</th>
-                                            <th class="py-3 px-4 text-right">積立金</th>
-                                            <th class="py-3 px-4 text-center">操作</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="text-gray-700">
-                                        <tr class="border-b">
-                                            <td class="py-3 px-4">9月</td>
-                                            <td class="py-3 px-4 text-right">¥450,000</td>
-                                            <td class="py-3 px-4 text-right">- ¥40,000</td>
-                                            <td class="py-3 px-4 text-right">- ¥250,000</td>
-                                            <td class="py-3 px-4 text-right">¥160,000</td>
-                                            <td class="py-3 px-4 text-center"><button class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button></td>
-                                        </tr>
-                                        <tr class="border-b bg-gray-50">
-                                             <td class="py-3 px-4">8月</td>
-                                            <td class="py-3 px-4 text-right">¥480,000</td>
-                                            <td class="py-3 px-4 text-right">- ¥50,000</td>
-                                            <td class="py-3 px-4 text-right">- ¥260,000</td>
-                                            <td class="py-3 px-4 text-right">¥170,000</td>
-                                            <td class="py-3 px-4 text-center"><button class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button></td>
-                                        </tr>
-                                         </tbody>
-                                </table>
+                                <div class="space-y-6">
+                                    <div>
+                                        <h3 class="text-lg font-bold mb-2 text-[var(--main-color)]">売上</h3>
+                                        <table class="min-w-full bg-white">
+                                             <thead class="bg-[var(--main-color)] text-white"><tr><th class="py-3 px-4 text-left">顧客名</th><th class="py-3 px-4 text-left">案件名</th><th class="py-3 px-4 text-right">金額</th></tr></thead>
+                                             <tbody><tr class="border-b"><td class="py-3 px-4">顧客A</td><td class="py-3 px-4">案件A</td><td class="py-3 px-4 text-right">¥300,000</td></tr><tr class="border-b bg-gray-50"><td class="py-3 px-4">顧客B</td><td class="py-3 px-4">案件B</td><td class="py-3 px-4 text-right">¥150,000</td></tr></tbody>
+                                        </table>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-bold mb-2 text-[var(--main-color)]">外注費</h3>
+                                        <table class="min-w-full bg-white">
+                                            <thead class="bg-[var(--main-color)] text-white"><tr><th class="py-3 px-4 text-left">外注先名</th><th class="py-3 px-4 text-left">案件名</th><th class="py-3 px-4 text-right">金額</th></tr></thead>
+                                            <tbody><tr class="border-b"><td class="py-3 px-4">外注先A</td><td class="py-3 px-4">案件A</td><td class="py-3 px-4 text-right">- ¥40,000</td></tr></tbody>
+                                        </table>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-bold mb-2 text-[var(--main-color)]">工賃</h3>
+                                        <table class="min-w-full bg-white">
+                                            <thead class="bg-[var(--main-color)] text-white"><tr><th class="py-3 px-4 text-left">利用者名</th><th class="py-3 px-4 text-right">金額</th></tr></thead>
+                                            <tbody><tr class="border-b"><td class="py-3 px-4">利用者A</td><td class="py-3 px-4 text-right">- ¥16,000</td></tr><tr class="border-b bg-gray-50"><td class="py-3 px-4">利用者B</td><td class="py-3 px-4 text-right">- ¥15,000</td></tr></tbody>
+                                        </table>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-bold mb-2 text-[var(--main-color)]">積立金</h3>
+                                        <table class="min-w-full bg-white">
+                                            <thead class="bg-[var(--main-color)] text-white"><tr><th class="py-3 px-4 text-left">種別</th><th class="py-3 px-4 text-right">金額</th></tr></thead>
+                                            <tbody><tr class="border-b"><td class="py-3 px-4">工賃積立金</td><td class="py-3 px-4 text-right">¥100,000</td></tr><tr class="border-b bg-gray-50"><td class="py-3 px-4">その他積立金</td><td class="py-3 px-4 text-right">¥60,000</td></tr></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
 
-                    <div class="finance-tab-content hidden" id="finance-average-wage">
-                        <div class="card rounded-lg p-6 shadow-sm">
-                            <h2 class="text-xl font-bold mb-6 text-[var(--main-color)]">平均工賃一覧</h2>
-                            
-                             <div class="mb-8">
-                                <h3 class="text-lg font-semibold mb-2 text-gray-800 text-center">会計年度</h3>
-                                <div class="flex items-center justify-center space-x-4 mb-4">
-                                    <button class="primary-button p-2 rounded-full text-lg">&lt;</button>
-                                    <div class="text-center">
-                                        <p class="text-4xl font-bold text-[var(--main-color)]">2025年度</p>
-                                        <p class="text-sm text-gray-500">2025年4月1日～2025年9月30日</p>
+                    <div class="finance-tab-content hidden" id="finance-average-wage-wrapper">
+                        <div id="finance-average-wage-list">
+                            <div class="card rounded-lg p-6 shadow-sm">
+                                <h2 class="text-xl font-bold mb-6 text-[var(--main-color)]">平均工賃一覧</h2>
+                                
+                                <div class="mb-8">
+                                    <h3 class="text-lg font-semibold mb-2 text-gray-800 text-center">会計年度</h3>
+                                    <div class="flex items-center justify-center space-x-4 mb-4">
+                                        <button class="primary-button p-2 rounded-full text-lg">&lt;</button>
+                                        <div class="text-center">
+                                            <p class="text-4xl font-bold text-[var(--main-color)]">2025年度</p>
+                                            <p class="text-sm text-gray-500">2025年4月1日～2025年9月30日</p>
+                                        </div>
+                                        <button class="primary-button p-2 rounded-full text-lg">&gt;</button>
                                     </div>
-                                    <button class="primary-button p-2 rounded-full text-lg">&gt;</button>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 text-center">
+                                        <div class="p-4 rounded-lg bg-gray-100">
+                                            <p class="text-sm font-semibold text-gray-600">平均工賃</p>
+                                            <p class="text-2xl font-bold text-[var(--main-color)]">¥16,000</p>
+                                        </div>
+                                        <div class="p-4 rounded-lg bg-gray-100">
+                                            <p class="text-sm font-semibold text-gray-600">工賃</p>
+                                            <p class="text-2xl font-bold text-[var(--main-color)]">¥3,000,000</p>
+                                        </div>
+                                        <div class="p-4 rounded-lg bg-gray-100">
+                                            <p class="text-sm font-semibold text-gray-600">平均利用者数/日</p>
+                                            <p class="text-2xl font-bold text-[var(--main-color)]">15.6人</p>
+                                        </div>
+                                        <div class="p-4 rounded-lg bg-gray-100">
+                                            <p class="text-sm font-semibold text-gray-600">延べ利用者数</p>
+                                            <p class="text-2xl font-bold text-[var(--main-color)]">3,580人</p>
+                                        </div>
+                                        <div class="p-4 rounded-lg bg-gray-100">
+                                            <p class="text-sm font-semibold text-gray-600">開所日数</p>
+                                            <p class="text-2xl font-bold text-[var(--main-color)]">230日</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 text-center">
-                                    <div class="p-4 rounded-lg bg-gray-100">
-                                        <p class="text-sm font-semibold text-gray-600">平均工賃</p>
-                                        <p class="text-2xl font-bold text-[var(--main-color)]">¥16,000</p>
-                                    </div>
-                                    <div class="p-4 rounded-lg bg-gray-100">
-                                        <p class="text-sm font-semibold text-gray-600">工賃</p>
-                                        <p class="text-2xl font-bold text-[var(--main-color)]">¥3,000,000</p>
-                                    </div>
-                                    <div class="p-4 rounded-lg bg-gray-100">
-                                        <p class="text-sm font-semibold text-gray-600">平均利用者数/日</p>
-                                        <p class="text-2xl font-bold text-[var(--main-color)]">15.6人</p>
-                                    </div>
-                                    <div class="p-4 rounded-lg bg-gray-100">
-                                        <p class="text-sm font-semibold text-gray-600">延べ利用者数</p>
-                                        <p class="text-2xl font-bold text-[var(--main-color)]">3,580人</p>
-                                    </div>
-                                    <div class="p-4 rounded-lg bg-gray-100">
-                                        <p class="text-sm font-semibold text-gray-600">開所日数</p>
-                                        <p class="text-2xl font-bold text-[var(--main-color)]">230日</p>
-                                    </div>
+                                
+                                <div class="overflow-x-auto">
+                                    <table class="min-w-full bg-white">
+                                        <thead class="bg-[var(--main-color)] text-white">
+                                            <tr>
+                                                <th class="py-3 px-4 text-left">時期</th>
+                                                <th class="py-3 px-4 text-right">平均工賃</th>
+                                                <th class="py-3 px-4 text-right">工賃</th>
+                                                <th class="py-3 px-4 text-right">平均利用者数/日</th>
+                                                <th class="py-3 px-4 text-right">延べ利用者数</th>
+                                                <th class="py-3 px-4 text-right">開所日数</th>
+                                                <th class="py-3 px-4 text-center">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-gray-700">
+                                            <tr class="border-b">
+                                                <td class="py-3 px-4">9月</td>
+                                                <td class="py-3 px-4 text-right">¥15,800</td>
+                                                <td class="py-3 px-4 text-right">¥250,000</td>
+                                                <td class="py-3 px-4 text-right">15.8人</td>
+                                                <td class="py-3 px-4 text-right">316人</td>
+                                                <td class="py-3 px-4 text-right">20日</td>
+                                                <td class="py-3 px-4 text-center"><button onclick="showAverageWageDetail(true)" class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button></td>
+                                            </tr>
+                                            <tr class="border-b bg-gray-50">
+                                                 <td class="py-3 px-4">8月</td>
+                                                <td class="py-3 px-4 text-right">¥16,200</td>
+                                                <td class="py-3 px-4 text-right">¥260,000</td>
+                                                <td class="py-3 px-4 text-right">16.0人</td>
+                                                <td class="py-3 px-4 text-right">352人</td>
+                                                <td class="py-3 px-4 text-right">22日</td>
+                                                <td class="py-3 px-4 text-center"><button onclick="showAverageWageDetail(true)" class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button></td>
+                                            </tr>
+                                             </tbody>
+                                    </table>
                                 </div>
                             </div>
-                            
-                            <div class="overflow-x-auto">
-                                <table class="min-w-full bg-white">
-                                    <thead class="bg-[var(--main-color)] text-white">
-                                        <tr>
-                                            <th class="py-3 px-4 text-left">時期</th>
-                                            <th class="py-3 px-4 text-right">平均工賃</th>
-                                            <th class="py-3 px-4 text-right">工賃</th>
-                                            <th class="py-3 px-4 text-right">平均利用者数/日</th>
-                                            <th class="py-3 px-4 text-right">延べ利用者数</th>
-                                            <th class="py-3 px-4 text-right">開所日数</th>
-                                            <th class="py-3 px-4 text-center">操作</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="text-gray-700">
-                                        <tr class="border-b">
-                                            <td class="py-3 px-4">9月</td>
-                                            <td class="py-3 px-4 text-right">¥15,800</td>
-                                            <td class="py-3 px-4 text-right">¥250,000</td>
-                                            <td class="py-3 px-4 text-right">15.8人</td>
-                                            <td class="py-3 px-4 text-right">316人</td>
-                                            <td class="py-3 px-4 text-right">20日</td>
-                                            <td class="py-3 px-4 text-center"><button class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button></td>
-                                        </tr>
-                                        <tr class="border-b bg-gray-50">
-                                             <td class="py-3 px-4">8月</td>
-                                            <td class="py-3 px-4 text-right">¥16,200</td>
-                                            <td class="py-3 px-4 text-right">¥260,000</td>
-                                            <td class="py-3 px-4 text-right">16.0人</td>
-                                            <td class="py-3 px-4 text-right">352人</td>
-                                            <td class="py-3 px-4 text-right">22日</td>
-                                            <td class="py-3 px-4 text-center"><button class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button></td>
-                                        </tr>
-                                         </tbody>
-                                </table>
+                        </div>
+                        <div id="finance-average-wage-detail" class="hidden">
+                            <div class="card rounded-lg p-6 shadow-sm">
+                                <div class="flex justify-between items-center mb-6">
+                                    <h2 class="text-xl font-bold text-[var(--main-color)]">平均工賃詳細</h2>
+                                    <button onclick="showAverageWageDetail(false)" class="detail-button font-bold py-2 px-4 rounded">戻る</button>
+                                </div>
+
+                                <div class="mb-8">
+                                    <h3 class="text-lg font-semibold mb-2 text-gray-800 text-center">会計年度</h3>
+                                    <div class="flex items-center justify-center space-x-4 mb-4">
+                                        <button class="primary-button p-2 rounded-full text-lg">&lt;</button>
+                                        <div class="text-center">
+                                            <p class="text-4xl font-bold text-[var(--main-color)]">2025年度9月</p>
+                                            <p class="text-sm text-gray-500">2025年9月1日～2025年9月30日</p>
+                                        </div>
+                                        <button class="primary-button p-2 rounded-full text-lg">&gt;</button>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 text-center">
+                                        <div class="p-4 rounded-lg bg-gray-100">
+                                            <p class="text-sm font-semibold text-gray-600">平均工賃</p>
+                                            <p class="text-2xl font-bold text-[var(--main-color)]">¥15,800</p>
+                                        </div>
+                                        <div class="p-4 rounded-lg bg-gray-100">
+                                            <p class="text-sm font-semibold text-gray-600">工賃</p>
+                                            <p class="text-2xl font-bold text-[var(--main-color)]">¥250,000</p>
+                                        </div>
+                                        <div class="p-4 rounded-lg bg-gray-100">
+                                            <p class="text-sm font-semibold text-gray-600">平均利用者数/日</p>
+                                            <p class="text-2xl font-bold text-[var(--main-color)]">15.8人</p>
+                                        </div>
+                                        <div class="p-4 rounded-lg bg-gray-100">
+                                            <p class="text-sm font-semibold text-gray-600">延べ利用者数</p>
+                                            <p class="text-2xl font-bold text-[var(--main-color)]">316人</p>
+                                        </div>
+                                        <div class="p-4 rounded-lg bg-gray-100">
+                                            <p class="text-sm font-semibold text-gray-600">開所日数</p>
+                                            <p class="text-2xl font-bold text-[var(--main-color)]">20日</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="overflow-x-auto">
+                                    <table class="min-w-full bg-white">
+                                        <thead class="bg-[var(--main-color)] text-white">
+                                            <tr>
+                                                <th class="py-3 px-4 text-left">利用者名</th>
+                                                <th class="py-3 px-4 text-right">平均工賃</th>
+                                                <th class="py-3 px-4 text-right">工賃</th>
+                                                <th class="py-3 px-4 text-right">平均利用者数/日</th>
+                                                <th class="py-3 px-4 text-right">延べ利用者数</th>
+                                                <th class="py-3 px-4 text-right">開所日数</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-gray-700">
+                                            <tr class="border-b">
+                                                <td class="py-3 px-4">利用者A</td>
+                                                <td class="py-3 px-4 text-right">¥16,000</td>
+                                                <td class="py-3 px-4 text-right">¥16,000</td>
+                                                <td class="py-3 px-4 text-right">1.0人</td>
+                                                <td class="py-3 px-4 text-right">20人</td>
+                                                <td class="py-3 px-4 text-right">20日</td>
+                                            </tr>
+                                            <tr class="border-b bg-gray-50">
+                                                 <td class="py-3 px-4">利用者B</td>
+                                                <td class="py-3 px-4 text-right">¥15,000</td>
+                                                <td class="py-3 px-4 text-right">¥15,000</td>
+                                                <td class="py-3 px-4 text-right">1.0人</td>
+                                                <td class="py-3 px-4 text-right">20人</td>
+                                                <td class="py-3 px-4 text-right">20日</td>
+                                            </tr>
+                                             </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -352,7 +501,13 @@
                     <div class="finance-tab-content hidden" id="finance-payment-list-wrapper">
                          <div id="finance-payment-list">
                             <div class="card rounded-lg p-6 shadow-sm">
-                                <h2 class="text-xl font-bold mb-6 text-[var(--main-color)]">支払い工賃一覧</h2>
+                                <div class="flex justify-between items-center mb-6">
+                                    <h2 class="text-xl font-bold text-[var(--main-color)]">支払い工賃一覧</h2>
+                                    <div class="flex space-x-2">
+                                        <button class="danger-button font-bold py-2 px-4 rounded">月次確定</button>
+                                        <button class="primary-button font-bold py-2 px-4 rounded">工賃明細書一括印刷</button>
+                                    </div>
+                                </div>
 
                                 <div class="mb-8">
                                     <h3 class="text-lg font-semibold mb-2 text-gray-800 text-center">事業年度</h3>
@@ -416,7 +571,10 @@
                              <div class="card rounded-lg p-6 shadow-sm">
                                 <div class="flex justify-between items-center mb-6">
                                     <h2 class="text-xl font-bold text-[var(--main-color)]">工賃明細書</h2>
-                                    <button onclick="showPayrollStatement(false)" class="detail-button font-bold py-2 px-4 rounded">戻る</button>
+                                    <div class="flex space-x-2">
+                                        <button class="primary-button font-bold py-2 px-4 rounded">印刷</button>
+                                        <button onclick="showPayrollStatement(false)" class="detail-button font-bold py-2 px-4 rounded">戻る</button>
+                                    </div>
                                 </div>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mb-6 p-4 border rounded-lg">
@@ -588,12 +746,7 @@
                 el.classList.add('hidden');
             });
             // Show target finance tab
-            // For the payment list, we use a wrapper to handle the detail view
-            if (tabId === 'finance-payment-list') {
-                 document.getElementById('finance-payment-list-wrapper').classList.remove('hidden');
-            } else {
-                document.getElementById(tabId).classList.remove('hidden');
-            }
+            document.getElementById(tabId).classList.remove('hidden');
 
             // Update sub-nav active state
             document.querySelectorAll('#finance-sub-nav .sub-nav-link').forEach(el => {
@@ -601,8 +754,10 @@
             });
             navElement.classList.add('active');
             
-            // Ensure the statement is hidden when switching tabs
+            // Ensure the detail/statement views are hidden when switching tabs
             showPayrollStatement(false);
+            showIncomeExpenditureDetail(false);
+            showAverageWageDetail(false);
         }
         
         function showPayrollStatement(show) {
@@ -614,6 +769,30 @@
             } else {
                 list.classList.remove('hidden');
                 statement.classList.add('hidden');
+            }
+        }
+        
+        function showIncomeExpenditureDetail(show) {
+            const summary = document.getElementById('finance-summary');
+            const detail = document.getElementById('finance-income-expenditure-detail');
+            if (show) {
+                summary.classList.add('hidden');
+                detail.classList.remove('hidden');
+            } else {
+                summary.classList.remove('hidden');
+                detail.classList.add('hidden');
+            }
+        }
+        
+        function showAverageWageDetail(show) {
+            const list = document.getElementById('finance-average-wage-list');
+            const detail = document.getElementById('finance-average-wage-detail');
+            if (show) {
+                list.classList.add('hidden');
+                detail.classList.remove('hidden');
+            } else {
+                list.classList.remove('hidden');
+                detail.classList.add('hidden');
             }
         }
 
