@@ -33,6 +33,7 @@
         .sub-nav-link.active { border-bottom-color: var(--main-color); color: var(--main-color); font-weight: bold; }
         .detail-button { background-color: var(--auxiliary-color); color: var(--main-color); }
         .detail-button:hover { background-color: #dcdcdc; }
+        .disabled-button { background-color: #E6E6E6; color: #888888; cursor: not-allowed; }
 
     </style>
 </head>
@@ -73,7 +74,7 @@
                         <li><a href="#" onclick="showScreen('user-list-screen', this)" class="nav-link block p-3 rounded-md">利用者管理</a></li>
                         <li><a href="#" onclick="showScreen('project-list-screen', this)" class="nav-link block p-3 rounded-md">案件管理</a></li>
                         <li><a href="#" onclick="showScreen('attendance-screen', this)" class="nav-link block p-3 rounded-md">勤退管理</a></li>
-                        <li><a href="#" onclick="showScreen('finance-screen', this)" class="nav-link block p-3 rounded-md">収支管理</a></li>
+                        <li><a href="#" onclick="showScreen('finance-screen', this, true)" class="nav-link block p-3 rounded-md">収支管理</a></li>
                     </ul>
                 </nav>
                 <div>
@@ -95,18 +96,115 @@
                 </div>
 
                 <div class="screen-content hidden" id="settings-screen">
-                     <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">各種設定</h1>
-                     <div class="mb-6 border-b border-gray-200">
-                        <nav class="-mb-px flex space-x-6">
-                            <a href="#" class="sub-nav-link active py-4 px-1 text-gray-500 hover:text-gray-700">施設情報設定</a>
-                            <a href="#" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">ベース設定</a>
-                            <a href="#" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">加算設定</a>
-                            <a href="#" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">控除設定</a>
+                    <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">各種設定</h1>
+                    <div class="mb-6 border-b border-gray-200">
+                        <nav id="settings-sub-nav" class="-mb-px flex space-x-6">
+                            <a href="#" onclick="showSettingsTab('settings-facility', this)" class="sub-nav-link active py-4 px-1 text-gray-500 hover:text-gray-700">施設情報設定</a>
+                            <a href="#" onclick="showSettingsTab('settings-terms', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">用語設定</a>
+                            <a href="#" onclick="showSettingsTab('settings-payment-wage', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">支払い工賃設定</a>
+                            <a href="#" onclick="showSettingsTab('settings-skills', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">スキル設定</a>
+                            <a href="#" onclick="showSettingsTab('settings-accounts', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">アカウント設定</a>
                         </nav>
                     </div>
-                     <div class="card rounded-lg p-6 shadow-sm">
-                        <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">施設情報</h2>
-                        <p>施設情報設定のフォームがここに表示されます。</p>
+                    
+                    <div class="settings-tab-content" id="settings-facility">
+                         <div class="space-y-6">
+                            <div class="card rounded-lg p-6 shadow-sm">
+                                <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">法人設定</h2>
+                                <div class="space-y-4">
+                                    <div><label class="font-semibold text-gray-700">法人番号</label><input type="text" class="border rounded w-full mt-1 px-2 py-1"></div>
+                                    <div><label class="font-semibold text-gray-700">法人名称</label><input type="text" class="border rounded w-full mt-1 px-2 py-1"></div>
+                                    <div><label class="font-semibold text-gray-700">代表者 役職</label><input type="text" class="border rounded w-full mt-1 px-2 py-1"></div>
+                                    <div><label class="font-semibold text-gray-700">代表者 氏名</label><input type="text" class="border rounded w-full mt-1 px-2 py-1"></div>
+                                </div>
+                                <div class="mt-6 text-right">
+                                    <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
+                                </div>
+                            </div>
+                            <div class="card rounded-lg p-6 shadow-sm">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h2 class="text-xl font-bold text-[var(--main-color)]">事業所設定</h2>
+                                    <button class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
+                                </div>
+                                <table class="min-w-full bg-white">
+                                    <thead class="bg-[var(--main-color)] text-white">
+                                        <tr>
+                                            <th class="py-3 px-4 text-left">事業所番号</th>
+                                            <th class="py-3 px-4 text-left">事業所名称</th>
+                                            <th class="py-3 px-4 text-left">状態</th>
+                                            <th class="py-3 px-4 text-center">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b"><td class="py-3 px-4">1234567890</td><td class="py-3 px-4">サンプル事業所</td><td class="py-3 px-4">有効</td><td class="py-3 px-4 text-center"><button class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-tab-content hidden" id="settings-terms">
+                        <div class="card rounded-lg p-6 shadow-sm">
+                            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">用語設定</h2>
+                             <p class="text-gray-600 mb-6">システム内で使用される特定の用語を、事業所の実情に合わせて変更できます。</p>
+                            <div class="space-y-4">
+                                <div class="grid grid-cols-2 gap-4 items-center">
+                                    <label class="font-semibold text-gray-700">システム内の表示名</label>
+                                    <label class="font-semibold text-gray-700">変更後の表示名</label>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 items-center">
+                                    <div>利用者</div>
+                                    <input type="text" value="メンバー" class="border rounded px-2 py-1">
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 items-center">
+                                    <div>工賃</div>
+                                    <input type="text" value="報酬" class="border rounded px-2 py-1">
+                                </div>
+                            </div>
+                            <div class="mt-6 text-right">
+                                <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="settings-tab-content hidden" id="settings-payment-wage">
+                        <div class="space-y-6">
+                            <div class="card rounded-lg p-6 shadow-sm">
+                                <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">ベース設定</h2>
+                                <div class="space-y-4">
+                                     <div><label class="font-semibold text-gray-700">ベース単価</label><input type="number" value="100" class="border rounded w-full mt-1 px-2 py-1"></div>
+                                     <div><label class="font-semibold text-gray-700">利用時間の単位</label><input type="number" value="15" class="border rounded w-full mt-1 px-2 py-1"></div>
+                                     <div><label class="font-semibold text-gray-700">端数の取り扱い</label>
+                                        <select class="border rounded w-full mt-1 px-2 py-1"><option>切り捨て</option><option>四捨五入</option><option>切り上げ</option></select>
+                                     </div>
+                                </div>
+                            </div>
+                            <div class="card rounded-lg p-6 shadow-sm">
+                                <div class="flex justify-between items-center mb-4"><h2 class="text-xl font-bold text-[var(--main-color)]">加算設定</h2><button class="primary-button font-bold py-2 px-4 rounded">新規作成</button></div>
+                                <p>加算設定テーブルがここに表示されます。</p>
+                            </div>
+                            <div class="card rounded-lg p-6 shadow-sm">
+                                <div class="flex justify-between items-center mb-4"><h2 class="text-xl font-bold text-[var(--main-color)]">控除設定</h2><button class="primary-button font-bold py-2 px-4 rounded">新規作成</button></div>
+                                <p>控除設定テーブルがここに表示されます。</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="settings-tab-content hidden" id="settings-skills">
+                        <div class="card rounded-lg p-6 shadow-sm">
+                             <div class="flex justify-between items-center mb-4">
+                                <h2 class="text-xl font-bold text-[var(--main-color)]">スキル設定</h2>
+                                <button class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
+                            </div>
+                            <p>スキル一覧テーブルがここに表示されます。</p>
+                        </div>
+                    </div>
+                     <div class="settings-tab-content hidden" id="settings-accounts">
+                        <div class="card rounded-lg p-6 shadow-sm">
+                             <div class="flex justify-between items-center mb-4">
+                                <h2 class="text-xl font-bold text-[var(--main-color)]">アカウント設定</h2>
+                                <button class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
+                            </div>
+                            <p>アカウント一覧テーブルがここに表示されます。</p>
+                        </div>
                     </div>
                 </div>
                 
@@ -198,13 +296,84 @@
                     <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">収支管理</h1>
                     <div class="mb-6 border-b border-gray-200">
                         <nav id="finance-sub-nav" class="-mb-px flex space-x-6">
-                            <a href="#" onclick="showFinanceTab('finance-summary-wrapper', this)" class="sub-nav-link active py-4 px-1 text-gray-500 hover:text-gray-700">収支一覧</a>
+                            <a href="#" onclick="showFinanceTab('finance-aggregation-wrapper', this)" class="sub-nav-link active py-4 px-1 text-gray-500 hover:text-gray-700">収支集計</a>
+                            <a href="#" onclick="showFinanceTab('finance-summary-wrapper', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">収支一覧</a>
                             <a href="#" onclick="showFinanceTab('finance-average-wage-wrapper', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">平均工賃一覧</a>
-                            <a href="#" onclick="showFinanceTab('finance-payment-list-wrapper', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">支払い工賃一覧</a>
+                            <a href="#" onclick="showFinanceTab('finance-payment-list-wrapper', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">支払い工賃一覧（工賃明細）</a>
                         </nav>
                     </div>
 
-                    <div class="finance-tab-content" id="finance-summary-wrapper">
+                    <div class="finance-tab-content" id="finance-aggregation-wrapper">
+                        <div class="card rounded-lg p-6 shadow-sm">
+                            <div class="flex justify-between items-center mb-6">
+                                <h2 class="text-xl font-bold text-[var(--main-color)]">収支集計</h2>
+                                <button id="aggregation-confirm-button" class="font-bold py-2 px-4 rounded"></button>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <h3 class="text-lg font-semibold mb-2 text-gray-800 text-center">事業年度</h3>
+                                <div class="flex items-center justify-center space-x-4 mb-4">
+                                    <button onclick="changeMonth(-1)" class="primary-button p-2 rounded-full text-lg">&lt;</button>
+                                    <div class="text-center">
+                                        <p id="aggregation-month-display" class="text-4xl font-bold text-[var(--main-color)]"></p>
+                                        <p id="aggregation-period-display" class="text-sm text-gray-500"></p>
+                                    </div>
+                                    <button onclick="changeMonth(1)" class="primary-button p-2 rounded-full text-lg">&gt;</button>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+                                    <div class="p-4 rounded-lg bg-gray-100">
+                                        <p class="text-sm font-semibold text-gray-600">売上</p>
+                                        <p class="text-2xl font-bold text-[var(--main-color)]">¥450,000</p>
+                                    </div>
+                                    <div class="p-4 rounded-lg bg-gray-100">
+                                        <p class="text-sm font-semibold text-gray-600">外注費</p>
+                                        <p class="text-2xl font-bold text-[var(--main-color)]">- ¥40,000</p>
+                                    </div>
+                                    <div class="p-4 rounded-lg bg-gray-100">
+                                        <p class="text-sm font-semibold text-gray-600">工賃</p>
+                                        <p class="text-2xl font-bold text-[var(--main-color)]">- ¥250,000</p>
+                                    </div>
+                                    <div class="p-4 rounded-lg bg-gray-100">
+                                        <p class="text-sm font-semibold text-gray-600">積立金</p>
+                                        <p class="text-2xl font-bold text-[var(--main-color)]">¥160,000</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div>
+                                    <h3 class="text-lg font-bold mb-2 text-[var(--main-color)]">売上</h3>
+                                    <table class="min-w-full bg-white">
+                                         <thead class="bg-[var(--main-color)] text-white"><tr><th class="py-3 px-4 text-left">顧客名</th><th class="py-3 px-4 text-left">案件名</th><th class="py-3 px-4 text-right">金額</th></tr></thead>
+                                         <tbody><tr class="border-b"><td class="py-3 px-4">顧客A</td><td class="py-3 px-4">案件A</td><td class="py-3 px-4 text-right">¥300,000</td></tr><tr class="border-b bg-gray-50"><td class="py-3 px-4">顧客B</td><td class="py-3 px-4">案件B</td><td class="py-3 px-4 text-right">¥150,000</td></tr></tbody>
+                                    </table>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold mb-2 text-[var(--main-color)]">外注費</h3>
+                                    <table class="min-w-full bg-white">
+                                        <thead class="bg-[var(--main-color)] text-white"><tr><th class="py-3 px-4 text-left">外注先名</th><th class="py-3 px-4 text-left">案件名</th><th class="py-3 px-4 text-right">金額</th></tr></thead>
+                                        <tbody><tr class="border-b"><td class="py-3 px-4">外注先A</td><td class="py-3 px-4">案件A</td><td class="py-3 px-4 text-right">- ¥40,000</td></tr></tbody>
+                                    </table>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold mb-2 text-[var(--main-color)]">工賃</h3>
+                                    <table class="min-w-full bg-white">
+                                        <thead class="bg-[var(--main-color)] text-white"><tr><th class="py-3 px-4 text-left">利用者名</th><th class="py-3 px-4 text-right">金額</th></tr></thead>
+                                        <tbody><tr class="border-b"><td class="py-3 px-4">利用者A</td><td class="py-3 px-4 text-right">- ¥16,000</td></tr><tr class="border-b bg-gray-50"><td class="py-3 px-4">利用者B</td><td class="py-3 px-4 text-right">- ¥15,000</td></tr></tbody>
+                                    </table>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold mb-2 text-[var(--main-color)]">積立金</h3>
+                                    <table class="min-w-full bg-white">
+                                        <thead class="bg-[var(--main-color)] text-white"><tr><th class="py-3 px-4 text-left">種別</th><th class="py-3 px-4 text-right">金額</th></tr></thead>
+                                        <tbody><tr class="border-b"><td class="py-3 px-4">工賃積立金</td><td class="py-3 px-4 text-right">¥100,000</td></tr><tr class="border-b bg-gray-50"><td class="py-3 px-4">その他積立金</td><td class="py-3 px-4 text-right">¥60,000</td></tr></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="finance-tab-content hidden" id="finance-summary-wrapper">
                         <div id="finance-summary">
                             <div class="card rounded-lg p-6 shadow-sm">
                                 <h2 class="text-xl font-bold mb-6 text-[var(--main-color)]">収支一覧</h2>
@@ -330,16 +499,16 @@
                                         <table class="min-w-full bg-white">
                                             <thead class="bg-[var(--main-color)] text-white"><tr><th class="py-3 px-4 text-left">利用者名</th><th class="py-3 px-4 text-right">金額</th></tr></thead>
                                             <tbody><tr class="border-b"><td class="py-3 px-4">利用者A</td><td class="py-3 px-4 text-right">- ¥16,000</td></tr><tr class="border-b bg-gray-50"><td class="py-3 px-4">利用者B</td><td class="py-3 px-4 text-right">- ¥15,000</td></tr></tbody>
-                                        </table>
-                                    </div>
-                                    <div>
-                                        <h3 class="text-lg font-bold mb-2 text-[var(--main-color)]">積立金</h3>
-                                        <table class="min-w-full bg-white">
-                                            <thead class="bg-[var(--main-color)] text-white"><tr><th class="py-3 px-4 text-left">種別</th><th class="py-3 px-4 text-right">金額</th></tr></thead>
-                                            <tbody><tr class="border-b"><td class="py-3 px-4">工賃積立金</td><td class="py-3 px-4 text-right">¥100,000</td></tr><tr class="border-b bg-gray-50"><td class="py-3 px-4">その他積立金</td><td class="py-3 px-4 text-right">¥60,000</td></tr></tbody>
-                                        </table>
-                                    </div>
+                                    </table>
                                 </div>
+                                <div>
+                                    <h3 class="text-lg font-bold mb-2 text-[var(--main-color)]">積立金</h3>
+                                    <table class="min-w-full bg-white">
+                                        <thead class="bg-[var(--main-color)] text-white"><tr><th class="py-3 px-4 text-left">種別</th><th class="py-3 px-4 text-right">金額</th></tr></thead>
+                                        <tbody><tr class="border-b"><td class="py-3 px-4">工賃積立金</td><td class="py-3 px-4 text-right">¥100,000</td></tr><tr class="border-b bg-gray-50"><td class="py-3 px-4">その他積立金</td><td class="py-3 px-4 text-right">¥60,000</td></tr></tbody>
+                                    </table>
+                                </div>
+                            </div>
 
                             </div>
                         </div>
@@ -466,32 +635,29 @@
                                     <table class="min-w-full bg-white">
                                         <thead class="bg-[var(--main-color)] text-white">
                                             <tr>
-                                                <th class="py-3 px-4 text-left">利用者名</th>
+                                                <th class="py-3 px-4 text-left">時期</th>
                                                 <th class="py-3 px-4 text-right">平均工賃</th>
                                                 <th class="py-3 px-4 text-right">工賃</th>
-                                                <th class="py-3 px-4 text-right">平均利用者数/日</th>
-                                                <th class="py-3 px-4 text-right">延べ利用者数</th>
-                                                <th class="py-3 px-4 text-right">開所日数</th>
+                                                <th class="py-3 px-4 text-right">利用者数</th>
+                                                <th class="py-3 px-4 text-center">開所</th>
                                             </tr>
                                         </thead>
                                         <tbody class="text-gray-700">
                                             <tr class="border-b">
-                                                <td class="py-3 px-4">利用者A</td>
-                                                <td class="py-3 px-4 text-right">¥16,000</td>
-                                                <td class="py-3 px-4 text-right">¥16,000</td>
-                                                <td class="py-3 px-4 text-right">1.0人</td>
-                                                <td class="py-3 px-4 text-right">20人</td>
-                                                <td class="py-3 px-4 text-right">20日</td>
+                                                <td class="py-3 px-4">9月30日</td>
+                                                <td class="py-3 px-4 text-right">¥15,800</td>
+                                                <td class="py-3 px-4 text-right">¥12,500</td>
+                                                <td class="py-3 px-4 text-right">16人</td>
+                                                <td class="py-3 px-4 text-center">◯</td>
                                             </tr>
                                             <tr class="border-b bg-gray-50">
-                                                 <td class="py-3 px-4">利用者B</td>
-                                                <td class="py-3 px-4 text-right">¥15,000</td>
-                                                <td class="py-3 px-4 text-right">¥15,000</td>
-                                                <td class="py-3 px-4 text-right">1.0人</td>
-                                                <td class="py-3 px-4 text-right">20人</td>
-                                                <td class="py-3 px-4 text-right">20日</td>
+                                                 <td class="py-3 px-4">9月29日</td>
+                                                <td class="py-3 px-4 text-right">¥15,800</td>
+                                                <td class="py-3 px-4 text-right">¥12,500</td>
+                                                <td class="py-3 px-4 text-right">15人</td>
+                                                <td class="py-3 px-4 text-center">◯</td>
                                             </tr>
-                                             </tbody>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -502,9 +668,8 @@
                          <div id="finance-payment-list">
                             <div class="card rounded-lg p-6 shadow-sm">
                                 <div class="flex justify-between items-center mb-6">
-                                    <h2 class="text-xl font-bold text-[var(--main-color)]">支払い工賃一覧</h2>
+                                    <h2 class="text-xl font-bold text-[var(--main-color)]">支払い工賃一覧（工賃明細）</h2>
                                     <div class="flex space-x-2">
-                                        <button class="danger-button font-bold py-2 px-4 rounded">月次確定</button>
                                         <button class="primary-button font-bold py-2 px-4 rounded">工賃明細書一括印刷</button>
                                     </div>
                                 </div>
@@ -693,39 +858,81 @@
     <script>
         // Store the last active screen to return to it
         let lastActiveScreenId = 'dashboard-screen';
+        
+        // --- 収支集計関連のスクリプト ---
+        let currentDate = new Date(2025, 9, 1); // 2025年10月を初期値とする (月は0から始まるため9を指定)
+        
+        function renderAggregationPage() {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth() + 1;
+            
+            const firstDay = new Date(year, month - 1, 1);
+            const lastDay = new Date(year, month, 0);
 
-        function showScreen(screenId, navElement) {
-            // Hide all screen content
-            document.querySelectorAll('.screen-content').forEach(el => {
-                el.classList.add('hidden');
-            });
+            document.getElementById('aggregation-month-display').textContent = `${year}年度${month}月`;
+            document.getElementById('aggregation-period-display').textContent = `${year}年${month}月${firstDay.getDate()}日～${year}年${month}月${lastDay.getDate()}日`;
+            
+            const confirmButton = document.getElementById('aggregation-confirm-button');
+            const now = new Date(2025, 9, 1);
+            const currentMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
 
-            // Show the target screen content
-            const targetScreen = document.getElementById(screenId);
-            if (targetScreen) {
-                targetScreen.classList.remove('hidden');
+            let statusText = '';
+            let isClickable = false;
+
+            if (currentDate > currentMonthStart) {
+                statusText = '未集計';
+                isClickable = false;
+            } else if (currentDate.getTime() === currentMonthStart.getTime()) {
+                statusText = '集計中/暫定値';
+                isClickable = false;
+            } else {
+                if (currentDate.getFullYear() === 2025 && currentDate.getMonth() === 8) { // 2025年9月
+                    statusText = '月次確定';
+                    isClickable = true;
+                } else { // 2025年8月以前
+                    statusText = '確定済';
+                    isClickable = false;
+                }
             }
+            
+            confirmButton.textContent = statusText;
+            confirmButton.disabled = !isClickable;
 
-            // Update active state in navigation if a nav element is provided
+            confirmButton.classList.remove('danger-button', 'disabled-button');
+
+            if (isClickable) {
+                confirmButton.classList.add('danger-button');
+            } else {
+                confirmButton.classList.add('disabled-button');
+            }
+        }
+        
+        function changeMonth(offset) {
+            currentDate.setMonth(currentDate.getMonth() + offset);
+            renderAggregationPage();
+        }
+        // --- ここまで ---
+
+        function showScreen(screenId, navElement, isFinanceScreen = false) {
+            document.querySelectorAll('.screen-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(screenId).classList.remove('hidden');
+
             if (navElement) {
-                document.querySelectorAll('#main-nav .nav-link').forEach(el => {
-                    el.classList.remove('active');
-                });
+                document.querySelectorAll('#main-nav .nav-link').forEach(el => el.classList.remove('active'));
                 navElement.classList.add('active');
-                 // Don't update lastActiveScreenId for detail screens
-                if (screenId.endsWith('-list-screen') || screenId.endsWith('-screen')) {
+                if (!screenId.includes('-detail-')) {
                    lastActiveScreenId = screenId;
                 }
             }
-             // Special handling for detail pages to not lose main nav context
-            if (screenId.includes('-detail-')) {
-                 // Keep the corresponding list screen's nav item active
-                const listScreenId = screenId.replace('-detail-', '-list-');
-                const listNavLink = document.querySelector(`#main-nav a[onclick*="'${listScreenId}'"]`);
-                if (listNavLink) {
-                     document.querySelectorAll('#main-nav .nav-link').forEach(el => el.classList.remove('active'));
-                     listNavLink.classList.add('active');
-                }
+            
+            if (screenId === 'settings-screen') {
+                 const firstSettingsTab = document.querySelector('#settings-sub-nav a');
+                 showSettingsTab('settings-facility', firstSettingsTab);
+            }
+
+            if (isFinanceScreen) {
+                 const financeAggregationTab = document.querySelector('#finance-sub-nav a');
+                 showFinanceTab('finance-aggregation-wrapper', financeAggregationTab, true);
             }
         }
         
@@ -739,22 +946,28 @@
             document.getElementById('app-wrapper').classList.add('hidden');
             document.getElementById('login-screen').classList.remove('hidden');
         }
-
-        function showFinanceTab(tabId, navElement) {
-            // Hide all finance tabs
-            document.querySelectorAll('.finance-tab-content').forEach(el => {
-                el.classList.add('hidden');
-            });
-            // Show target finance tab
+        
+        function showSettingsTab(tabId, navElement) {
+            document.querySelectorAll('.settings-tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById(tabId).classList.remove('hidden');
 
-            // Update sub-nav active state
-            document.querySelectorAll('#finance-sub-nav .sub-nav-link').forEach(el => {
-                el.classList.remove('active');
-            });
+            document.querySelectorAll('#settings-sub-nav .sub-nav-link').forEach(el => el.classList.remove('active'));
+            navElement.classList.add('active');
+        }
+
+
+        function showFinanceTab(tabId, navElement, forceReset = false) {
+            document.querySelectorAll('.finance-tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+
+            document.querySelectorAll('#finance-sub-nav .sub-nav-link').forEach(el => el.classList.remove('active'));
             navElement.classList.add('active');
             
-            // Ensure the detail/statement views are hidden when switching tabs
+            if ((navElement && navElement.textContent === '収支集計') || forceReset) {
+                currentDate = new Date(2025, 9, 1);
+                renderAggregationPage();
+            }
+
             showPayrollStatement(false);
             showIncomeExpenditureDetail(false);
             showAverageWageDetail(false);
@@ -763,45 +976,30 @@
         function showPayrollStatement(show) {
             const list = document.getElementById('finance-payment-list');
             const statement = document.getElementById('finance-payroll-statement');
-            if (show) {
-                list.classList.add('hidden');
-                statement.classList.remove('hidden');
-            } else {
-                list.classList.remove('hidden');
-                statement.classList.add('hidden');
-            }
+            list.classList.toggle('hidden', show);
+            statement.classList.toggle('hidden', !show);
         }
         
         function showIncomeExpenditureDetail(show) {
             const summary = document.getElementById('finance-summary');
             const detail = document.getElementById('finance-income-expenditure-detail');
-            if (show) {
-                summary.classList.add('hidden');
-                detail.classList.remove('hidden');
-            } else {
-                summary.classList.remove('hidden');
-                detail.classList.add('hidden');
-            }
+            summary.classList.toggle('hidden', show);
+            detail.classList.toggle('hidden', !show);
         }
         
         function showAverageWageDetail(show) {
             const list = document.getElementById('finance-average-wage-list');
             const detail = document.getElementById('finance-average-wage-detail');
-            if (show) {
-                list.classList.add('hidden');
-                detail.classList.remove('hidden');
-            } else {
-                list.classList.remove('hidden');
-                detail.classList.add('hidden');
-            }
+            list.classList.toggle('hidden', show);
+            detail.classList.toggle('hidden', !show);
         }
 
 
         // Initial state
         document.addEventListener('DOMContentLoaded', () => {
-             // By default, only the login screen is visible
              document.getElementById('app-wrapper').classList.add('hidden');
              document.getElementById('login-screen').classList.remove('hidden');
+             renderAggregationPage();
         });
     </script>
 </body>
