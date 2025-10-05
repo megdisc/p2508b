@@ -1,0 +1,32 @@
+/* UI/UX要件で定義されたテーマカラーを適用 */
+:root {
+    --main-color: #001F3F;
+    --sub-color: #FFFFFF;
+    --accent-color: #FFD700;
+    --auxiliary-color: #E6E6E6;
+    --danger-color: #E53935;
+}
+body {
+    background-color: var(--auxiliary-color);
+    font-family: 'Helvetica Neue', 'Arial', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
+}
+.sidebar { background-color: var(--main-color); color: var(--sub-color); }
+.main-content-bg { background-color: var(--sub-color); }
+.card { background-color: var(--sub-color); border: 1px solid var(--auxiliary-color); }
+.nav-link { color: var(--sub-color); border-left: 4px solid transparent; transition: all 0.2s; }
+.nav-link:hover { background-color: rgba(255, 255, 255, 0.1); }
+.nav-link.active { background-color: rgba(0, 0, 0, 0.2); border-left-color: var(--accent-color); }
+.primary-button { background-color: var(--main-color); color: var(--sub-color); }
+.primary-button:hover { opacity: 0.9; }
+.danger-button { background-color: var(--danger-color); color: var(--sub-color); }
+.danger-button:hover { opacity: 0.9; }
+.sub-nav-link { border-bottom: 2px solid transparent; }
+.sub-nav-link.active { border-bottom-color: var(--main-color); color: var(--main-color); font-weight: bold; }
+.detail-button { background-color: var(--auxiliary-color); color: var(--main-color); }
+.detail-button:hover { background-color: #dcdcdc; }
+.disabled-button { background-color: #E6E6E6; color: #888888; cursor: not-allowed; }
+
+/* インラインスタイルから移動したクラス */
+.user-info-bg {
+    background-color: rgba(0,0,0,0.2);
+}
