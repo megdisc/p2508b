@@ -1,0 +1,94 @@
+const dummyData = {
+    // 施設情報設定 > 事業所設定
+    facilities: [
+        { officeNumber: '1234567890', officeName: 'サンプル事業所', status: '有効' }
+    ],
+    // 各種設定 > スキル設定
+    skills: [
+        { id: 1, genre: 'Web制作', category: 'デザイン', skillName: 'Figma' },
+        { id: 2, genre: 'Web制作', category: 'フロントエンド', skillName: 'HTML/CSS' },
+        { id: 3, genre: 'Web制作', category: 'フロントエンド', skillName: 'JavaScript' },
+        { id: 4, genre: '事務', category: '資料作成', skillName: 'Word' },
+        { id: 5, genre: '事務', category: '資料作成', skillName: 'Excel' }
+    ],
+    // 収支管理 > 収支集計（テーブルデータ）
+    incomeAndExpenditure: {
+        businessIncome: [
+            { projectName: '案件A', clientName: '顧客A', amount: 300000 },
+            { projectName: '案件B', clientName: '顧客B', amount: 150000 }
+        ],
+        productionCosts: [
+            { projectName: '案件A', subcontractorName: '外注先A', amount: -40000 }
+        ],
+        wages: [
+            { userName: '利用者A', amount: -16000 },
+            { userName: '利用者B', amount: -15000 }
+        ],
+        reserves: [
+            { type: '工賃積立金', amount: 100000 },
+            { type: 'その他積立金', amount: 60000 }
+        ]
+    },
+    // 収支管理 > 収支一覧（テーブルデータ）
+    financialSummary: [
+        { month: '9月', income: 450000, costs: -40000, wages: -250000, reserves: 160000 },
+        { month: '8月', income: 480000, costs: -50000, wages: -260000, reserves: 170000 }
+    ],
+    // 収支管理 > 平均工賃一覧（テーブルデータ）
+    averageWages: [
+        { month: '9月', average: 15800, totalWages: 250000, avgUsers: 15.8, totalUsers: 316, openDays: 20 },
+        { month: '8月', average: 16200, totalWages: 260000, avgUsers: 16.0, totalUsers: 352, openDays: 22 }
+    ],
+    // 収支管理 > 平均工賃詳細（テーブルデータ）
+    averageWageDetails: [
+        { date: '9月30日', average: 15800, wages: 12500, users: 16, isOpen: '◯' },
+        { date: '9月29日', average: 15800, wages: 12500, users: 15, isOpen: '◯' }
+    ],
+    // 収支管理 > 支払い工賃一覧（テーブルデータ）
+    paymentList: [
+        { userName: '利用者A', payment: 15500, wages: 16000, deduction: -500 },
+        { userName: '利用者B', payment: 14500, wages: 15000, deduction: -500 }
+    ],
+    // 収支管理 > 各画面のサマリー（集計値）データ
+    financialSummaries: {
+        // 収支集計
+        aggregation: {
+            year: 2025,
+            month: 9,
+            period: '2025年9月1日～2025年9月30日',
+            income: 450000,
+            costs: -40000,
+            wages: -250000,
+            reserves: 160000,
+            status: 'unconfirmed' // 状態を追加 ('unconfirmed', 'confirmed', 'calculating', 'uncalculated')
+        },
+        // 収支一覧
+        summary: {
+            year: 2025,
+            period: '2025年1月1日～2025年9月30日',
+            income: 5000000,
+            costs: -500000,
+            wages: -3000000,
+            reserves: 1500000
+        },
+        // 平均工賃一覧
+        averageWage: {
+            year: 2025,
+            period: '2025年4月1日～2025年9月30日',
+            average: 16000,
+            totalWages: 3000000,
+            avgUsers: 15.6,
+            totalUsers: 3580,
+            openDays: 230
+        },
+        // 支払い工賃一覧
+        payment: {
+            year: 2025,
+            month: 9,
+            period: '2025年9月1日～2025年9月30日',
+            totalPayment: 240000,
+            totalWages: 250000,
+            totalDeduction: -10000
+        }
+    }
+};
