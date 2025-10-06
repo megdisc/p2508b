@@ -38,25 +38,223 @@ function renderFacilityList() {
 }
 
 /**
- * 各種設定 > スキル設定 > スキル一覧を描画する
+ * =================================================================
+ * スキル設定 機能
+ * * 担当ファイル： script.js
+ * 概要：
+ * スキル設定タブ内のUIをアコーディオン形式で動的に生成し、
+ * ユーザーによるジャンル、カテゴリ、スキルの追加、編集、削除
+ * といった操作を可能にするためのすべてのロジックを記述します。
+ * =================================================================
  */
-function renderSkillList() {
-    const skillList = document.getElementById('skill-list');
-    if (!skillList) return;
 
-    skillList.innerHTML = dummyData.skills.map(skill => `
-        <tr class="border-b hover:bg-gray-50">
-            <td class="py-3 px-4">${skill.genre}</td>
-            <td class="py-3 px-4">${skill.category}</td>
-            <td class="py-3 px-4">${skill.skillName}</td>
-            <td class="py-3 px-4 text-center">
-                <button class="detail-button font-bold py-1 px-3 rounded text-sm mr-2">編集</button>
-                <button class="danger-button font-bold py-1 px-3 rounded text-sm">削除</button>
-            </td>
-        </tr>
-    `).join('');
+/**
+ * ユーティリティ関数：スキルデータを階層構造に変換する
+ * @param {Array} skills - フラットなスキルの配列
+ * @returns {Object} - ジャンル > カテゴリ > スキルリスト の階層にグループ化されたオブジェクト
+ * * 元のデータ: [{ genre: "A", category: "B", skillName: "C" }, ...]
+ * 変換後のデータ: { "A": { "B": ["C", ...] } }
+ */
+function groupSkills(skills) {
+    return skills.reduce((acc, skill) => {
+        const { genre, category, skillName } = skill;
+        if (!acc[genre]) {
+            acc[genre] = {};
+        }
+        if (!acc[genre][category]) {
+            acc[genre][category] = [];
+        }
+        acc[genre][category].push(skillName);
+        return acc;
+    }, {});
 }
 
+/**
+ * メイン描画関数：スキル一覧のUIを構築する
+ * * 処理の流れ：
+ * 1. `dummyData.skills`からスキルデータを取得
+ * 2. `groupSkills`関数を使い、データを扱いやすい階層構造に変換
+ * 3. 階層構造を元に、各ジャンルのアコーディオンHTMLを生成 (`createGenreAccordion`を呼び出す)
+ * 4. 生成したHTMLを`#skill-accordion-container`に挿入して画面に表示する
+ */
+function renderSkillList() {
+    const container = document.getElementById('skill-accordion-container');
+    if (!container) return;
+
+    const groupedSkills = groupSkills(dummyData.skills);
+    let html = '';
+
+    for (const genre in groupedSkills) {
+        html += createGenreAccordion(genre, groupedSkills[genre]);
+    }
+    container.innerHTML = html;
+}
+
+/**
+ * HTML生成関数：ジャンルのアコーディオン部分を作成
+ * @param {string} genre - ジャンル名
+ * @param {Object} categories - そのジャンルに属するカテゴリとスキルのオブジェクト
+ * @returns {string} - ジャンル一つ分のHTML文字列
+ */
+function createGenreAccordion(genre, categories) {
+    let categoryHtml = '';
+    for (const category in categories) {
+        categoryHtml += createCategoryAccordion(category, categories[category]);
+    }
+
+    return `
+        <div class="genre-item border rounded" data-genre="${genre}">
+            <div class="accordion-header bg-[var(--main-color)] text-white p-3 flex justify-between items-center">
+                <div class="flex-grow flex items-center">
+                    <span class="cursor-pointer accordion-toggle mr-2">▼</span>
+                    <input type="text" value="${genre}" class="font-bold text-lg text-white bg-transparent border-b border-transparent focus:border-gray-400 outline-none w-full">
+                </div>
+                <button class="text-xs p-1 rounded delete-genre-btn border border-white text-white hover:bg-white hover:text-[var(--main-color)] transition-colors">ジャンル削除</button>
+            </div>
+            <div class="accordion-content hidden p-3 pl-6 space-y-2">
+                ${categoryHtml}
+                <div class="text-center mt-2">
+                    <button class="secondary-button-outline text-xs py-1 px-2 rounded add-category-btn">+ カテゴリ追加</button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+/**
+ * HTML生成関数：カテゴリのアコーディオン部分を作成
+ * @param {string} category - カテゴリ名
+ * @param {Array} skills - そのカテゴリに属するスキルの配列
+ * @returns {string} - カテゴリ一つ分のHTML文字列
+ */
+function createCategoryAccordion(category, skills) {
+    let skillHtml = '<ul class="list-disc pl-4 space-y-2 skill-list">';
+    skills.forEach(skillName => {
+        skillHtml += createSkillItem(skillName);
+    });
+    // ★変更点：「スキル追加」ボタンをdivで囲み、中央配置
+    skillHtml += '</ul><div class="text-center mt-2"><button class="secondary-button-outline text-xs py-1 px-2 rounded add-skill-btn">+ スキル追加</button></div>';
+
+    return `
+        <div class="category-item border rounded" data-category="${category}">
+            <div class="accordion-header bg-gray-50 p-3 flex justify-between items-center">
+                <div class="flex-grow flex items-center">
+                    <span class="cursor-pointer accordion-toggle mr-2">▼</span>
+                    <input type="text" value="${category}" class="font-semibold text-md bg-transparent border-b border-transparent focus:border-gray-400 outline-none w-full">
+                </div>
+                <button class="danger-button-outline text-xs p-1 rounded delete-category-btn">カテゴリ削除</button>
+            </div>
+            <div class="accordion-content hidden p-3 pl-6">
+                ${skillHtml}
+            </div>
+        </div>
+    `;
+}
+
+/**
+ * HTML生成関数：スキル項目（li要素）を作成
+ * @param {string} skillName - スキル名
+ * @returns {string} - スキル一つ分のHTML文字列
+ */
+function createSkillItem(skillName) {
+    return `
+        <li class="skill-item flex justify-between items-center">
+            <input type="text" value="${skillName}" class="bg-transparent border-b border-transparent focus:border-gray-400 outline-none w-full">
+            <button class="danger-button-outline text-xs p-1 rounded delete-skill-btn">スキル削除</button>
+        </li>
+    `;
+}
+
+/**
+ * イベントリスナー設定関数
+ * * 概要：
+ * スキル設定タブ内でのすべてのクリックイベントを管理します。
+ * 「イベント委譲」という手法を使い、親要素(#settings-skills)にのみ
+ * イベントリスナーを設定し、クリックされた要素のクラス名を見て処理を分岐させます。
+ * これにより、動的に追加された要素にもイベントが適用されます。
+ */
+function setupSkillSettingsEventListeners() {
+    const container = document.getElementById('settings-skills');
+    if (!container) return;
+
+    // 「ジャンル追加」ボタンの処理
+    const addGenreBtn = document.getElementById('add-genre-btn');
+    if(addGenreBtn) {
+        addGenreBtn.addEventListener('click', () => {
+            const newGenreHtml = createGenreAccordion('新しいジャンル', {});
+            document.getElementById('skill-accordion-container').insertAdjacentHTML('beforeend', newGenreHtml);
+        });
+    }
+
+    // アコーディオンコンテナ内のクリックイベントを監視
+    container.addEventListener('click', function(event) {
+        const target = event.target; // クリックされた要素を取得
+
+        // 分岐処理：クリックされた要素のクラス名に応じて処理を実行
+        
+        // アコーディオン開閉
+        if (target.classList.contains('accordion-toggle')) {
+            const header = target.closest('.accordion-header');
+            const content = header.nextElementSibling;
+            content.classList.toggle('hidden');
+            target.textContent = content.classList.contains('hidden') ? '▼' : '▲';
+            return; 
+        }
+
+        // 各種削除ボタン
+        if (target.classList.contains('delete-genre-btn')) {
+            target.closest('.genre-item').remove();
+        }
+        if (target.classList.contains('delete-category-btn')) {
+            target.closest('.category-item').remove();
+        }
+        if (target.classList.contains('delete-skill-btn')) {
+            target.closest('.skill-item').remove();
+        }
+
+        // 各種追加ボタン
+        if (target.classList.contains('add-category-btn')) {
+            const newCategoryHtml = createCategoryAccordion('新しいカテゴリ', []);
+            // ★変更なし：ボタンの親divの前に挿入
+            target.closest('div').insertAdjacentHTML('beforebegin', newCategoryHtml);
+        }
+        
+        // ★★★★★ ここからが修正箇所です ★★★★★
+        if (target.classList.contains('add-skill-btn')) {
+            const newSkillHtml = createSkillItem('新しいスキル');
+            // 修正前： target.previousElementSibling;
+            // 修正後： クリックしたボタンの親(div)の、さらに前の要素(ul)を探す
+            const skillList = target.closest('div').previousElementSibling;
+
+            if (skillList && skillList.classList.contains('skill-list')) {
+                skillList.insertAdjacentHTML('beforeend', newSkillHtml);
+            }
+        }
+        // ★★★★★ ここまでが修正箇所です ★★★★★
+    });
+}
+
+/**
+ * 初期化処理
+ * Webページが読み込まれた後に、スキル設定タブの描画と
+ * イベントリスナーの設定を実行します。
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    // ... (ファイル内の他の既存の初期化処理はそのまま残してください) ...
+
+    // スキル設定タブの初期化処理
+    const skillTabContainer = document.getElementById('settings-skills');
+    if(skillTabContainer) {
+        renderSkillList(); // 初回のアコーディオン描画
+        setupSkillSettingsEventListeners(); // イベントリスナーの設定
+    }
+});
+
+// 既存のDOMContentLoadedイベントリスナーに関数を追加
+document.addEventListener('DOMContentLoaded', function() {
+    // （...既存の処理...）
+    setupAccordionEventListeners(); // この行を追加
+});
 
 /**
  * 収支管理 > 収支集計タブの全データを描画する

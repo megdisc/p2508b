@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <div id="login-screen">
@@ -17,14 +19,20 @@
                 <form>
                     <div class="mb-4">
                         <label for="email" class="block text-gray-700 text-sm font-bold mb-2">メールアドレス</label>
-                        <input type="email" id="email" class="shadow-sm appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[var(--main-color)]" required>
+                        <input type="email" id="email"
+                            class="shadow-sm appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[var(--main-color)]"
+                            required>
                     </div>
                     <div class="mb-6">
                         <label for="password" class="block text-gray-700 text-sm font-bold mb-2">パスワード</label>
-                        <input type="password" id="password" class="shadow-sm appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[var(--main-color)]" required>
+                        <input type="password" id="password"
+                            class="shadow-sm appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[var(--main-color)]"
+                            required>
                     </div>
                     <div class="flex items-center justify-between">
-                        <button onclick="login()" class="primary-button w-full font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                        <button onclick="login()"
+                            class="primary-button w-full font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline"
+                            type="button">
                             ログイン
                         </button>
                     </div>
@@ -39,13 +47,20 @@
                 <div class="text-2xl font-bold text-center text-[var(--accent-color)] py-4 mb-6">Compath</div>
                 <nav id="main-nav" class="flex-1">
                     <ul class="space-y-2">
-                        <li><a href="#" onclick="showScreen('dashboard-screen', this)" class="nav-link active block p-3 rounded-md">ダッシュボード</a></li>
-                        <li><a href="#" onclick="showScreen('settings-screen', this)" class="nav-link block p-3 rounded-md">各種設定</a></li>
-                        <li><a href="#" onclick="showScreen('client-list-screen', this)" class="nav-link block p-3 rounded-md">取引先管理</a></li>
-                        <li><a href="#" onclick="showScreen('user-list-screen', this)" class="nav-link block p-3 rounded-md">利用者管理</a></li>
-                        <li><a href="#" onclick="showScreen('project-list-screen', this)" class="nav-link block p-3 rounded-md">案件管理</a></li>
-                        <li><a href="#" onclick="showScreen('attendance-screen', this)" class="nav-link block p-3 rounded-md">勤退管理</a></li>
-                        <li><a href="#" onclick="showScreen('finance-screen', this, true)" class="nav-link block p-3 rounded-md">収支管理</a></li>
+                        <li><a href="#" onclick="showScreen('dashboard-screen', this)"
+                                class="nav-link active block p-3 rounded-md">ダッシュボード</a></li>
+                        <li><a href="#" onclick="showScreen('settings-screen', this)"
+                                class="nav-link block p-3 rounded-md">各種設定</a></li>
+                        <li><a href="#" onclick="showScreen('client-list-screen', this)"
+                                class="nav-link block p-3 rounded-md">取引先管理</a></li>
+                        <li><a href="#" onclick="showScreen('user-list-screen', this)"
+                                class="nav-link block p-3 rounded-md">利用者管理</a></li>
+                        <li><a href="#" onclick="showScreen('project-list-screen', this)"
+                                class="nav-link block p-3 rounded-md">案件管理</a></li>
+                        <li><a href="#" onclick="showScreen('attendance-screen', this)"
+                                class="nav-link block p-3 rounded-md">勤退管理</a></li>
+                        <li><a href="#" onclick="showScreen('finance-screen', this, true)"
+                                class="nav-link block p-3 rounded-md">収支管理</a></li>
                     </ul>
                 </nav>
                 <div>
@@ -70,23 +85,32 @@
                     <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">各種設定</h1>
                     <div class="mb-6 border-b border-gray-200">
                         <nav id="settings-sub-nav" class="-mb-px flex space-x-6">
-                            <a href="#" onclick="showSettingsTab('settings-facility', this)" class="sub-nav-link active py-4 px-1 text-gray-500 hover:text-gray-700">施設情報設定</a>
-                            <a href="#" onclick="showSettingsTab('settings-terms', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">用語設定</a>
-                            <a href="#" onclick="showSettingsTab('settings-payment-wage', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">差引工賃設定</a>
-                            <a href="#" onclick="showSettingsTab('settings-skills', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">スキル設定</a>
-                            <a href="#" onclick="showSettingsTab('settings-accounts', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">アカウント設定</a>
+                            <a href="#" onclick="showSettingsTab('settings-facility', this)"
+                                class="sub-nav-link active py-4 px-1 text-gray-500 hover:text-gray-700">施設情報設定</a>
+                            <a href="#" onclick="showSettingsTab('settings-terms', this)"
+                                class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">用語設定</a>
+                            <a href="#" onclick="showSettingsTab('settings-payment-wage', this)"
+                                class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">差引工賃設定</a>
+                            <a href="#" onclick="showSettingsTab('settings-skills', this)"
+                                class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">スキル設定</a>
+                            <a href="#" onclick="showSettingsTab('settings-accounts', this)"
+                                class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">アカウント設定</a>
                         </nav>
                     </div>
-                    
+
                     <div class="settings-tab-content" id="settings-facility">
-                         <div class="space-y-6">
+                        <div class="space-y-6">
                             <div class="card rounded-lg p-6 shadow-sm">
                                 <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">法人設定</h2>
                                 <div class="space-y-4">
-                                    <div><label class="font-semibold text-gray-700">法人番号</label><input type="text" class="border rounded w-full mt-1 px-2 py-1"></div>
-                                    <div><label class="font-semibold text-gray-700">法人名称</label><input type="text" class="border rounded w-full mt-1 px-2 py-1"></div>
-                                    <div><label class="font-semibold text-gray-700">代表者 役職</label><input type="text" class="border rounded w-full mt-1 px-2 py-1"></div>
-                                    <div><label class="font-semibold text-gray-700">代表者 氏名</label><input type="text" class="border rounded w-full mt-1 px-2 py-1"></div>
+                                    <div><label class="font-semibold text-gray-700">法人番号</label><input type="text"
+                                            class="border rounded w-full mt-1 px-2 py-1"></div>
+                                    <div><label class="font-semibold text-gray-700">法人名称</label><input type="text"
+                                            class="border rounded w-full mt-1 px-2 py-1"></div>
+                                    <div><label class="font-semibold text-gray-700">代表者 役職</label><input type="text"
+                                            class="border rounded w-full mt-1 px-2 py-1"></div>
+                                    <div><label class="font-semibold text-gray-700">代表者 氏名</label><input type="text"
+                                            class="border rounded w-full mt-1 px-2 py-1"></div>
                                 </div>
                                 <div class="mt-6 text-right">
                                     <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
@@ -107,7 +131,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="facility-list">
-                                        </tbody>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -116,7 +140,7 @@
                     <div class="settings-tab-content hidden" id="settings-terms">
                         <div class="card rounded-lg p-6 shadow-sm">
                             <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">用語設定</h2>
-                             <p class="text-gray-600 mb-6">システム内で使用される特定の用語を、事業所の実情に合わせて変更できます。</p>
+                            <p class="text-gray-600 mb-6">システム内で使用される特定の用語を、事業所の実情に合わせて変更できます。</p>
                             <div class="space-y-4">
                                 <div class="grid grid-cols-2 gap-4 items-center">
                                     <label class="font-semibold text-gray-700">システム内の表示名</label>
@@ -136,51 +160,61 @@
                             </div>
                         </div>
                     </div>
-                     <div class="settings-tab-content hidden" id="settings-payment-wage">
+                    <div class="settings-tab-content hidden" id="settings-payment-wage">
                         <div class="space-y-6">
                             <div class="card rounded-lg p-6 shadow-sm">
                                 <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">ベース設定</h2>
                                 <div class="space-y-4">
-                                     <div><label class="font-semibold text-gray-700">ベース単価</label><input type="number" value="100" class="border rounded w-full mt-1 px-2 py-1"></div>
-                                     <div><label class="font-semibold text-gray-700">利用時間の単位</label><input type="number" value="15" class="border rounded w-full mt-1 px-2 py-1"></div>
-                                     <div><label class="font-semibold text-gray-700">端数の取り扱い</label>
-                                        <select class="border rounded w-full mt-1 px-2 py-1"><option>切り捨て</option><option>四捨五入</option><option>切り上げ</option></select>
-                                     </div>
+                                    <div><label class="font-semibold text-gray-700">ベース単価</label><input type="number"
+                                            value="100" class="border rounded w-full mt-1 px-2 py-1"></div>
+                                    <div><label class="font-semibold text-gray-700">利用時間の単位</label><input type="number"
+                                            value="15" class="border rounded w-full mt-1 px-2 py-1"></div>
+                                    <div><label class="font-semibold text-gray-700">端数の取り扱い</label>
+                                        <select class="border rounded w-full mt-1 px-2 py-1">
+                                            <option>切り捨て</option>
+                                            <option>四捨五入</option>
+                                            <option>切り上げ</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card rounded-lg p-6 shadow-sm">
-                                <div class="flex justify-between items-center mb-4"><h2 class="text-xl font-bold text-[var(--main-color)]">加算設定</h2><button class="primary-button font-bold py-2 px-4 rounded">新規作成</button></div>
+                                <div class="flex justify-between items-center mb-4">
+                                    <h2 class="text-xl font-bold text-[var(--main-color)]">加算設定</h2><button
+                                        class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
+                                </div>
                                 <p>加算設定テーブルがここに表示されます。</p>
                             </div>
                             <div class="card rounded-lg p-6 shadow-sm">
-                                <div class="flex justify-between items-center mb-4"><h2 class="text-xl font-bold text-[var(--main-color)]">控除設定</h2><button class="primary-button font-bold py-2 px-4 rounded">新規作成</button></div>
+                                <div class="flex justify-between items-center mb-4">
+                                    <h2 class="text-xl font-bold text-[var(--main-color)]">控除設定</h2><button
+                                        class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
+                                </div>
                                 <p>控除設定テーブルがここに表示されます。</p>
                             </div>
                         </div>
                     </div>
-                     <div class="settings-tab-content hidden" id="settings-skills">
+<div class="settings-tab-content hidden" id="settings-skills">
+    <div class="card rounded-lg p-6 shadow-sm">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold text-[var(--main-color)]">スキル設定</h2>
+        </div>
+
+        <div id="skill-accordion-container" class="space-y-2">
+            </div>
+        
+<div class="mt-4 text-center">
+             <button id="add-genre-btn" class="secondary-button-outline text-xs py-1 px-2 rounded">+ ジャンル追加</button>
+        </div>
+
+        <div class="mt-6 text-right">
+            <button class="primary-button font-bold py-2 px-4 rounded">保存</button>
+        </div>
+    </div>
+</div>
+                    <div class="settings-tab-content hidden" id="settings-accounts">
                         <div class="card rounded-lg p-6 shadow-sm">
-                             <div class="flex justify-between items-center mb-4">
-                                <h2 class="text-xl font-bold text-[var(--main-color)]">スキル設定</h2>
-                                <button class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
-                            </div>
-                            <table class="min-w-full bg-white">
-                                <thead class="bg-[var(--main-color)] text-white">
-                                    <tr>
-                                        <th class="py-3 px-4 text-left">ジャンル</th>
-                                        <th class="py-3 px-4 text-left">カテゴリ</th>
-                                        <th class="py-3 px-4 text-left">スキル</th>
-                                        <th class="py-3 px-4 text-center">操作</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="skill-list">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                     <div class="settings-tab-content hidden" id="settings-accounts">
-                        <div class="card rounded-lg p-6 shadow-sm">
-                             <div class="flex justify-between items-center mb-4">
+                            <div class="flex justify-between items-center mb-4">
                                 <h2 class="text-xl font-bold text-[var(--main-color)]">アカウント設定</h2>
                                 <button class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
                             </div>
@@ -188,13 +222,14 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="screen-content hidden" id="client-list-screen">
                     <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">取引先管理</h1>
                     <div class="card rounded-lg p-6 shadow-sm">
                         <div class="flex justify-between items-center mb-4">
                             <h2 class="text-xl font-bold text-[var(--main-color)]">取引先一覧</h2>
-                            <button onclick="showScreen('client-detail-screen')" class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
+                            <button onclick="showScreen('client-detail-screen')"
+                                class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
                         </div>
                         <p>取引先一覧のテーブルがここに表示されます。</p>
                     </div>
@@ -205,7 +240,7 @@
                     <div class="card rounded-lg p-6 shadow-sm">
                         <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">取引先基本情報</h2>
                         <p>取引先詳細のフォームがここに表示されます。</p>
-                         <div class="mt-6 flex justify-end">
+                        <div class="mt-6 flex justify-end">
                             <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
                         </div>
                     </div>
@@ -216,55 +251,85 @@
                     <div class="card rounded-lg p-6 shadow-sm">
                         <div class="flex justify-between items-center mb-4">
                             <h2 class="text-xl font-bold text-[var(--main-color)]">利用者一覧</h2>
-                            <button onclick="showScreen('user-detail-screen')" class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
+                            <button onclick="showScreen('user-detail-screen')"
+                                class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
                         </div>
                         <p>利用者一覧のテーブルがここに表示されます。</p>
                     </div>
                 </div>
 
                 <div class="screen-content hidden" id="user-detail-screen">
-                     <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">利用者詳細</h1>
-                     <div class="space-y-6">
-                        <div class="card rounded-lg p-6 shadow-sm"><h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">利用者基本情報</h2><p>フォーム</p></div>
-                        <div class="card rounded-lg p-6 shadow-sm"><h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">障害福祉サービス受給者証情報</h2><p>フォーム</p></div>
-                        <div class="card rounded-lg p-6 shadow-sm"><h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">基本シフト</h2><p>フォーム</p></div>
-                        <div class="card rounded-lg p-6 shadow-sm"><h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">習得スキル</h2><p>フォーム</p></div>
+                    <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">利用者詳細</h1>
+                    <div class="space-y-6">
+                        <div class="card rounded-lg p-6 shadow-sm">
+                            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">利用者基本情報</h2>
+                            <p>フォーム</p>
+                        </div>
+                        <div class="card rounded-lg p-6 shadow-sm">
+                            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">障害福祉サービス受給者証情報</h2>
+                            <p>フォーム</p>
+                        </div>
+                        <div class="card rounded-lg p-6 shadow-sm">
+                            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">基本シフト</h2>
+                            <p>フォーム</p>
+                        </div>
+                        <div class="card rounded-lg p-6 shadow-sm">
+                            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">習得スキル</h2>
+                            <p>フォーム</p>
+                        </div>
                         <div class="mt-6 flex justify-end">
                             <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
                         </div>
-                     </div>
+                    </div>
                 </div>
 
                 <div class="screen-content hidden" id="project-list-screen">
                     <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">案件管理</h1>
-                     <div class="card rounded-lg p-6 shadow-sm">
+                    <div class="card rounded-lg p-6 shadow-sm">
                         <div class="flex justify-between items-center mb-4">
                             <h2 class="text-xl font-bold text-[var(--main-color)]">案件一覧</h2>
-                            <button onclick="showScreen('project-detail-screen')" class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
+                            <button onclick="showScreen('project-detail-screen')"
+                                class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
                         </div>
                         <p>案件一覧のテーブルがここに表示されます。</p>
                     </div>
                 </div>
 
                 <div class="screen-content hidden" id="project-detail-screen">
-                     <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">案件詳細</h1>
-                     <div class="space-y-6">
-                        <div class="card rounded-lg p-6 shadow-sm"><h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">案件基本情報</h2><p>フォーム</p></div>
-                        <div class="card rounded-lg p-6 shadow-sm"><h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">受託料</h2><p>フォーム</p></div>
-                        <div class="card rounded-lg p-6 shadow-sm"><h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">タスク基本情報</h2><p>フォーム</p></div>
-                        <div class="card rounded-lg p-6 shadow-sm"><h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">タスクアサイン</h2><p>フォーム</p></div>
-                        <div class="card rounded-lg p-6 shadow-sm"><h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">タスク進捗</h2><p>フォーム</p></div>
+                    <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">案件詳細</h1>
+                    <div class="space-y-6">
+                        <div class="card rounded-lg p-6 shadow-sm">
+                            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">案件基本情報</h2>
+                            <p>フォーム</p>
+                        </div>
+                        <div class="card rounded-lg p-6 shadow-sm">
+                            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">受託料</h2>
+                            <p>フォーム</p>
+                        </div>
+                        <div class="card rounded-lg p-6 shadow-sm">
+                            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">タスク基本情報</h2>
+                            <p>フォーム</p>
+                        </div>
+                        <div class="card rounded-lg p-6 shadow-sm">
+                            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">タスクアサイン</h2>
+                            <p>フォーム</p>
+                        </div>
+                        <div class="card rounded-lg p-6 shadow-sm">
+                            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">タスク進捗</h2>
+                            <p>フォーム</p>
+                        </div>
                         <div class="mt-6 flex justify-end">
                             <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
                         </div>
-                     </div>
+                    </div>
                 </div>
 
                 <div class="screen-content hidden" id="attendance-screen">
-                     <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">勤退管理</h1>
-                     <div class="mb-6 border-b border-gray-200">
+                    <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">勤退管理</h1>
+                    <div class="mb-6 border-b border-gray-200">
                         <nav class="-mb-px flex space-x-6">
-                            <a href="#" class="sub-nav-link active py-4 px-1 text-gray-500 hover:text-gray-700">事業所カレンダー</a>
+                            <a href="#"
+                                class="sub-nav-link active py-4 px-1 text-gray-500 hover:text-gray-700">事業所カレンダー</a>
                             <a href="#" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">利用者個別カレンダー</a>
                         </nav>
                     </div>
@@ -272,15 +337,19 @@
                         <p>カレンダーがここに表示されます。</p>
                     </div>
                 </div>
-                
+
                 <div class="screen-content hidden" id="finance-screen">
                     <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">収支管理</h1>
                     <div class="mb-6 border-b border-gray-200">
                         <nav id="finance-sub-nav" class="-mb-px flex space-x-6">
-                            <a href="#" onclick="showFinanceTab('finance-aggregation-wrapper', this)" class="sub-nav-link active py-4 px-1 text-gray-500 hover:text-gray-700">収支集計</a>
-                            <a href="#" onclick="showFinanceTab('finance-summary-wrapper', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">収支一覧</a>
-                            <a href="#" onclick="showFinanceTab('finance-average-wage-wrapper', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">平均工賃一覧</a>
-                            <a href="#" onclick="showFinanceTab('finance-payment-list-wrapper', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">差引工賃一覧（工賃明細）</a>
+                            <a href="#" onclick="showFinanceTab('finance-aggregation-wrapper', this)"
+                                class="sub-nav-link active py-4 px-1 text-gray-500 hover:text-gray-700">収支集計</a>
+                            <a href="#" onclick="showFinanceTab('finance-summary-wrapper', this)"
+                                class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">収支一覧</a>
+                            <a href="#" onclick="showFinanceTab('finance-average-wage-wrapper', this)"
+                                class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">平均工賃一覧</a>
+                            <a href="#" onclick="showFinanceTab('finance-payment-list-wrapper', this)"
+                                class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">差引工賃一覧（工賃明細）</a>
                         </nav>
                     </div>
 
@@ -289,34 +358,42 @@
                             <div class="flex justify-between items-center mb-6">
                                 <h2 class="text-xl font-bold text-[var(--main-color)]">収支集計</h2>
                                 <div id="aggregation-status-container">
-                                    </div>
+                                </div>
                             </div>
-                            
+
                             <div class="mb-8">
                                 <h3 class="text-lg font-semibold mb-2 text-gray-800 text-center">事業年度</h3>
                                 <div class="flex items-center justify-center space-x-4 mb-4">
-                                    <button onclick="changeMonth(-1)" class="primary-button p-2 rounded-full text-lg">&lt;</button>
+                                    <button onclick="changeMonth(-1)"
+                                        class="primary-button p-2 rounded-full text-lg">&lt;</button>
                                     <div class="text-center">
-                                        <p id="aggregation-month-display" class="text-4xl font-bold text-[var(--main-color)]"></p>
+                                        <p id="aggregation-month-display"
+                                            class="text-4xl font-bold text-[var(--main-color)]"></p>
                                         <p id="aggregation-period-display" class="text-sm text-gray-500"></p>
                                     </div>
-                                    <button onclick="changeMonth(1)" class="primary-button p-2 rounded-full text-lg">&gt;</button>
+                                    <button onclick="changeMonth(1)"
+                                        class="primary-button p-2 rounded-full text-lg">&gt;</button>
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
                                     <div class="p-4 rounded-lg bg-gray-100">
                                         <p class="text-sm font-semibold text-gray-600">事業収入</p>
-                                        <p id="aggregation-income" class="text-2xl font-bold text-[var(--main-color)]"></p>
+                                        <p id="aggregation-income" class="text-2xl font-bold text-[var(--main-color)]">
+                                        </p>
                                     </div>
                                     <div class="p-4 rounded-lg bg-gray-100">
                                         <p class="text-sm font-semibold text-gray-600">生産活動経費</p>
-                                        <p id="aggregation-costs" class="text-2xl font-bold text-[var(--main-color)]"></p>
+                                        <p id="aggregation-costs" class="text-2xl font-bold text-[var(--main-color)]">
+                                        </p>
                                     </div>
                                     <div class="p-4 rounded-lg bg-gray-100">
                                         <p class="text-sm font-semibold text-gray-600">積立金</p>
-                                        <p id="aggregation-reserves" class="text-2xl font-bold text-[var(--main-color)]"></p>
-                                    </div>                                    <div class="p-4 rounded-lg bg-gray-100">
+                                        <p id="aggregation-reserves"
+                                            class="text-2xl font-bold text-[var(--main-color)]"></p>
+                                    </div>
+                                    <div class="p-4 rounded-lg bg-gray-100">
                                         <p class="text-sm font-semibold text-gray-600">工賃</p>
-                                        <p id="aggregation-wages" class="text-2xl font-bold text-[var(--main-color)]"></p>
+                                        <p id="aggregation-wages" class="text-2xl font-bold text-[var(--main-color)]">
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -325,28 +402,50 @@
                                 <div>
                                     <h3 class="text-lg font-bold mb-2 text-[var(--main-color)]">事業収入</h3>
                                     <table class="min-w-full bg-white">
-                                         <thead class="bg-[var(--main-color)] text-white"><tr><th class="py-3 px-4 text-left">案件名</th><th class="py-3 px-4 text-left">顧客名</th><th class="py-3 px-4 text-right">金額</th></tr></thead>
-                                         <tbody id="business-income-list"></tbody>
+                                        <thead class="bg-[var(--main-color)] text-white">
+                                            <tr>
+                                                <th class="py-3 px-4 text-left">案件名</th>
+                                                <th class="py-3 px-4 text-left">顧客名</th>
+                                                <th class="py-3 px-4 text-right">金額</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="business-income-list"></tbody>
                                     </table>
                                 </div>
                                 <div>
                                     <h3 class="text-lg font-bold mb-2 text-[var(--main-color)]">生産活動経費</h3>
                                     <table class="min-w-full bg-white">
-                                        <thead class="bg-[var(--main-color)] text-white"><tr><th class="py-3 px-4 text-left">案件名</th><th class="py-3 px-4 text-left">外注先名</th><th class="py-3 px-4 text-right">金額</th></tr></thead>
+                                        <thead class="bg-[var(--main-color)] text-white">
+                                            <tr>
+                                                <th class="py-3 px-4 text-left">案件名</th>
+                                                <th class="py-3 px-4 text-left">外注先名</th>
+                                                <th class="py-3 px-4 text-right">金額</th>
+                                            </tr>
+                                        </thead>
                                         <tbody id="production-costs-list"></tbody>
                                     </table>
                                 </div>
                                 <div>
                                     <h3 class="text-lg font-bold mb-2 text-[var(--main-color)]">積立金</h3>
                                     <table class="min-w-full bg-white">
-                                        <thead class="bg-[var(--main-color)] text-white"><tr><th class="py-3 px-4 text-left">種別</th><th class="py-3 px-4 text-right">金額</th></tr></thead>
+                                        <thead class="bg-[var(--main-color)] text-white">
+                                            <tr>
+                                                <th class="py-3 px-4 text-left">種別</th>
+                                                <th class="py-3 px-4 text-right">金額</th>
+                                            </tr>
+                                        </thead>
                                         <tbody id="reserves-list"></tbody>
                                     </table>
                                 </div>
                                 <div>
                                     <h3 class="text-lg font-bold mb-2 text-[var(--main-color)]">工賃</h3>
                                     <table class="min-w-full bg-white">
-                                        <thead class="bg-[var(--main-color)] text-white"><tr><th class="py-3 px-4 text-left">利用者名</th><th class="py-3 px-4 text-right">金額</th></tr></thead>
+                                        <thead class="bg-[var(--main-color)] text-white">
+                                            <tr>
+                                                <th class="py-3 px-4 text-left">利用者名</th>
+                                                <th class="py-3 px-4 text-right">金額</th>
+                                            </tr>
+                                        </thead>
                                         <tbody id="wages-list"></tbody>
                                     </table>
                                 </div>
@@ -358,13 +457,14 @@
                         <div id="finance-summary">
                             <div class="card rounded-lg p-6 shadow-sm">
                                 <h2 class="text-xl font-bold mb-6 text-[var(--main-color)]">収支一覧</h2>
-                                
+
                                 <div class="mb-8">
                                     <h3 class="text-lg font-semibold mb-2 text-gray-800 text-center">事業年度</h3>
                                     <div class="flex items-center justify-center space-x-4 mb-4">
                                         <button class="primary-button p-2 rounded-full text-lg">&lt;</button>
                                         <div class="text-center">
-                                            <p id="summary-year-display" class="text-4xl font-bold text-[var(--main-color)]"></p>
+                                            <p id="summary-year-display"
+                                                class="text-4xl font-bold text-[var(--main-color)]"></p>
                                             <p id="summary-period-display" class="text-sm text-gray-500"></p>
                                         </div>
                                         <button class="primary-button p-2 rounded-full text-lg">&gt;</button>
@@ -372,19 +472,23 @@
                                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
                                         <div class="p-4 rounded-lg bg-gray-100">
                                             <p class="text-sm font-semibold text-gray-600">事業収入</p>
-                                            <p id="summary-income" class="text-2xl font-bold text-[var(--main-color)]"></p>
+                                            <p id="summary-income" class="text-2xl font-bold text-[var(--main-color)]">
+                                            </p>
                                         </div>
                                         <div class="p-4 rounded-lg bg-gray-100">
                                             <p class="text-sm font-semibold text-gray-600">生産活動経費</p>
-                                            <p id="summary-costs" class="text-2xl font-bold text-[var(--main-color)]"></p>
+                                            <p id="summary-costs" class="text-2xl font-bold text-[var(--main-color)]">
+                                            </p>
                                         </div>
                                         <div class="p-4 rounded-lg bg-gray-100">
                                             <p class="text-sm font-semibold text-gray-600">積立金</p>
-                                            <p id="summary-reserves" class="text-2xl font-bold text-[var(--main-color)]"></p>
+                                            <p id="summary-reserves"
+                                                class="text-2xl font-bold text-[var(--main-color)]"></p>
                                         </div>
                                         <div class="p-4 rounded-lg bg-gray-100">
                                             <p class="text-sm font-semibold text-gray-600">工賃</p>
-                                            <p id="summary-wages" class="text-2xl font-bold text-[var(--main-color)]"></p>
+                                            <p id="summary-wages" class="text-2xl font-bold text-[var(--main-color)]">
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -410,9 +514,10 @@
                             <div class="card rounded-lg p-6 shadow-sm">
                                 <div class="flex justify-between items-center mb-6">
                                     <h2 class="text-xl font-bold text-[var(--main-color)]">収支詳細</h2>
-                                    <button onclick="showIncomeExpenditureDetail(false)" class="detail-button font-bold py-2 px-4 rounded">戻る</button>
+                                    <button onclick="showIncomeExpenditureDetail(false)"
+                                        class="detail-button font-bold py-2 px-4 rounded">戻る</button>
                                 </div>
-                                
+
                                 <div class="mb-8">
                                     <h3 class="text-lg font-semibold mb-2 text-gray-800 text-center">事業年度</h3>
                                     <div class="flex items-center justify-center space-x-4 mb-4">
@@ -447,32 +552,54 @@
                                     <div>
                                         <h3 class="text-lg font-bold mb-2 text-[var(--main-color)]">事業収入</h3>
                                         <table class="min-w-full bg-white">
-                                             <thead class="bg-[var(--main-color)] text-white"><tr><th class="py-3 px-4 text-left">案件名</th><th class="py-3 px-4 text-left">顧客名</th><th class="py-3 px-4 text-right">金額</th></tr></thead>
-                                             <tbody id="detail-business-income-list"></tbody>
+                                            <thead class="bg-[var(--main-color)] text-white">
+                                                <tr>
+                                                    <th class="py-3 px-4 text-left">案件名</th>
+                                                    <th class="py-3 px-4 text-left">顧客名</th>
+                                                    <th class="py-3 px-4 text-right">金額</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="detail-business-income-list"></tbody>
                                         </table>
                                     </div>
                                     <div>
                                         <h3 class="text-lg font-bold mb-2 text-[var(--main-color)]">生産活動経費</h3>
                                         <table class="min-w-full bg-white">
-                                            <thead class="bg-[var(--main-color)] text-white"><tr><th class="py-3 px-4 text-left">案件名</th><th class="py-3 px-4 text-left">外注先名</th><th class="py-3 px-4 text-right">金額</th></tr></thead>
+                                            <thead class="bg-[var(--main-color)] text-white">
+                                                <tr>
+                                                    <th class="py-3 px-4 text-left">案件名</th>
+                                                    <th class="py-3 px-4 text-left">外注先名</th>
+                                                    <th class="py-3 px-4 text-right">金額</th>
+                                                </tr>
+                                            </thead>
                                             <tbody id="detail-production-costs-list"></tbody>
                                         </table>
                                     </div>
-                                <div>
-                                    <h3 class="text-lg font-bold mb-2 text-[var(--main-color)]">積立金</h3>
-                                    <table class="min-w-full bg-white">
-                                        <thead class="bg-[var(--main-color)] text-white"><tr><th class="py-3 px-4 text-left">種別</th><th class="py-3 px-4 text-right">金額</th></tr></thead>
-                                        <tbody id="detail-reserves-list"></tbody>
-                                    </table>
-                                </div>
+                                    <div>
+                                        <h3 class="text-lg font-bold mb-2 text-[var(--main-color)]">積立金</h3>
+                                        <table class="min-w-full bg-white">
+                                            <thead class="bg-[var(--main-color)] text-white">
+                                                <tr>
+                                                    <th class="py-3 px-4 text-left">種別</th>
+                                                    <th class="py-3 px-4 text-right">金額</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="detail-reserves-list"></tbody>
+                                        </table>
+                                    </div>
                                     <div>
                                         <h3 class="text-lg font-bold mb-2 text-[var(--main-color)]">工賃</h3>
                                         <table class="min-w-full bg-white">
-                                            <thead class="bg-[var(--main-color)] text-white"><tr><th class="py-3 px-4 text-left">利用者名</th><th class="py-3 px-4 text-right">金額</th></tr></thead>
+                                            <thead class="bg-[var(--main-color)] text-white">
+                                                <tr>
+                                                    <th class="py-3 px-4 text-left">利用者名</th>
+                                                    <th class="py-3 px-4 text-right">金額</th>
+                                                </tr>
+                                            </thead>
                                             <tbody id="detail-wages-list"></tbody>
-                                    </table>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
 
                             </div>
                         </div>
@@ -482,13 +609,14 @@
                         <div id="finance-average-wage-list">
                             <div class="card rounded-lg p-6 shadow-sm">
                                 <h2 class="text-xl font-bold mb-6 text-[var(--main-color)]">平均工賃一覧</h2>
-                                
+
                                 <div class="mb-8">
                                     <h3 class="text-lg font-semibold mb-2 text-gray-800 text-center">会計年度</h3>
                                     <div class="flex items-center justify-center space-x-4 mb-4">
                                         <button class="primary-button p-2 rounded-full text-lg">&lt;</button>
                                         <div class="text-center">
-                                            <p id="avg-wage-year-display" class="text-4xl font-bold text-[var(--main-color)]"></p>
+                                            <p id="avg-wage-year-display"
+                                                class="text-4xl font-bold text-[var(--main-color)]"></p>
                                             <p id="avg-wage-period-display" class="text-sm text-gray-500"></p>
                                         </div>
                                         <button class="primary-button p-2 rounded-full text-lg">&gt;</button>
@@ -496,27 +624,32 @@
                                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 text-center">
                                         <div class="p-4 rounded-lg bg-gray-100">
                                             <p class="text-sm font-semibold text-gray-600">平均工賃</p>
-                                            <p id="avg-wage-average" class="text-2xl font-bold text-[var(--main-color)]"></p>
+                                            <p id="avg-wage-average"
+                                                class="text-2xl font-bold text-[var(--main-color)]"></p>
                                         </div>
                                         <div class="p-4 rounded-lg bg-gray-100">
                                             <p class="text-sm font-semibold text-gray-600">工賃</p>
-                                            <p id="avg-wage-total-wages" class="text-2xl font-bold text-[var(--main-color)]"></p>
+                                            <p id="avg-wage-total-wages"
+                                                class="text-2xl font-bold text-[var(--main-color)]"></p>
                                         </div>
                                         <div class="p-4 rounded-lg bg-gray-100">
                                             <p class="text-sm font-semibold text-gray-600">平均利用者数/日</p>
-                                            <p id="avg-wage-avg-users" class="text-2xl font-bold text-[var(--main-color)]"></p>
+                                            <p id="avg-wage-avg-users"
+                                                class="text-2xl font-bold text-[var(--main-color)]"></p>
                                         </div>
                                         <div class="p-4 rounded-lg bg-gray-100">
                                             <p class="text-sm font-semibold text-gray-600">延べ利用者数</p>
-                                            <p id="avg-wage-total-users" class="text-2xl font-bold text-[var(--main-color)]"></p>
+                                            <p id="avg-wage-total-users"
+                                                class="text-2xl font-bold text-[var(--main-color)]"></p>
                                         </div>
                                         <div class="p-4 rounded-lg bg-gray-100">
                                             <p class="text-sm font-semibold text-gray-600">開所日数</p>
-                                            <p id="avg-wage-open-days" class="text-2xl font-bold text-[var(--main-color)]"></p>
+                                            <p id="avg-wage-open-days"
+                                                class="text-2xl font-bold text-[var(--main-color)]"></p>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="overflow-x-auto">
                                     <table class="min-w-full bg-white">
                                         <thead class="bg-[var(--main-color)] text-white">
@@ -539,7 +672,8 @@
                             <div class="card rounded-lg p-6 shadow-sm">
                                 <div class="flex justify-between items-center mb-6">
                                     <h2 class="text-xl font-bold text-[var(--main-color)]">平均工賃詳細</h2>
-                                    <button onclick="showAverageWageDetail(false)" class="detail-button font-bold py-2 px-4 rounded">戻る</button>
+                                    <button onclick="showAverageWageDetail(false)"
+                                        class="detail-button font-bold py-2 px-4 rounded">戻る</button>
                                 </div>
 
                                 <div class="mb-8">
@@ -595,7 +729,7 @@
                     </div>
 
                     <div class="finance-tab-content hidden" id="finance-payment-list-wrapper">
-                         <div id="finance-payment-list">
+                        <div id="finance-payment-list">
                             <div class="card rounded-lg p-6 shadow-sm">
                                 <div class="flex justify-between items-center mb-6">
                                     <h2 class="text-xl font-bold text-[var(--main-color)]">差引工賃一覧（工賃明細）</h2>
@@ -609,7 +743,8 @@
                                     <div class="flex items-center justify-center space-x-4 mb-4">
                                         <button class="primary-button p-2 rounded-full text-lg">&lt;</button>
                                         <div class="text-center">
-                                            <p id="payment-month-display" class="text-4xl font-bold text-[var(--main-color)]"></p>
+                                            <p id="payment-month-display"
+                                                class="text-4xl font-bold text-[var(--main-color)]"></p>
                                             <p id="payment-period-display" class="text-sm text-gray-500"></p>
                                         </div>
                                         <button class="primary-button p-2 rounded-full text-lg">&gt;</button>
@@ -617,19 +752,22 @@
                                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                                         <div class="p-4 rounded-lg bg-gray-100">
                                             <p class="text-sm font-semibold text-gray-600">差引工賃</p>
-                                            <p id="payment-total-payment" class="text-2xl font-bold text-[var(--main-color)]"></p>
+                                            <p id="payment-total-payment"
+                                                class="text-2xl font-bold text-[var(--main-color)]"></p>
                                         </div>
                                         <div class="p-4 rounded-lg bg-gray-100">
                                             <p class="text-sm font-semibold text-gray-600">工賃</p>
-                                            <p id="payment-total-wages" class="text-2xl font-bold text-[var(--main-color)]"></p>
+                                            <p id="payment-total-wages"
+                                                class="text-2xl font-bold text-[var(--main-color)]"></p>
                                         </div>
                                         <div class="p-4 rounded-lg bg-gray-100">
                                             <p class="text-sm font-semibold text-gray-600">控除</p>
-                                            <p id="payment-total-deduction" class="text-2xl font-bold text-[var(--main-color)]"></p>
+                                            <p id="payment-total-deduction"
+                                                class="text-2xl font-bold text-[var(--main-color)]"></p>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="overflow-x-auto">
                                     <table class="min-w-full bg-white">
                                         <thead class="bg-[var(--main-color)] text-white">
@@ -648,12 +786,13 @@
                         </div>
 
                         <div id="finance-payroll-statement" class="hidden">
-                             <div class="card rounded-lg p-6 shadow-sm">
+                            <div class="card rounded-lg p-6 shadow-sm">
                                 <div class="flex justify-between items-center mb-6">
                                     <h2 class="text-xl font-bold text-[var(--main-color)]">工賃明細書</h2>
                                     <div class="flex space-x-2">
                                         <button class="primary-button font-bold py-2 px-4 rounded">印刷</button>
-                                        <button onclick="showPayrollStatement(false)" class="detail-button font-bold py-2 px-4 rounded">戻る</button>
+                                        <button onclick="showPayrollStatement(false)"
+                                            class="detail-button font-bold py-2 px-4 rounded">戻る</button>
                                     </div>
                                 </div>
 
@@ -691,7 +830,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="overflow-x-auto mb-6">
                                     <table class="min-w-full bg-white">
                                         <thead class="bg-[var(--main-color)] text-white">
@@ -770,7 +909,8 @@
         </div>
     </div>
 
-    <script src="dummydata.js"></script>
+<script src="dummydata.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>

@@ -4,13 +4,22 @@ const dummyData = {
         { officeNumber: '1234567890', officeName: 'サンプル事業所', status: '有効' }
     ],
     // 各種設定 > スキル設定
-    skills: [
-        { id: 1, genre: 'Web制作', category: 'デザイン', skillName: 'Figma' },
-        { id: 2, genre: 'Web制作', category: 'フロントエンド', skillName: 'HTML/CSS' },
-        { id: 3, genre: 'Web制作', category: 'フロントエンド', skillName: 'JavaScript' },
-        { id: 4, genre: '事務', category: '資料作成', skillName: 'Word' },
-        { id: 5, genre: '事務', category: '資料作成', skillName: 'Excel' }
-    ],
+  skills: [
+    { genre: "マーケティング", category: "SEO", skillName: "キーワードリサーチ" },
+    { genre: "マーケティング", category: "SEO", skillName: "コンテンツ最適化" },
+    { genre: "マーケティング", category: "広告", skillName: "Google広告" },
+    { genre: "マーケティング", category: "広告", skillName: "SNS広告" },
+    { genre: "デザイン", category: "UIデザイン", skillName: "Figma" },
+    { genre: "デザイン", category: "UIデザイン", skillName: "Adobe XD" },
+    { genre: "デザイン", category: "グラフィックデザイン", skillName: "Illustrator" },
+    { genre: "デザイン", category: "グラフィックデザイン", skillName: "Photoshop" },
+    { genre: "開発", category: "フロントエンド", skillName: "React" },
+    { genre: "開発", category: "フロントエンド", skillName: "Next.js" },
+    { genre: "開発", category: "バックエンド", skillName: "Node.js" },
+    { genre: "開発", category: "バックエンド", skillName: "Python" },
+    { genre: "開発", category: "インフラ", skillName: "Docker" },
+    { genre: "開発", category: "インフラ", skillName: "AWS" },
+  ],
     // 収支管理 > 収支集計（テーブルデータ）
     incomeAndExpenditure: {
         businessIncome: [
