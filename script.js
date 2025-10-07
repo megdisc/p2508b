@@ -51,8 +51,9 @@ function renderAccountList() {
             <td class="py-3 px-4">${account.email}</td>
             <td class="py-3 px-4 text-center">
                 <button class="detail-button font-bold py-1 px-3 rounded text-sm mr-2 edit-account-btn" data-email="${account.email}">編集</button>
-                <button class="danger-button-outline text-xs p-1 rounded delete-account-btn" data-email="${account.email}">削除</button>
-                </td>
+                <button class="danger-button font-bold py-1 px-3 rounded text-sm mr-2 password-reset-btn" data-email="${account.email}">ﾊﾟｽﾜｰﾄﾞﾘｾｯﾄ</button>
+                <button class="danger-button font-bold py-1 px-3 rounded text-sm delete-account-btn" data-email="${account.email}">削除</button>
+            </td>
         </tr>
     `).join('');
 }
