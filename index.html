@@ -217,7 +217,7 @@
                         <div class="card rounded-lg p-6 shadow-sm">
                             <div class="flex justify-between items-center mb-4">
                                 <h2 class="text-xl font-bold text-[var(--main-color)]">アカウント設定</h2>
-                                <button class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
+                                <button id="open-account-modal-btn" class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
                             </div>
                             <table class="min-w-full bg-white">
                                 <thead class="bg-[var(--main-color)] text-white">
@@ -225,14 +225,13 @@
                                         <th class="py-3 px-4 text-left">ロール</th>
                                         <th class="py-3 px-4 text-left">ユーザー名</th>
                                         <th class="py-3 px-4 text-left">メールアドレス</th>
-                                        <th class="py-3 px-4 text-left">状態</th>
                                         <th class="py-3 px-4 text-center">操作</th>
                                     </tr>
                                 </thead>
                                 <tbody id="account-list" class="text-gray-700">
                                     </tbody>
                             </table>
-                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -922,6 +921,42 @@
         </div>
     </div>
 
+<div id="account-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-6">
+            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                <h3 id="account-modal-title" class="text-xl font-bold text-[var(--main-color)]">アカウント情報</h3>
+                <button id="close-account-modal-btn" class="text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+            </div>
+            <form id="account-form">
+                <input type="hidden" id="account-id">
+                <div class="space-y-4">
+                    <div>
+                        <label for="account-role" class="block text-sm font-medium text-gray-700">ロール</label>
+                        <select id="account-role" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[var(--main-color)] focus:border-[var(--main-color)]">
+                            <option>管理者</option>
+                            <option>スタッフ</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="account-username" class="block text-sm font-medium text-gray-700">ユーザー名</label>
+                        <input type="text" id="account-username" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[var(--main-color)] focus:border-[var(--main-color)]" required>
+                    </div>
+                    <div>
+                        <label for="account-email" class="block text-sm font-medium text-gray-700">メールアドレス</label>
+                        <input type="email" id="account-email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[var(--main-color)] focus:border-[var(--main-color)]" required>
+                    </div>
+                     <div>
+                        <label class="block text-sm font-medium text-gray-700">パスワード</label>
+                        <p class="text-sm text-gray-500 mt-1">パスワードの変更はリセットでのみ可能です。</p>
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-end space-x-3">
+                    <button type="button" id="cancel-account-modal-btn" class="detail-button font-bold py-2 px-4 rounded">キャンセル</button>
+                    <button type="submit" class="primary-button font-bold py-2 px-4 rounded">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <script src="dummydata.js"></script>
     <script src="script.js"></script>
 </body>

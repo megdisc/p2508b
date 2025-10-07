@@ -49,10 +49,10 @@ function renderAccountList() {
             <td class="py-3 px-4">${account.role}</td>
             <td class="py-3 px-4">${account.userName}</td>
             <td class="py-3 px-4">${account.email}</td>
-            <td class="py-3 px-4 ${account.status === '無効' ? 'text-gray-400' : ''}">${account.status}</td>
             <td class="py-3 px-4 text-center">
-                <button class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button>
-            </td>
+                <button class="detail-button font-bold py-1 px-3 rounded text-sm mr-2 edit-account-btn" data-email="${account.email}">編集</button>
+                <button class="danger-button-outline text-xs p-1 rounded delete-account-btn" data-email="${account.email}">削除</button>
+                </td>
         </tr>
     `).join('');
 }
@@ -559,3 +559,91 @@ function changeMonth(offset) {
 
     renderFinanceAggregation();
 }
+
+// =================================================================
+// アカウント設定モーダル機能
+// =================================================================
+
+/**
+ * アカウント編集モーダルを開く
+ * @param {object | null} account - 編集するアカウントオブジェクト。新規作成時はnull
+ */
+function openAccountModal(account = null) {
+    const modal = document.getElementById('account-modal');
+    const modalTitle = document.getElementById('account-modal-title');
+    const form = document.getElementById('account-form');
+    
+    form.reset(); // フォームをリセット
+    document.getElementById('account-id').value = '';
+
+    if (account) {
+        // 編集の場合
+        modalTitle.textContent = 'アカウント編集';
+        document.getElementById('account-id').value = account.email; // emailをIDとして使用
+        document.getElementById('account-role').value = account.role;
+        document.getElementById('account-username').value = account.userName;
+        document.getElementById('account-email').value = account.email;
+        document.getElementById('account-email').readOnly = true; // メールアドレスは変更不可
+    } else {
+        // 新規作成の場合
+        modalTitle.textContent = 'アカウント新規作成';
+        document.getElementById('account-email').readOnly = false;
+    }
+    
+    modal.classList.remove('hidden');
+}
+
+/**
+ * アカウント編集モーダルを閉じる
+ */
+function closeAccountModal() {
+    const modal = document.getElementById('account-modal');
+    modal.classList.add('hidden');
+}
+
+/**
+ * アカウント設定関連のイベントリスナーをセットアップする
+ */
+function setupAccountSettingsEventListeners() {
+    // 「新規作成」ボタン
+    document.getElementById('open-account-modal-btn').addEventListener('click', () => {
+        openAccountModal();
+    });
+
+    // モーダルを閉じるボタン
+    document.getElementById('close-account-modal-btn').addEventListener('click', closeAccountModal);
+    document.getElementById('cancel-account-modal-btn').addEventListener('click', closeAccountModal);
+
+    // テーブル内のボタン（イベント委譲）
+    const accountList = document.getElementById('account-list');
+    if (accountList) {
+        accountList.addEventListener('click', (e) => {
+            if (e.target.classList.contains('edit-account-btn')) {
+                const email = e.target.dataset.email;
+                const accountToEdit = dummyData.accounts.find(acc => acc.email === email);
+                if (accountToEdit) {
+                    openAccountModal(accountToEdit);
+                }
+            }
+
+            if (e.target.classList.contains('delete-account-btn')) {
+                // ToDo: 削除処理を実装
+                alert('削除機能は未実装です。');
+            }
+        });
+    }
+
+    // フォームの送信処理
+    document.getElementById('account-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        // ToDo: 保存処理を実装
+        alert('保存機能は未実装です。');
+        closeAccountModal();
+    });
+}
+
+
+// 既存のDOMContentLoadedイベントリスナーにアカウント設定のイベントリスナーセットアップを追加
+document.addEventListener('DOMContentLoaded', function() {
+    setupAccountSettingsEventListeners();
+});
