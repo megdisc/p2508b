@@ -648,3 +648,77 @@ function setupAccountSettingsEventListeners() {
 document.addEventListener('DOMContentLoaded', function() {
     setupAccountSettingsEventListeners();
 });
+
+/**
+ * =================================================================
+ * 差引工賃設定 機能
+ * =================================================================
+ */
+
+/**
+ * 差引工賃設定タブのイベントリスナーをセットアップする
+ */
+function setupPaymentWageSettingsEventListeners() {
+    const container = document.getElementById('settings-payment-wage');
+    if (!container) return;
+
+    // ベース単価テーブルの新しい行HTML
+    const createBasePriceRowHtml = () => `
+        <tr>
+            <td class="py-2 px-2"><input type="text" class="border rounded w-full px-2 py-1"></td>
+            <td class="py-2 px-2"><input type="number" class="border rounded w-full px-2 py-1"></td>
+            <td class="py-2 px-2"><input type="text" class="border rounded w-full px-2 py-1"></td>
+            <td class="py-2 px-2 text-center">
+                <button class="danger-button font-bold py-1 px-3 rounded text-sm delete-row-btn">削除</button>
+            </td>
+        </tr>
+    `;
+
+    // 加算・控除テーブルの新しい行HTML
+    const createAdditionDeductionRowHtml = () => `
+        <tr>
+            <td class="py-2 px-2"><input type="text" class="border rounded w-full px-2 py-1"></td>
+            <td class="py-2 px-2"><input type="number" class="border rounded w-full px-2 py-1"></td>
+            <td class="py-2 px-2"><input type="text" class="border rounded w-full px-2 py-1"></td>
+            <td class="py-2 px-2 text-center">
+                <button class="danger-button font-bold py-1 px-3 rounded text-sm delete-row-btn">削除</button>
+            </td>
+        </tr>
+    `;
+
+    // 「ベース単価」の行追加
+    const addBasePriceBtn = document.getElementById('add-base-price-row-btn');
+    const basePriceTableBody = document.getElementById('base-price-table-body');
+    if (addBasePriceBtn && basePriceTableBody) {
+        addBasePriceBtn.addEventListener('click', () => {
+            basePriceTableBody.insertAdjacentHTML('beforeend', createBasePriceRowHtml());
+        });
+    }
+
+    // イベント委譲で追加・削除ボタンを処理
+    container.addEventListener('click', (e) => {
+        const target = e.target;
+
+        // 行削除ボタン
+        if (target.classList.contains('delete-row-btn')) {
+            target.closest('tr').remove();
+            return;
+        }
+
+        // 行追加ボタン（加算・控除）
+        if (target.classList.contains('add-row-btn')) {
+            const targetTableId = target.dataset.targetTable;
+            const tableBody = document.getElementById(targetTableId);
+            if (tableBody) {
+                tableBody.insertAdjacentHTML('beforeend', createAdditionDeductionRowHtml());
+            }
+            return;
+        }
+    });
+}
+
+// 既存のDOMContentLoadedイベントリスナーにセットアップ関数を追加
+document.addEventListener('DOMContentLoaded', function() {
+    // ... (他の既存のセットアップ関数はそのまま) ...
+    setupPaymentWageSettingsEventListeners();
+});

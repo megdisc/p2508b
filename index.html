@@ -90,7 +90,7 @@
                             <a href="#" onclick="showSettingsTab('settings-terms', this)"
                                 class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">用語設定</a>
                             <a href="#" onclick="showSettingsTab('settings-payment-wage', this)"
-                                class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">差引工賃設定</a>
+                                class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">工賃・控除設定</a>
                             <a href="#" onclick="showSettingsTab('settings-skills', this)"
                                 class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">スキル設定</a>
                             <a href="#" onclick="showSettingsTab('settings-accounts', this)"
@@ -160,40 +160,167 @@
                             </div>
                         </div>
                     </div>
-                    <div class="settings-tab-content hidden" id="settings-payment-wage">
-                        <div class="space-y-6">
-                            <div class="card rounded-lg p-6 shadow-sm">
-                                <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">ベース設定</h2>
-                                <div class="space-y-4">
-                                    <div><label class="font-semibold text-gray-700">ベース単価</label><input type="number"
-                                            value="100" class="border rounded w-full mt-1 px-2 py-1"></div>
-                                    <div><label class="font-semibold text-gray-700">利用時間の単位</label><input type="number"
-                                            value="15" class="border rounded w-full mt-1 px-2 py-1"></div>
-                                    <div><label class="font-semibold text-gray-700">端数の取り扱い</label>
-                                        <select class="border rounded w-full mt-1 px-2 py-1">
-                                            <option>切り捨て</option>
-                                            <option>四捨五入</option>
-                                            <option>切り上げ</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card rounded-lg p-6 shadow-sm">
-                                <div class="flex justify-between items-center mb-4">
-                                    <h2 class="text-xl font-bold text-[var(--main-color)]">加算設定</h2><button
-                                        class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
-                                </div>
-                                <p>加算設定テーブルがここに表示されます。</p>
-                            </div>
-                            <div class="card rounded-lg p-6 shadow-sm">
-                                <div class="flex justify-between items-center mb-4">
-                                    <h2 class="text-xl font-bold text-[var(--main-color)]">控除設定</h2><button
-                                        class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
-                                </div>
-                                <p>控除設定テーブルがここに表示されます。</p>
-                            </div>
-                        </div>
-                    </div>
+<div class="settings-tab-content hidden" id="settings-payment-wage">
+    <div class="space-y-6">
+        <div class="card rounded-lg p-6 shadow-sm">
+            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">ベース設定</h2>
+
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold mb-2 text-gray-800">ベース単価</h3>
+                <table class="min-w-full bg-white">
+                    <thead class="bg-[var(--main-color)] text-white">
+                        <tr>
+                            <th class="py-3 px-4 text-left">レベル</th>
+                            <th class="py-3 px-4 text-left">ベース単価</th>
+                            <th class="py-3 px-4 text-left">判定基準</th>
+                            <th class="py-3 px-4 text-center w-24">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="base-price-table-body" class="text-gray-700">
+                        <tr>
+                            <td class="py-2 px-2"><input type="text" value="A" class="border rounded w-full px-2 py-1"></td>
+                            <td class="py-2 px-2"><input type="number" value="100" class="border rounded w-full px-2 py-1"></td>
+                            <td class="py-2 px-2"><input type="text" value="スキル評価A" class="border rounded w-full px-2 py-1"></td>
+                            <td class="py-2 px-2 text-center">
+                                <button class="danger-button font-bold py-1 px-3 rounded text-sm delete-row-btn">削除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="mt-2">
+                    <button id="add-base-price-row-btn" class="secondary-button-outline text-xs py-1 px-2 rounded">+ 追加</button>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold mb-2 text-gray-800">時間単位</h3>
+                <table class="min-w-full bg-white">
+                    <thead class="bg-[var(--main-color)] text-white">
+                        <tr>
+                            <th class="py-3 px-4 text-left">利用時間の単位（分）</th>
+                            <th class="py-3 px-4 text-left">端数の取り扱い</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <tr>
+                            <td class="py-2 px-2"><input type="number" value="15" class="border rounded w-full px-2 py-1"></td>
+                            <td class="py-2 px-2">
+                                <select class="border rounded w-full px-2 py-1">
+                                    <option>切り捨て</option>
+                                    <option>四捨入</option>
+                                    <option>切り上げ</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-6 text-right">
+                <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
+            </div>
+        </div>
+
+        <div class="card rounded-lg p-6 shadow-sm">
+            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">加算設定</h2>
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold mb-2 text-gray-800">日別加算</h3>
+                <table class="min-w-full bg-white">
+                    <thead class="bg-[var(--main-color)] text-white">
+                        <tr>
+                            <th class="py-3 px-4 text-left">項目名</th>
+                            <th class="py-3 px-4 text-left">単価</th>
+                            <th class="py-3 px-4 text-left">判定基準</th>
+                            <th class="py-3 px-4 text-center w-24">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="daily-addition-table-body" class="text-gray-700"></tbody>
+                </table>
+                <div class="mt-2">
+                    <button class="secondary-button-outline text-xs py-1 px-2 rounded add-row-btn" data-target-table="daily-addition-table-body">+ 追加</button>
+                </div>
+            </div>
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold mb-2 text-gray-800">月別加算</h3>
+                <table class="min-w-full bg-white">
+                    <thead class="bg-[var(--main-color)] text-white">
+                        <tr>
+                            <th class="py-3 px-4 text-left">項目名</th>
+                            <th class="py-3 px-4 text-left">単価</th>
+                            <th class="py-3 px-4 text-left">判定基準</th>
+                            <th class="py-3 px-4 text-center w-24">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="monthly-addition-table-body" class="text-gray-700"></tbody>
+                </table>
+                <div class="mt-2">
+                    <button class="secondary-button-outline text-xs py-1 px-2 rounded add-row-btn" data-target-table="monthly-addition-table-body">+ 追加</button>
+                </div>
+            </div>
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold mb-2 text-gray-800">精勤・皆勤加算</h3>
+                <table class="min-w-full bg-white">
+                    <thead class="bg-[var(--main-color)] text-white">
+                        <tr>
+                            <th class="py-3 px-4 text-left">項目名</th>
+                            <th class="py-3 px-4 text-left">単価</th>
+                            <th class="py-3 px-4 text-left">判定基準</th>
+                            <th class="py-3 px-4 text-center w-24">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="diligence-addition-table-body" class="text-gray-700"></tbody>
+                </table>
+                <div class="mt-2">
+                    <button class="secondary-button-outline text-xs py-1 px-2 rounded add-row-btn" data-target-table="diligence-addition-table-body">+ 追加</button>
+                </div>
+            </div>
+            <div class="mt-6 text-right">
+                <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
+            </div>
+        </div>
+
+        <div class="card rounded-lg p-6 shadow-sm">
+            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">控除設定</h2>
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold mb-2 text-gray-800">日別控除</h3>
+                <table class="min-w-full bg-white">
+                    <thead class="bg-[var(--main-color)] text-white">
+                        <tr>
+                            <th class="py-3 px-4 text-left">項目名</th>
+                            <th class="py-3 px-4 text-left">単価</th>
+                            <th class="py-3 px-4 text-left">判定基準</th>
+                            <th class="py-3 px-4 text-center w-24">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="daily-deduction-table-body" class="text-gray-700"></tbody>
+                </table>
+                <div class="mt-2">
+                    <button class="secondary-button-outline text-xs py-1 px-2 rounded add-row-btn" data-target-table="daily-deduction-table-body">+ 追加</button>
+                </div>
+            </div>
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold mb-2 text-gray-800">月別控除</h3>
+                <table class="min-w-full bg-white">
+                    <thead class="bg-[var(--main-color)] text-white">
+                        <tr>
+                            <th class="py-3 px-4 text-left">項目名</th>
+                            <th class="py-3 px-4 text-left">単価</th>
+                            <th class="py-3 px-4 text-left">判定基準</th>
+                            <th class="py-3 px-4 text-center w-24">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="monthly-deduction-table-body" class="text-gray-700"></tbody>
+                </table>
+                <div class="mt-2">
+                    <button class="secondary-button-outline text-xs py-1 px-2 rounded add-row-btn" data-target-table="monthly-deduction-table-body">+ 追加</button>
+                </div>
+            </div>
+            <div class="mt-6 text-right">
+                <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
                     <div class="settings-tab-content hidden" id="settings-skills">
                         <div class="card rounded-lg p-6 shadow-sm">
                             <div class="flex justify-between items-center mb-4">
