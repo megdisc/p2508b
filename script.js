@@ -38,6 +38,26 @@ function renderFacilityList() {
 }
 
 /**
+ * 各種設定 > アカウント設定タブのテーブルを描画する
+ */
+function renderAccountList() {
+    const accountList = document.getElementById('account-list');
+    if (!accountList) return;
+
+    accountList.innerHTML = dummyData.accounts.map(account => `
+        <tr class="border-b hover:bg-gray-50">
+            <td class="py-3 px-4">${account.role}</td>
+            <td class="py-3 px-4">${account.userName}</td>
+            <td class="py-3 px-4">${account.email}</td>
+            <td class="py-3 px-4 ${account.status === '無効' ? 'text-gray-400' : ''}">${account.status}</td>
+            <td class="py-3 px-4 text-center">
+                <button class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+/**
  * =================================================================
  * スキル設定 機能
  * * 担当ファイル： script.js
@@ -453,10 +473,14 @@ function showSettingsTab(tabId, navLink) {
     document.querySelectorAll('#settings-sub-nav .sub-nav-link').forEach(link => link.classList.remove('active'));
     navLink.classList.add('active');
 
-    // スキル設定タブが選択されたときに関数を呼び出す
     if (tabId === 'settings-skills') {
         renderSkillList();
     }
+    // ★★★★★ ここから追加 ★★★★★
+    if (tabId === 'settings-accounts') {
+        renderAccountList();
+    }
+    // ★★★★★ ここまで追加 ★★★★★
 }
 
 function showFinanceTab(tabId, navLink) {

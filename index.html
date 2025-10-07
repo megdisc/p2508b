@@ -194,32 +194,45 @@
                             </div>
                         </div>
                     </div>
-<div class="settings-tab-content hidden" id="settings-skills">
-    <div class="card rounded-lg p-6 shadow-sm">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold text-[var(--main-color)]">スキル設定</h2>
-        </div>
+                    <div class="settings-tab-content hidden" id="settings-skills">
+                        <div class="card rounded-lg p-6 shadow-sm">
+                            <div class="flex justify-between items-center mb-4">
+                                <h2 class="text-xl font-bold text-[var(--main-color)]">スキル設定</h2>
+                            </div>
 
-        <div id="skill-accordion-container" class="space-y-2">
-            </div>
-        
-<div class="mt-4 text-center">
-             <button id="add-genre-btn" class="secondary-button-outline text-xs py-1 px-2 rounded">+ ジャンル追加</button>
-        </div>
+                            <div id="skill-accordion-container" class="space-y-2">
+                            </div>
 
-        <div class="mt-6 text-right">
-            <button class="primary-button font-bold py-2 px-4 rounded">保存</button>
-        </div>
-    </div>
-</div>
-                    <div class="settings-tab-content hidden" id="settings-accounts">
+                            <div class="mt-4 text-center">
+                                <button id="add-genre-btn" class="secondary-button-outline text-xs py-1 px-2 rounded">+
+                                    ジャンル追加</button>
+                            </div>
+
+                            <div class="mt-6 text-right">
+                                <button class="primary-button font-bold py-2 px-4 rounded">保存</button>
+                            </div>
+                        </div>
+                    </div>
+<div class="settings-tab-content hidden" id="settings-accounts">
                         <div class="card rounded-lg p-6 shadow-sm">
                             <div class="flex justify-between items-center mb-4">
                                 <h2 class="text-xl font-bold text-[var(--main-color)]">アカウント設定</h2>
                                 <button class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
                             </div>
-                            <p>アカウント一覧テーブルがここに表示されます。</p>
-                        </div>
+                            <table class="min-w-full bg-white">
+                                <thead class="bg-[var(--main-color)] text-white">
+                                    <tr>
+                                        <th class="py-3 px-4 text-left">ロール</th>
+                                        <th class="py-3 px-4 text-left">ユーザー名</th>
+                                        <th class="py-3 px-4 text-left">メールアドレス</th>
+                                        <th class="py-3 px-4 text-left">状態</th>
+                                        <th class="py-3 px-4 text-center">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="account-list" class="text-gray-700">
+                                    </tbody>
+                            </table>
+                            </div>
                     </div>
                 </div>
 
@@ -909,7 +922,7 @@
         </div>
     </div>
 
-<script src="dummydata.js"></script>
+    <script src="dummydata.js"></script>
     <script src="script.js"></script>
 </body>
 

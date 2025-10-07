@@ -99,5 +99,10 @@ const dummyData = {
             totalWages: 250000,
             totalDeduction: -10000
         }
-    }
+    },
+    accounts: [
+        { role: '管理者', userName: '田中 太郎', email: 'tanaka@example.com', status: '有効' },
+        { role: 'スタッフ', userName: '鈴木 一郎', email: 'suzuki@example.com', status: '有効' },
+        { role: 'スタッフ', userName: '佐藤 花子', email: 'sato@example.com', status: '無効' }
+    ]
 };
