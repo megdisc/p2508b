@@ -101,7 +101,7 @@
                     <div class="settings-tab-content" id="settings-facility">
                         <div class="space-y-6">
                             <div class="card rounded-lg p-6 shadow-sm">
-                                <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">法人設定</h2>
+                                <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">法人情報</h2>
                                 <div class="space-y-4">
                                     <div><label class="font-semibold text-gray-700">法人番号</label><input type="text"
                                             class="border rounded w-full mt-1 px-2 py-1"></div>
@@ -111,6 +111,60 @@
                                             class="border rounded w-full mt-1 px-2 py-1"></div>
                                     <div><label class="font-semibold text-gray-700">代表者 氏名</label><input type="text"
                                             class="border rounded w-full mt-1 px-2 py-1"></div>
+                                    <div>
+                                        <label class="font-semibold text-gray-700">決算期</label>
+                                        <div class="flex items-center mt-1">
+                                            <select class="border rounded w-full px-2 py-1">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                                <option>8</option>
+                                                <option>9</option>
+                                                <option>10</option>
+                                                <option>11</option>
+                                                <option>12</option>
+                                            </select>
+                                            <span class="mx-2">月</span>
+                                            <select class="border rounded w-full px-2 py-1">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                                <option>8</option>
+                                                <option>9</option>
+                                                <option>10</option>
+                                                <option>11</option>
+                                                <option>12</option>
+                                                <option>13</option>
+                                                <option>14</option>
+                                                <option>15</option>
+                                                <option>16</option>
+                                                <option>17</option>
+                                                <option>18</option>
+                                                <option>19</option>
+                                                <option>20</option>
+                                                <option>21</option>
+                                                <option>22</option>
+                                                <option>23</option>
+                                                <option>24</option>
+                                                <option>25</option>
+                                                <option>26</option>
+                                                <option>27</option>
+                                                <option>28</option>
+                                                <option>29</option>
+                                                <option>30</option>
+                                                <option>31</option>
+                                            </select>
+                                            <span class="ml-2">日</span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="mt-6 text-right">
                                     <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
@@ -118,7 +172,7 @@
                             </div>
                             <div class="card rounded-lg p-6 shadow-sm">
                                 <div class="flex justify-between items-center mb-4">
-                                    <h2 class="text-xl font-bold text-[var(--main-color)]">事業所設定</h2>
+                                    <h2 class="text-xl font-bold text-[var(--main-color)]">事業所情報</h2>
                                     <button class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
                                 </div>
                                 <table class="min-w-full bg-white">
@@ -160,167 +214,178 @@
                             </div>
                         </div>
                     </div>
-<div class="settings-tab-content hidden" id="settings-payment-wage">
-    <div class="space-y-6">
-        <div class="card rounded-lg p-6 shadow-sm">
-            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">ベース設定</h2>
+                    <div class="settings-tab-content hidden" id="settings-payment-wage">
+                        <div class="space-y-6">
+                            <div class="card rounded-lg p-6 shadow-sm">
+                                <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">ベース設定</h2>
 
-            <div class="mb-6">
-                <h3 class="text-lg font-semibold mb-2 text-gray-800">ベース単価</h3>
-                <table class="min-w-full bg-white">
-                    <thead class="bg-[var(--main-color)] text-white">
-                        <tr>
-                            <th class="py-3 px-4 text-left">レベル</th>
-                            <th class="py-3 px-4 text-left">ベース単価</th>
-                            <th class="py-3 px-4 text-left">判定基準</th>
-                            <th class="py-3 px-4 text-center w-24">操作</th>
-                        </tr>
-                    </thead>
-                    <tbody id="base-price-table-body" class="text-gray-700">
-                        <tr>
-                            <td class="py-2 px-2"><input type="text" value="A" class="border rounded w-full px-2 py-1"></td>
-                            <td class="py-2 px-2"><input type="number" value="100" class="border rounded w-full px-2 py-1"></td>
-                            <td class="py-2 px-2"><input type="text" value="スキル評価A" class="border rounded w-full px-2 py-1"></td>
-                            <td class="py-2 px-2 text-center">
-                                <button class="danger-button font-bold py-1 px-3 rounded text-sm delete-row-btn">削除</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="mt-2">
-                    <button id="add-base-price-row-btn" class="secondary-button-outline text-xs py-1 px-2 rounded">+ 追加</button>
-                </div>
-            </div>
+                                <div class="mb-6">
+                                    <h3 class="text-lg font-semibold mb-2 text-gray-800">ベース単価</h3>
+                                    <table class="min-w-full bg-white">
+                                        <thead class="bg-[var(--main-color)] text-white">
+                                            <tr>
+                                                <th class="py-3 px-4 text-left">レベル</th>
+                                                <th class="py-3 px-4 text-left">ベース単価（円/時間）</th>
+                                                <th class="py-3 px-4 text-left">判定基準</th>
+                                                <th class="py-3 px-4 text-center w-24">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="base-price-table-body" class="text-gray-700">
+                                            <tr>
+                                                <td class="py-2 px-2"><input type="text" value="A"
+                                                        class="border rounded w-full px-2 py-1"></td>
+                                                <td class="py-2 px-2"><input type="number" value="100"
+                                                        class="border rounded w-full px-2 py-1"></td>
+                                                <td class="py-2 px-2"><input type="text" value="スキル評価A"
+                                                        class="border rounded w-full px-2 py-1"></td>
+                                                <td class="py-2 px-2 text-center">
+                                                    <button
+                                                        class="danger-button font-bold py-1 px-3 rounded text-sm delete-row-btn">削除</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="mt-2">
+                                        <button id="add-base-price-row-btn"
+                                            class="secondary-button-outline text-xs py-1 px-2 rounded">+ 追加</button>
+                                    </div>
+                                </div>
 
-            <div class="mb-6">
-                <h3 class="text-lg font-semibold mb-2 text-gray-800">時間単位</h3>
-                <table class="min-w-full bg-white">
-                    <thead class="bg-[var(--main-color)] text-white">
-                        <tr>
-                            <th class="py-3 px-4 text-left">利用時間の単位（分）</th>
-                            <th class="py-3 px-4 text-left">端数の取り扱い</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-700">
-                        <tr>
-                            <td class="py-2 px-2"><input type="number" value="15" class="border rounded w-full px-2 py-1"></td>
-                            <td class="py-2 px-2">
-                                <select class="border rounded w-full px-2 py-1">
-                                    <option>切り捨て</option>
-                                    <option>四捨入</option>
-                                    <option>切り上げ</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                                <div class="mb-6">
+                                    <h3 class="text-lg font-semibold mb-2 text-gray-800">時間単位</h3>
+                                    <table class="min-w-full bg-white">
+                                        <thead class="bg-[var(--main-color)] text-white">
+                                            <tr>
+                                                <th class="py-3 px-4 text-left">利用時間の単位（分）</th>
+                                                <th class="py-3 px-4 text-left">端数の取り扱い</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-gray-700">
+                                            <tr>
+                                                <td class="py-2 px-2"><input type="number" value="15"
+                                                        class="border rounded w-full px-2 py-1"></td>
+                                                <td class="py-2 px-2">
+                                                    <select class="border rounded w-full px-2 py-1">
+                                                        <option>切り捨て</option>
+                                                        <option>四捨入</option>
+                                                        <option>切り上げ</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
-            <div class="mt-6 text-right">
-                <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
-            </div>
-        </div>
+                                <div class="mt-6 text-right">
+                                    <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
+                                </div>
+                            </div>
 
-        <div class="card rounded-lg p-6 shadow-sm">
-            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">加算設定</h2>
-            <div class="mb-6">
-                <h3 class="text-lg font-semibold mb-2 text-gray-800">日別加算</h3>
-                <table class="min-w-full bg-white">
-                    <thead class="bg-[var(--main-color)] text-white">
-                        <tr>
-                            <th class="py-3 px-4 text-left">項目名</th>
-                            <th class="py-3 px-4 text-left">単価</th>
-                            <th class="py-3 px-4 text-left">判定基準</th>
-                            <th class="py-3 px-4 text-center w-24">操作</th>
-                        </tr>
-                    </thead>
-                    <tbody id="daily-addition-table-body" class="text-gray-700"></tbody>
-                </table>
-                <div class="mt-2">
-                    <button class="secondary-button-outline text-xs py-1 px-2 rounded add-row-btn" data-target-table="daily-addition-table-body">+ 追加</button>
-                </div>
-            </div>
-            <div class="mb-6">
-                <h3 class="text-lg font-semibold mb-2 text-gray-800">月別加算</h3>
-                <table class="min-w-full bg-white">
-                    <thead class="bg-[var(--main-color)] text-white">
-                        <tr>
-                            <th class="py-3 px-4 text-left">項目名</th>
-                            <th class="py-3 px-4 text-left">単価</th>
-                            <th class="py-3 px-4 text-left">判定基準</th>
-                            <th class="py-3 px-4 text-center w-24">操作</th>
-                        </tr>
-                    </thead>
-                    <tbody id="monthly-addition-table-body" class="text-gray-700"></tbody>
-                </table>
-                <div class="mt-2">
-                    <button class="secondary-button-outline text-xs py-1 px-2 rounded add-row-btn" data-target-table="monthly-addition-table-body">+ 追加</button>
-                </div>
-            </div>
-            <div class="mb-6">
-                <h3 class="text-lg font-semibold mb-2 text-gray-800">精勤・皆勤加算</h3>
-                <table class="min-w-full bg-white">
-                    <thead class="bg-[var(--main-color)] text-white">
-                        <tr>
-                            <th class="py-3 px-4 text-left">項目名</th>
-                            <th class="py-3 px-4 text-left">単価</th>
-                            <th class="py-3 px-4 text-left">判定基準</th>
-                            <th class="py-3 px-4 text-center w-24">操作</th>
-                        </tr>
-                    </thead>
-                    <tbody id="diligence-addition-table-body" class="text-gray-700"></tbody>
-                </table>
-                <div class="mt-2">
-                    <button class="secondary-button-outline text-xs py-1 px-2 rounded add-row-btn" data-target-table="diligence-addition-table-body">+ 追加</button>
-                </div>
-            </div>
-            <div class="mt-6 text-right">
-                <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
-            </div>
-        </div>
+                            <div class="card rounded-lg p-6 shadow-sm">
+                                <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">加算設定</h2>
+                                <div class="mb-6">
+                                    <h3 class="text-lg font-semibold mb-2 text-gray-800">日別加算</h3>
+                                    <table class="min-w-full bg-white">
+                                        <thead class="bg-[var(--main-color)] text-white">
+                                            <tr>
+                                                <th class="py-3 px-4 text-left">項目名</th>
+                                                <th class="py-3 px-4 text-left">単価</th>
+                                                <th class="py-3 px-4 text-left">判定基準</th>
+                                                <th class="py-3 px-4 text-center w-24">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="daily-addition-table-body" class="text-gray-700"></tbody>
+                                    </table>
+                                    <div class="mt-2">
+                                        <button class="secondary-button-outline text-xs py-1 px-2 rounded add-row-btn"
+                                            data-target-table="daily-addition-table-body">+ 追加</button>
+                                    </div>
+                                </div>
+                                <div class="mb-6">
+                                    <h3 class="text-lg font-semibold mb-2 text-gray-800">月別加算</h3>
+                                    <table class="min-w-full bg-white">
+                                        <thead class="bg-[var(--main-color)] text-white">
+                                            <tr>
+                                                <th class="py-3 px-4 text-left">項目名</th>
+                                                <th class="py-3 px-4 text-left">単価</th>
+                                                <th class="py-3 px-4 text-left">判定基準</th>
+                                                <th class="py-3 px-4 text-center w-24">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="monthly-addition-table-body" class="text-gray-700"></tbody>
+                                    </table>
+                                    <div class="mt-2">
+                                        <button class="secondary-button-outline text-xs py-1 px-2 rounded add-row-btn"
+                                            data-target-table="monthly-addition-table-body">+ 追加</button>
+                                    </div>
+                                </div>
+                                <div class="mb-6">
+                                    <h3 class="text-lg font-semibold mb-2 text-gray-800">精勤・皆勤加算</h3>
+                                    <table class="min-w-full bg-white">
+                                        <thead class="bg-[var(--main-color)] text-white">
+                                            <tr>
+                                                <th class="py-3 px-4 text-left">項目名</th>
+                                                <th class="py-3 px-4 text-left">単価</th>
+                                                <th class="py-3 px-4 text-left">判定基準</th>
+                                                <th class="py-3 px-4 text-center w-24">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="diligence-addition-table-body" class="text-gray-700"></tbody>
+                                    </table>
+                                    <div class="mt-2">
+                                        <button class="secondary-button-outline text-xs py-1 px-2 rounded add-row-btn"
+                                            data-target-table="diligence-addition-table-body">+ 追加</button>
+                                    </div>
+                                </div>
+                                <div class="mt-6 text-right">
+                                    <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
+                                </div>
+                            </div>
 
-        <div class="card rounded-lg p-6 shadow-sm">
-            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">控除設定</h2>
-            <div class="mb-6">
-                <h3 class="text-lg font-semibold mb-2 text-gray-800">日別控除</h3>
-                <table class="min-w-full bg-white">
-                    <thead class="bg-[var(--main-color)] text-white">
-                        <tr>
-                            <th class="py-3 px-4 text-left">項目名</th>
-                            <th class="py-3 px-4 text-left">単価</th>
-                            <th class="py-3 px-4 text-left">判定基準</th>
-                            <th class="py-3 px-4 text-center w-24">操作</th>
-                        </tr>
-                    </thead>
-                    <tbody id="daily-deduction-table-body" class="text-gray-700"></tbody>
-                </table>
-                <div class="mt-2">
-                    <button class="secondary-button-outline text-xs py-1 px-2 rounded add-row-btn" data-target-table="daily-deduction-table-body">+ 追加</button>
-                </div>
-            </div>
-            <div class="mb-6">
-                <h3 class="text-lg font-semibold mb-2 text-gray-800">月別控除</h3>
-                <table class="min-w-full bg-white">
-                    <thead class="bg-[var(--main-color)] text-white">
-                        <tr>
-                            <th class="py-3 px-4 text-left">項目名</th>
-                            <th class="py-3 px-4 text-left">単価</th>
-                            <th class="py-3 px-4 text-left">判定基準</th>
-                            <th class="py-3 px-4 text-center w-24">操作</th>
-                        </tr>
-                    </thead>
-                    <tbody id="monthly-deduction-table-body" class="text-gray-700"></tbody>
-                </table>
-                <div class="mt-2">
-                    <button class="secondary-button-outline text-xs py-1 px-2 rounded add-row-btn" data-target-table="monthly-deduction-table-body">+ 追加</button>
-                </div>
-            </div>
-            <div class="mt-6 text-right">
-                <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
-            </div>
-        </div>
-    </div>
-</div>
+                            <div class="card rounded-lg p-6 shadow-sm">
+                                <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">控除設定</h2>
+                                <div class="mb-6">
+                                    <h3 class="text-lg font-semibold mb-2 text-gray-800">日別控除</h3>
+                                    <table class="min-w-full bg-white">
+                                        <thead class="bg-[var(--main-color)] text-white">
+                                            <tr>
+                                                <th class="py-3 px-4 text-left">項目名</th>
+                                                <th class="py-3 px-4 text-left">単価</th>
+                                                <th class="py-3 px-4 text-left">判定基準</th>
+                                                <th class="py-3 px-4 text-center w-24">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="daily-deduction-table-body" class="text-gray-700"></tbody>
+                                    </table>
+                                    <div class="mt-2">
+                                        <button class="secondary-button-outline text-xs py-1 px-2 rounded add-row-btn"
+                                            data-target-table="daily-deduction-table-body">+ 追加</button>
+                                    </div>
+                                </div>
+                                <div class="mb-6">
+                                    <h3 class="text-lg font-semibold mb-2 text-gray-800">月別控除</h3>
+                                    <table class="min-w-full bg-white">
+                                        <thead class="bg-[var(--main-color)] text-white">
+                                            <tr>
+                                                <th class="py-3 px-4 text-left">項目名</th>
+                                                <th class="py-3 px-4 text-left">単価</th>
+                                                <th class="py-3 px-4 text-left">判定基準</th>
+                                                <th class="py-3 px-4 text-center w-24">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="monthly-deduction-table-body" class="text-gray-700"></tbody>
+                                    </table>
+                                    <div class="mt-2">
+                                        <button class="secondary-button-outline text-xs py-1 px-2 rounded add-row-btn"
+                                            data-target-table="monthly-deduction-table-body">+ 追加</button>
+                                    </div>
+                                </div>
+                                <div class="mt-6 text-right">
+                                    <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="settings-tab-content hidden" id="settings-skills">
                         <div class="card rounded-lg p-6 shadow-sm">
                             <div class="flex justify-between items-center mb-4">
@@ -340,11 +405,12 @@
                             </div>
                         </div>
                     </div>
-<div class="settings-tab-content hidden" id="settings-accounts">
+                    <div class="settings-tab-content hidden" id="settings-accounts">
                         <div class="card rounded-lg p-6 shadow-sm">
                             <div class="flex justify-between items-center mb-4">
                                 <h2 class="text-xl font-bold text-[var(--main-color)]">アカウント設定</h2>
-                                <button id="open-account-modal-btn" class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
+                                <button id="open-account-modal-btn"
+                                    class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
                             </div>
                             <table class="min-w-full bg-white">
                                 <thead class="bg-[var(--main-color)] text-white">
@@ -356,7 +422,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="account-list" class="text-gray-700">
-                                    </tbody>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -463,19 +529,78 @@
                     </div>
                 </div>
 
-                <div class="screen-content hidden" id="attendance-screen">
-                    <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">勤退管理</h1>
-                    <div class="mb-6 border-b border-gray-200">
-                        <nav class="-mb-px flex space-x-6">
-                            <a href="#"
-                                class="sub-nav-link active py-4 px-1 text-gray-500 hover:text-gray-700">事業所カレンダー</a>
-                            <a href="#" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">利用者個別カレンダー</a>
-                        </nav>
+<<div class="screen-content hidden" id="attendance-screen">
+    <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">勤退管理</h1>
+    <div class="mb-6 border-b border-gray-200">
+        <nav class="-mb-px flex space-x-6">
+            <a href="#"
+                class="sub-nav-link active py-4 px-1 text-gray-500 hover:text-gray-700">事業所カレンダー</a>
+            <a href="#" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">利用者個別カレンダー</a>
+        </nav>
+    </div>
+    <div class="card rounded-lg p-6 shadow-sm">
+        <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">事業所カレンダー</h2>
+        <div class="flex justify-between items-center mb-4">
+            <button onclick="changeCalendarMonth(-1)" class="primary-button p-2 rounded-full text-lg">&lt;</button>
+            <h2 id="calendar-month-year" class="text-xl font-bold text-[var(--main-color)]">2025年 10月</h2>
+            <button onclick="changeCalendarMonth(1)" class="primary-button p-2 rounded-full text-lg">&gt;</button>
+        </div>
+        <table class="min-w-full bg-white border table-fixed">
+            <thead class="bg-[var(--main-color)] text-white">
+                <tr>
+                    <th class="py-3 px-4 text-center">日</th>
+                    <th class="py-3 px-4 text-center">月</th>
+                    <th class="py-3 px-4 text-center">火</th>
+                    <th class="py-3 px-4 text-center">水</th>
+                    <th class="py-3 px-4 text-center">木</th>
+                    <th class="py-3 px-4 text-center">金</th>
+                    <th class="py-3 px-4 text-center">土</th>
+                </tr>
+            </thead>
+            <tbody id="calendar-body" class="text-gray-700">
+                </tbody>
+        </table>
+    </div>
+
+    <div id="calendar-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-6">
+            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                <h3 id="calendar-modal-title" class="text-xl font-bold text-[var(--main-color)]">日付設定</h3>
+                <button onclick="closeCalendarModal()" class="text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+            </div>
+            <form id="calendar-form">
+                <input type="hidden" id="calendar-date">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">状態</label>
+                        <div class="mt-2 flex space-x-4">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="day-status" value="open" class="form-radio" checked onchange="toggleTimePicker(true)">
+                                <span class="ml-2">開所</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="day-status" value="closed" class="form-radio" onchange="toggleTimePicker(false)">
+                                <span class="ml-2">閉所</span>
+                            </label>
+                        </div>
                     </div>
-                    <div class="card rounded-lg p-6 shadow-sm">
-                        <p>カレンダーがここに表示されます。</p>
+                    <div id="time-picker-wrapper">
+                        <label class="block text-sm font-medium text-gray-700">利用時間</label>
+                        <div class="flex items-center mt-2 space-x-2">
+                            <input type="time" id="start-time" value="10:00" class="border rounded w-full px-2 py-1">
+                            <span>～</span>
+                            <input type="time" id="end-time" value="16:00" class="border rounded w-full px-2 py-1">
+                        </div>
                     </div>
                 </div>
+                <div class="mt-6 flex justify-end space-x-3">
+                    <button type="button" onclick="closeCalendarModal()" class="detail-button font-bold py-2 px-4 rounded">キャンセル</button>
+                    <button type="submit" class="primary-button font-bold py-2 px-4 rounded">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
                 <div class="screen-content hidden" id="finance-screen">
                     <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">収支管理</h1>
@@ -1048,7 +1173,7 @@
         </div>
     </div>
 
-<div id="account-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div id="account-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-6">
             <div class="flex justify-between items-center border-b pb-3 mb-4">
                 <h3 id="account-modal-title" class="text-xl font-bold text-[var(--main-color)]">アカウント情報</h3>
@@ -1059,22 +1184,28 @@
                 <div class="space-y-4">
                     <div>
                         <label for="account-role" class="block text-sm font-medium text-gray-700">ロール</label>
-                        <select id="account-role" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[var(--main-color)] focus:border-[var(--main-color)]">
+                        <select id="account-role"
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[var(--main-color)] focus:border-[var(--main-color)]">
                             <option>管理者</option>
                             <option>スタッフ</option>
                         </select>
                     </div>
                     <div>
                         <label for="account-username" class="block text-sm font-medium text-gray-700">ユーザー名</label>
-                        <input type="text" id="account-username" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[var(--main-color)] focus:border-[var(--main-color)]" required>
+                        <input type="text" id="account-username"
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[var(--main-color)] focus:border-[var(--main-color)]"
+                            required>
                     </div>
                     <div>
                         <label for="account-email" class="block text-sm font-medium text-gray-700">メールアドレス</label>
-                        <input type="email" id="account-email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[var(--main-color)] focus:border-[var(--main-color)]" required>
+                        <input type="email" id="account-email"
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[var(--main-color)] focus:border-[var(--main-color)]"
+                            required>
                     </div>
                 </div>
                 <div class="mt-6 flex justify-end space-x-3">
-                    <button type="button" id="cancel-account-modal-btn" class="detail-button font-bold py-2 px-4 rounded">キャンセル</button>
+                    <button type="button" id="cancel-account-modal-btn"
+                        class="detail-button font-bold py-2 px-4 rounded">キャンセル</button>
                     <button type="submit" class="primary-button font-bold py-2 px-4 rounded">保存</button>
                 </div>
             </form>

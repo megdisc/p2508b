@@ -722,3 +722,142 @@ document.addEventListener('DOMContentLoaded', function() {
     // ... (他の既存のセットアップ関数はそのまま) ...
     setupPaymentWageSettingsEventListeners();
 });
+
+/**
+ * =================================================================
+ * 事業所カレンダー編集モーダル機能
+ * =================================================================
+ */
+
+/**
+ * カレンダー編集モーダルを開く
+ * @param {string} day - 選択された日付
+ */
+function openCalendarModal(day) {
+    const modal = document.getElementById('calendar-modal');
+    const modalTitle = document.getElementById('calendar-modal-title');
+    const dateInput = document.getElementById('calendar-date');
+    
+    // モーダルのタイトルと隠しフィールドに日付を設定
+    modalTitle.textContent = `日付設定（10月${day}日）`; // 仮で月を固定
+    dateInput.value = day;
+    
+    // TODO: 選択した日付の現在の状態（開所/閉所、時間）をフォームに反映する処理をここに追加
+    
+    modal.classList.remove('hidden');
+}
+
+/**
+ * カレンダー編集モーダルを閉じる
+ */
+function closeCalendarModal() {
+    const modal = document.getElementById('calendar-modal');
+    modal.classList.add('hidden');
+}
+
+/**
+ * 開所/閉所の選択に応じて時刻ピッカーの表示/非表示を切り替える
+ * @param {boolean} show - trueなら表示、falseなら非表示
+ */
+function toggleTimePicker(show) {
+    const timePickerWrapper = document.getElementById('time-picker-wrapper');
+    if (show) {
+        timePickerWrapper.classList.remove('hidden');
+    } else {
+        timePickerWrapper.classList.add('hidden');
+    }
+}
+
+// フォームの送信イベント（ダミー）
+document.addEventListener('DOMContentLoaded', function() {
+    const calendarForm = document.getElementById('calendar-form');
+    if(calendarForm) {
+        calendarForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // TODO: 保存処理を実装
+            alert('保存機能は未実装です。');
+            closeCalendarModal();
+        });
+    }
+});
+
+/**
+ * =================================================================
+ * 事業所カレンダー 月変更機能
+ * =================================================================
+ */
+
+// 現在表示しているカレンダーの年月を保持する変数
+let currentCalendarDate = new Date(2025, 9, 1); // 2025年10月を初期値とする
+
+/**
+ * カレンダーの表示を更新する
+ */
+function renderBusinessCalendar() {
+    const calendarMonthYear = document.getElementById('calendar-month-year');
+    const calendarBody = document.getElementById('calendar-body');
+
+    if (!calendarMonthYear || !calendarBody) return;
+
+    const year = currentCalendarDate.getFullYear();
+    const month = currentCalendarDate.getMonth(); // 0-11
+
+    // 年月表示を更新
+    calendarMonthYear.textContent = `${year}年 ${month + 1}月`;
+
+    const firstDay = new Date(year, month, 1).getDay(); // 0:Sun, 1:Mon...
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    let html = '';
+    let day = 1;
+    for (let i = 0; i < 6; i++) { // 最大6週
+        html += '<tr class="border-b">';
+        for (let j = 0; j < 7; j++) { // jが曜日を表す (0:日曜, 1:月曜, ..., 6:土曜)
+            if (i === 0 && j < firstDay) {
+                html += '<td class="py-3 px-4 h-32 text-center border align-top"></td>';
+            } else if (day > daysInMonth) {
+                html += '<td class="py-3 px-4 h-32 text-center border align-top"></td>';
+            } else {
+                let content = '';
+                let cellClass = 'cursor-pointer hover:bg-gray-100';
+
+                // ▼▼▼▼▼ 修正箇所 ▼▼▼▼▼
+                // 曜日を判定する条件を、日付(day)ではなく列のインデックス(j)に変更しました。
+                // jが0(日曜)または6(土曜)の場合に「閉所」とします。
+                if (j === 0 || j === 6) { 
+                    content = `<div class="font-bold">${day}</div><div class="font-bold">閉所</div>`;
+                    cellClass += ' bg-[var(--auxiliary-color)] hover:bg-gray-200';
+                } else {
+                    content = `<div class="font-bold">${day}</div><div class="text-sm"><div>10:00</div><div>～</div><div>16:00</div></div>`;
+                }
+                // ▲▲▲▲▲ 修正箇所 ▲▲▲▲▲
+
+                // 今日の日付をハイライト（仮）
+                const today = new Date();
+                if (year === today.getFullYear() && month === today.getMonth() && day === today.getDate()) {
+                     content = `<div class="font-bold inline-block bg-[var(--accent-color)] rounded-full w-6 h-6 leading-6">${day}</div><div class="text-sm"><div>10:00</div><div>～</div><div>16:00</div></div>`;
+                }
+
+                html += `<td onclick="openCalendarModal('${day}')" class="py-3 px-4 h-32 text-center border align-top ${cellClass}">${content}</td>`;
+                day++;
+            }
+        }
+        html += '</tr>';
+        if (day > daysInMonth) break;
+    }
+    calendarBody.innerHTML = html;
+}
+
+/**
+ * カレンダーの月を変更する
+ * @param {number} offset - 1で翌月、-1で前月
+ */
+function changeCalendarMonth(offset) {
+    currentCalendarDate.setMonth(currentCalendarDate.getMonth() + offset);
+    renderBusinessCalendar();
+}
+
+// ページ読み込み時にカレンダーを初期描画
+document.addEventListener('DOMContentLoaded', function() {
+    renderBusinessCalendar();
+});
