@@ -31,7 +31,7 @@ function renderFacilityList() {
             <td class="py-3 px-4">${facility.officeName}</td>
             <td class="py-3 px-4">${facility.status}</td>
             <td class="py-3 px-4 text-center">
-                <button class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button>
+                <button onclick="showFacilityDetailScreen(true)" class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button>
             </td>
         </tr>
     `).join('');
@@ -447,6 +447,29 @@ function renderIncomeExpenditureDetail() {
 
 // --- 以下、画面遷移などの制御関数 ---
 
+/**
+ * =================================================================
+ * ▼▼▼▼▼ ここから追加 ▼▼▼▼▼
+ * 事業所情報設定タブ内の画面表示を切り替える
+ * =================================================================
+ */
+function showFacilityDetailScreen(show) {
+    const listWrapper = document.getElementById('facility-list-wrapper');
+    const detailWrapper = document.getElementById('facility-detail-wrapper');
+
+    if (show) {
+        listWrapper.classList.add('hidden');
+        detailWrapper.classList.remove('hidden');
+    } else {
+        listWrapper.classList.remove('hidden');
+        detailWrapper.classList.add('hidden');
+    }
+}
+/**
+ * ▲▲▲▲▲ ここまで追加 ▲▲▲▲▲
+ * =================================================================
+ */
+
 function login() {
     document.getElementById('login-screen').classList.add('hidden');
     document.getElementById('app-wrapper').classList.remove('hidden');
@@ -473,15 +496,18 @@ function showSettingsTab(tabId, navLink) {
     document.getElementById(tabId).classList.remove('hidden');
     document.querySelectorAll('#settings-sub-nav .sub-nav-link').forEach(link => link.classList.remove('active'));
     navLink.classList.add('active');
-
+    
+    // ▼▼▼▼▼ ここから変更 ▼▼▼▼▼
+    if (tabId === 'settings-facility') {
+        showFacilityDetailScreen(false); // 事業所一覧をデフォルトで表示
+    }
+    // ▲▲▲▲▲ ここまで変更 ▲▲▲▲▲
     if (tabId === 'settings-skills') {
         renderSkillList();
     }
-    // ★★★★★ ここから追加 ★★★★★
     if (tabId === 'settings-accounts') {
         renderAccountList();
     }
-    // ★★★★★ ここまで追加 ★★★★★
 }
 
 function showFinanceTab(tabId, navLink) {
