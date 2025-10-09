@@ -93,8 +93,8 @@
                                 class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">工賃・控除</a>
                             <a href="#" onclick="showSettingsTab('settings-skills', this)"
                                 class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">スキル</a>
-<a href="#" onclick="showSettingsTab('settings-accounts', this)"
-    class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">アカウント</a>
+                            <a href="#" onclick="showSettingsTab('settings-accounts', this)"
+                                class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">アカウント</a>
                         </nav>
                     </div>
 
@@ -323,7 +323,7 @@
                         </div>
                     </div>
 
-<div class="settings-tab-content hidden" id="settings-terms">
+                    <div class="settings-tab-content hidden" id="settings-terms">
                         <h2 class="text-2xl font-bold mb-6 text-[var(--main-color)]">用語定義</h2>
                         <div class="card rounded-lg p-6 shadow-sm">
                             <div class="space-y-6">
@@ -341,12 +341,14 @@
                                         <tbody class="text-gray-700">
                                             <tr class="border-b">
                                                 <td class="py-3 px-4 align-middle">利用者</td>
-                                                <td class="py-3 px-4"><input type="text" value="メンバー" class="border rounded w-full px-2 py-1"></td>
+                                                <td class="py-3 px-4"><input type="text" value="メンバー"
+                                                        class="border rounded w-full px-2 py-1"></td>
                                                 <td class="py-3 px-4 align-middle">利用者の呼称を変更します。</td>
                                             </tr>
                                             <tr class="border-b">
                                                 <td class="py-3 px-4 align-middle">工賃</td>
-                                                <td class="py-3 px-4"><input type="text" value="報酬" class="border rounded w-full px-2 py-1"></td>
+                                                <td class="py-3 px-4"><input type="text" value="報酬"
+                                                        class="border rounded w-full px-2 py-1"></td>
                                                 <td class="py-3 px-4 align-middle">工賃の呼称を変更します。</td>
                                             </tr>
                                         </tbody>
@@ -359,7 +361,7 @@
                         </div>
                     </div>
 
-<div class="settings-tab-content hidden" id="settings-payment-wage">
+                    <div class="settings-tab-content hidden" id="settings-payment-wage">
                         <h2 class="text-2xl font-bold mb-6 text-[var(--main-color)]">工賃・控除</h2>
                         <div class="space-y-6">
                             <div class="card rounded-lg p-6 shadow-sm">
@@ -533,10 +535,10 @@
                         </div>
                     </div>
 
-<div class="settings-tab-content hidden" id="settings-skills">
+                    <div class="settings-tab-content hidden" id="settings-skills">
                         <h2 class="text-2xl font-bold mb-6 text-[var(--main-color)]">スキル</h2>
                         <div class="card rounded-lg p-6 shadow-sm">
-                                    <h3 class="text-xl font-bold mb-4 text-[var(--main-color)]">スキル一覧</h3>
+                            <h3 class="text-xl font-bold mb-4 text-[var(--main-color)]">スキル一覧</h3>
                             <div id="skill-accordion-container" class="space-y-2">
                             </div>
 
@@ -575,24 +577,63 @@
                     </div>
                 </div>
 
-                <div class="screen-content hidden" id="client-list-screen">
+<div class="screen-content hidden" id="client-list-screen">
                     <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">取引先管理</h1>
-                    <div class="card rounded-lg p-6 shadow-sm">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-xl font-bold text-[var(--main-color)]">取引先一覧</h2>
-                            <button onclick="showScreen('client-detail-screen')"
-                                class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
-                        </div>
-                        <p>取引先一覧のテーブルがここに表示されます。</p>
+                    <div class="mb-6 border-b border-gray-200">
+                        <nav id="client-sub-nav" class="-mb-px flex space-x-6">
+                            <a href="#" onclick="showClientTab('client-customer-tab', this)"
+                                class="sub-nav-link active py-4 px-1 text-gray-500 hover:text-gray-700">顧客</a>
+                            <a href="#" onclick="showClientTab('client-subcontractor-tab', this)"
+                                class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">外注先</a>
+                        </nav>
                     </div>
-                </div>
 
-                <div class="screen-content hidden" id="client-detail-screen">
-                    <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">取引先詳細</h1>
-                    <div class="card rounded-lg p-6 shadow-sm">
-                        <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">取引先基本情報</h2>
-                        <p>取引先詳細のフォームがここに表示されます。</p>
-                        <div class="mt-6 flex justify-end">
+                    <div class="client-tab-content" id="client-customer-tab">
+                        <h2 class="text-2xl font-bold mb-6 text-[var(--main-color)]">顧客</h2>
+                        <div class="card rounded-lg p-6 shadow-sm">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-xl font-bold text-[var(--main-color)]">顧客一覧</h3>
+                                </div>
+                            <table class="min-w-full bg-white">
+                                <thead class="bg-[var(--main-color)] text-white">
+                                    <tr>
+                                        <th class="py-3 px-4 text-left">顧客名称</th>
+                                        <th class="py-3 px-4 text-center w-24">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="customer-list-body" class="text-gray-700">
+                                    </tbody>
+                            </table>
+                            <div class="mt-2">
+                                <button class="secondary-button-outline text-xs py-1 px-2 rounded add-client-row-btn" data-target-table="customer-list-body">+ 追加</button>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-right">
+                            <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
+                        </div>
+                    </div>
+
+                    <div class="client-tab-content hidden" id="client-subcontractor-tab">
+                        <h2 class="text-2xl font-bold mb-6 text-[var(--main-color)]">外注先</h2>
+                        <div class="card rounded-lg p-6 shadow-sm">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-xl font-bold text-[var(--main-color)]">外注先一覧</h3>
+                                </div>
+                            <table class="min-w-full bg-white">
+                                <thead class="bg-[var(--main-color)] text-white">
+                                    <tr>
+                                        <th class="py-3 px-4 text-left">外注先名称</th>
+                                        <th class="py-3 px-4 text-center w-24">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="subcontractor-list-body" class="text-gray-700">
+                                    </tbody>
+                            </table>
+                            <div class="mt-2">
+                                <button class="secondary-button-outline text-xs py-1 px-2 rounded add-client-row-btn" data-target-table="subcontractor-list-body">+ 追加</button>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-right">
                             <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
                         </div>
                     </div>
@@ -676,78 +717,89 @@
                     </div>
                 </div>
 
-<div class="screen-content hidden" id="attendance-screen">
-    <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">勤退管理</h1>
-    <div class="mb-6 border-b border-gray-200">
-        <nav class="-mb-px flex space-x-6">
-            <a href="#"
-                class="sub-nav-link active py-4 px-1 text-gray-500 hover:text-gray-700">事業所カレンダー</a>
-            <a href="#" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">利用者個別カレンダー</a>
-        </nav>
-    </div>
-    <div class="card rounded-lg p-6 shadow-sm">
-        <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">事業所カレンダー</h2>
-        <div class="flex justify-between items-center mb-4">
-            <button onclick="changeCalendarMonth(-1)" class="primary-button p-2 rounded-full text-lg">&lt;</button>
-            <h2 id="calendar-month-year" class="text-xl font-bold text-[var(--main-color)]">2025年 10月</h2>
-            <button onclick="changeCalendarMonth(1)" class="primary-button p-2 rounded-full text-lg">&gt;</button>
-        </div>
-        <table class="min-w-full bg-white border table-fixed">
-            <thead class="bg-[var(--main-color)] text-white">
-                <tr>
-                    <th class="py-3 px-4 text-center">日</th>
-                    <th class="py-3 px-4 text-center">月</th>
-                    <th class="py-3 px-4 text-center">火</th>
-                    <th class="py-3 px-4 text-center">水</th>
-                    <th class="py-3 px-4 text-center">木</th>
-                    <th class="py-3 px-4 text-center">金</th>
-                    <th class="py-3 px-4 text-center">土</th>
-                </tr>
-            </thead>
-            <tbody id="calendar-body" class="text-gray-700">
-                </tbody>
-        </table>
-    </div>
+                <div class="screen-content hidden" id="attendance-screen">
+                    <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">勤退管理</h1>
+                    <div class="mb-6 border-b border-gray-200">
+                        <nav class="-mb-px flex space-x-6">
+                            <a href="#"
+                                class="sub-nav-link active py-4 px-1 text-gray-500 hover:text-gray-700">事業所カレンダー</a>
+                            <a href="#" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">利用者個別カレンダー</a>
+                        </nav>
+                    </div>
+                    <div class="card rounded-lg p-6 shadow-sm">
+                        <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">事業所カレンダー</h2>
+                        <div class="flex justify-between items-center mb-4">
+                            <button onclick="changeCalendarMonth(-1)"
+                                class="primary-button p-2 rounded-full text-lg">&lt;</button>
+                            <h2 id="calendar-month-year" class="text-xl font-bold text-[var(--main-color)]">2025年 10月
+                            </h2>
+                            <button onclick="changeCalendarMonth(1)"
+                                class="primary-button p-2 rounded-full text-lg">&gt;</button>
+                        </div>
+                        <table class="min-w-full bg-white border table-fixed">
+                            <thead class="bg-[var(--main-color)] text-white">
+                                <tr>
+                                    <th class="py-3 px-4 text-center">日</th>
+                                    <th class="py-3 px-4 text-center">月</th>
+                                    <th class="py-3 px-4 text-center">火</th>
+                                    <th class="py-3 px-4 text-center">水</th>
+                                    <th class="py-3 px-4 text-center">木</th>
+                                    <th class="py-3 px-4 text-center">金</th>
+                                    <th class="py-3 px-4 text-center">土</th>
+                                </tr>
+                            </thead>
+                            <tbody id="calendar-body" class="text-gray-700">
+                            </tbody>
+                        </table>
+                    </div>
 
-    <div id="calendar-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-6">
-            <div class="flex justify-between items-center border-b pb-3 mb-4">
-                <h3 id="calendar-modal-title" class="text-xl font-bold text-[var(--main-color)]">日付設定</h3>
-                <button onclick="closeCalendarModal()" class="text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
-            </div>
-            <form id="calendar-form">
-                <input type="hidden" id="calendar-date">
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">状態</label>
-                        <div class="mt-2 flex space-x-4">
-                            <label class="inline-flex items-center">
-                                <input type="radio" name="day-status" value="open" class="form-radio" checked onchange="toggleTimePicker(true)">
-                                <span class="ml-2">開所</span>
-                            </label>
-                            <label class="inline-flex items-center">
-                                <input type="radio" name="day-status" value="closed" class="form-radio" onchange="toggleTimePicker(false)">
-                                <span class="ml-2">閉所</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div id="time-picker-wrapper">
-                        <label class="block text-sm font-medium text-gray-700">利用時間</label>
-                        <div class="flex items-center mt-2 space-x-2">
-                            <input type="time" id="start-time" value="10:00" class="border rounded w-full px-2 py-1">
-                            <span>～</span>
-                            <input type="time" id="end-time" value="16:00" class="border rounded w-full px-2 py-1">
+                    <div id="calendar-modal"
+                        class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                        <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-6">
+                            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                                <h3 id="calendar-modal-title" class="text-xl font-bold text-[var(--main-color)]">日付設定
+                                </h3>
+                                <button onclick="closeCalendarModal()"
+                                    class="text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+                            </div>
+                            <form id="calendar-form">
+                                <input type="hidden" id="calendar-date">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700">状態</label>
+                                        <div class="mt-2 flex space-x-4">
+                                            <label class="inline-flex items-center">
+                                                <input type="radio" name="day-status" value="open" class="form-radio"
+                                                    checked onchange="toggleTimePicker(true)">
+                                                <span class="ml-2">開所</span>
+                                            </label>
+                                            <label class="inline-flex items-center">
+                                                <input type="radio" name="day-status" value="closed" class="form-radio"
+                                                    onchange="toggleTimePicker(false)">
+                                                <span class="ml-2">閉所</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div id="time-picker-wrapper">
+                                        <label class="block text-sm font-medium text-gray-700">利用時間</label>
+                                        <div class="flex items-center mt-2 space-x-2">
+                                            <input type="time" id="start-time" value="10:00"
+                                                class="border rounded w-full px-2 py-1">
+                                            <span>～</span>
+                                            <input type="time" id="end-time" value="16:00"
+                                                class="border rounded w-full px-2 py-1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-6 flex justify-end space-x-3">
+                                    <button type="button" onclick="closeCalendarModal()"
+                                        class="detail-button font-bold py-2 px-4 rounded">キャンセル</button>
+                                    <button type="submit" class="primary-button font-bold py-2 px-4 rounded">保存</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div class="mt-6 flex justify-end space-x-3">
-                    <button type="button" onclick="closeCalendarModal()" class="detail-button font-bold py-2 px-4 rounded">キャンセル</button>
-                    <button type="submit" class="primary-button font-bold py-2 px-4 rounded">保存</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
                 <div class="screen-content hidden" id="finance-screen">
                     <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">収支管理</h1>

@@ -4,22 +4,32 @@ const dummyData = {
         { officeNumber: '1234567890', officeName: 'サンプル事業所', status: '有効' }
     ],
     // 各種設定 > スキル設定
-  skills: [
-    { genre: "マーケティング", category: "SEO", skillName: "キーワードリサーチ" },
-    { genre: "マーケティング", category: "SEO", skillName: "コンテンツ最適化" },
-    { genre: "マーケティング", category: "広告", skillName: "Google広告" },
-    { genre: "マーケティング", category: "広告", skillName: "SNS広告" },
-    { genre: "デザイン", category: "UIデザイン", skillName: "Figma" },
-    { genre: "デザイン", category: "UIデザイン", skillName: "Adobe XD" },
-    { genre: "デザイン", category: "グラフィックデザイン", skillName: "Illustrator" },
-    { genre: "デザイン", category: "グラフィックデザイン", skillName: "Photoshop" },
-    { genre: "開発", category: "フロントエンド", skillName: "React" },
-    { genre: "開発", category: "フロントエンド", skillName: "Next.js" },
-    { genre: "開発", category: "バックエンド", skillName: "Node.js" },
-    { genre: "開発", category: "バックエンド", skillName: "Python" },
-    { genre: "開発", category: "インフラ", skillName: "Docker" },
-    { genre: "開発", category: "インフラ", skillName: "AWS" },
-  ],
+    skills: [
+        { genre: "マーケティング", category: "SEO", skillName: "キーワードリサーチ" },
+        { genre: "マーケティング", category: "SEO", skillName: "コンテンツ最適化" },
+        { genre: "マーケティング", category: "広告", skillName: "Google広告" },
+        { genre: "マーケティング", category: "広告", skillName: "SNS広告" },
+        { genre: "デザイン", category: "UIデザイン", skillName: "Figma" },
+        { genre: "デザイン", category: "UIデザイン", skillName: "Adobe XD" },
+        { genre: "デザイン", category: "グラフィックデザイン", skillName: "Illustrator" },
+        { genre: "デザイン", category: "グラフィックデザイン", skillName: "Photoshop" },
+        { genre: "開発", category: "フロントエンド", skillName: "React" },
+        { genre: "開発", category: "フロントエンド", skillName: "Next.js" },
+        { genre: "開発", category: "バックエンド", skillName: "Node.js" },
+        { genre: "開発", category: "バックエンド", skillName: "Python" },
+        { genre: "開発", category: "インフラ", skillName: "Docker" },
+        { genre: "開発", category: "インフラ", skillName: "AWS" },
+    ],
+    // 取引先管理 > 顧客一覧
+    customers: [
+        { customerName: '株式会社サンプル取引先' },
+        { customerName: '合同会社テスト顧客' }
+    ],
+    // 取引先管理 > 外注先一覧
+    subcontractors: [
+        { subcontractorName: '個人事業主A' },
+        { subcontractorName: '株式会社B' }
+    ],
     // 収支管理 > 収支集計（テーブルデータ）
     incomeAndExpenditure: {
         businessIncome: [
