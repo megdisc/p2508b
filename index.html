@@ -639,7 +639,7 @@
                     </div>
                 </div>
 
-                <div class="screen-content hidden" id="user-list-screen">
+<div class="screen-content hidden" id="user-list-screen">
                     <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">利用者管理</h1>
                     <div class="card rounded-lg p-6 shadow-sm">
                         <div class="flex justify-between items-center mb-4">
@@ -647,34 +647,136 @@
                             <button onclick="showScreen('user-detail-screen')"
                                 class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
                         </div>
-                        <p>利用者一覧のテーブルがここに表示されます。</p>
-                    </div>
+                        <table class="min-w-full bg-white">
+                            <thead class="bg-[var(--main-color)] text-white">
+                                <tr>
+                                    <th class="py-3 px-4 text-left">利用者名</th>
+                                    <th class="py-3 px-4 text-left">契約ステータス</th>
+                                    <th class="py-3 px-4 text-center">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="user-list">
+                                </tbody>
+                        </table>
+                        </div>
                 </div>
 
-                <div class="screen-content hidden" id="user-detail-screen">
-                    <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">利用者詳細</h1>
+<div class="screen-content hidden" id="user-detail-screen">
+                    <div class="flex justify-between items-center mb-6">
+                        <h1 class="text-3xl font-bold text-[var(--main-color)]">利用者詳細</h1>
+                        <button onclick="showScreen('user-list-screen', document.querySelector('a[onclick*=\'user-list-screen\']'))" class="detail-button font-bold py-2 px-4 rounded">戻る</button>
+                    </div>
+
                     <div class="space-y-6">
                         <div class="card rounded-lg p-6 shadow-sm">
-                            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">利用者基本情報</h2>
-                            <p>フォーム</p>
+                            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">基本情報</h2>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="font-semibold text-gray-700">利用者名</label>
+                                    <input type="text" class="border rounded w-full mt-1 px-2 py-1">
+                                </div>
+                                <div>
+                                    <label class="font-semibold text-gray-700">契約ステータス</label>
+                                    <select class="border rounded w-full mt-1 px-2 py-1">
+                                        <option>契約中</option>
+                                        <option>契約終了</option>
+                                        <option>体験利用中</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="font-semibold text-gray-700">備考</label>
+                                    <textarea class="border rounded w-full mt-1 px-2 py-1" rows="3"></textarea>
+                                </div>
+                            </div>
                         </div>
                         <div class="card rounded-lg p-6 shadow-sm">
                             <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">障害福祉サービス受給者証情報</h2>
-                            <p>フォーム</p>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="font-semibold text-gray-700">利用者負担割合</label>
+                                    <input type="number" class="border rounded w-full mt-1 px-2 py-1">
+                                </div>
+                                <div>
+                                    <label class="font-semibold text-gray-700">利用者負担上限月額</label>
+                                    <input type="number" class="border rounded w-full mt-1 px-2 py-1">
+                                </div>
+                                <div>
+                                    <label class="font-semibold text-gray-700">有効期間</label>
+                                    <div class="flex items-center space-x-2 mt-1">
+                                        <input type="date" class="border rounded px-2 py-1 w-full">
+                                        <span>～</span>
+                                        <input type="date" class="border rounded px-2 py-1 w-full">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card rounded-lg p-6 shadow-sm">
+<div class="card rounded-lg p-6 shadow-sm">
                             <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">基本シフト</h2>
-                            <p>フォーム</p>
+                            <table class="min-w-full bg-white">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="py-2 px-4 text-left font-medium text-gray-600 w-24">曜日</th>
+                                        <th class="py-2 px-4 text-left font-medium text-gray-600">利用時間</th>
+                                        <th class="py-2 px-4 text-left font-medium text-gray-600">休憩時間（分）</th>
+                                        <th class="py-2 px-4 text-center font-medium text-gray-600 w-24">昼食利用</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-700">
+                                    <tr class="border-b">
+                                        <td class="py-2 px-4">日</td>
+                                        <td class="py-2 px-4"><div class="flex items-center space-x-2"><input type="time" class="border rounded px-2 py-1 w-32"><span>～</span><input type="time" class="border rounded px-2 py-1 w-32"></div></td>
+                                        <td class="py-2 px-4"><input type="number" class="border rounded px-2 py-1 w-32"></td>
+                                        <td class="py-2 px-4 text-center"><input type="checkbox"></td>
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="py-2 px-4">月</td>
+                                        <td class="py-2 px-4"><div class="flex items-center space-x-2"><input type="time" value="10:00" class="border rounded px-2 py-1 w-32"><span>～</span><input type="time" value="16:00" class="border rounded px-2 py-1 w-32"></div></td>
+                                        <td class="py-2 px-4"><input type="number" value="60" class="border rounded px-2 py-1 w-32"></td>
+                                        <td class="py-2 px-4 text-center"><input type="checkbox" checked></td>
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="py-2 px-4">火</td>
+                                        <td class="py-2 px-4"><div class="flex items-center space-x-2"><input type="time" value="10:00" class="border rounded px-2 py-1 w-32"><span>～</span><input type="time" value="16:00" class="border rounded px-2 py-1 w-32"></div></td>
+                                        <td class="py-2 px-4"><input type="number" value="60" class="border rounded px-2 py-1 w-32"></td>
+                                        <td class="py-2 px-4 text-center"><input type="checkbox" checked></td>
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="py-2 px-4">水</td>
+                                        <td class="py-2 px-4"><div class="flex items-center space-x-2"><input type="time" value="10:00" class="border rounded px-2 py-1 w-32"><span>～</span><input type="time" value="16:00" class="border rounded px-2 py-1 w-32"></div></td>
+                                        <td class="py-2 px-4"><input type="number" value="60" class="border rounded px-2 py-1 w-32"></td>
+                                        <td class="py-2 px-4 text-center"><input type="checkbox" checked></td>
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="py-2 px-4">木</td>
+                                        <td class="py-2 px-4"><div class="flex items-center space-x-2"><input type="time" value="10:00" class="border rounded px-2 py-1 w-32"><span>～</span><input type="time" value="16:00" class="border rounded px-2 py-1 w-32"></div></td>
+                                        <td class="py-2 px-4"><input type="number" value="60" class="border rounded px-2 py-1 w-32"></td>
+                                        <td class="py-2 px-4 text-center"><input type="checkbox" checked></td>
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="py-2 px-4">金</td>
+                                        <td class="py-2 px-4"><div class="flex items-center space-x-2"><input type="time" value="10:00" class="border rounded px-2 py-1 w-32"><span>～</span><input type="time" value="16:00" class="border rounded px-2 py-1 w-32"></div></td>
+                                        <td class="py-2 px-4"><input type="number" value="60" class="border rounded px-2 py-1 w-32"></td>
+                                        <td class="py-2 px-4 text-center"><input type="checkbox" checked></td>
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="py-2 px-4">土</td>
+                                        <td class="py-2 px-4"><div class="flex items-center space-x-2"><input type="time" class="border rounded px-2 py-1 w-32"><span>～</span><input type="time" class="border rounded px-2 py-1 w-32"></div></td>
+                                        <td class="py-2 px-4"><input type="number" class="border rounded px-2 py-1 w-32"></td>
+                                        <td class="py-2 px-4 text-center"><input type="checkbox"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="card rounded-lg p-6 shadow-sm">
-                            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">習得スキル</h2>
-                            <p>フォーム</p>
+                            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">スキル</h2>
+                            <div id="user-skill-accordion-container" class="space-y-2">
+                                </div>
                         </div>
                         <div class="mt-6 flex justify-end">
                             <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
                         </div>
                     </div>
-                </div>
+                    </div>
 
                 <div class="screen-content hidden" id="project-list-screen">
                     <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">案件管理</h1>

@@ -114,5 +114,28 @@ const dummyData = {
         { role: '管理者', userName: '田中 太郎', email: 'tanaka@example.com', status: '有効' },
         { role: 'スタッフ', userName: '鈴木 一郎', email: 'suzuki@example.com', status: '有効' },
         { role: 'スタッフ', userName: '佐藤 花子', email: 'sato@example.com', status: '無効' }
+    ],
+    // 施設情報設定 > 事業所設定
+    facilities: [
+        { officeNumber: '1234567890', officeName: 'サンプル事業所', status: '有効' }
+    ],
+    // ...（既存のデータは省略）
+    accounts: [
+        { role: '管理者', userName: '田中 太郎', email: 'tanaka@example.com', status: '有効' },
+        { role: 'スタッフ', userName: '鈴木 一郎', email: 'suzuki@example.com', status: '有効' },
+        { role: 'スタッフ', userName: '佐藤 花子', email: 'sato@example.com', status: '無効' }
+    ],
+    users: [
+        {
+            userName: '山田 太郎', 
+            status: '契約中',
+            skills: [
+                { genre: "マーケティング", category: "SEO", skillName: "キーワードリサーチ", level: 3 },
+                { genre: "マーケティング", category: "SEO", skillName: "コンテンツ最適化", level: 2 },
+                { genre: "デザイン", category: "UIデザイン", skillName: "Figma", level: 1 },
+            ]
+        },
+        { userName: '佐藤 次郎', status: '契約中', skills: [] },
+        { userName: '鈴木 三郎', status: '契約終了', skills: [] }
     ]
 };

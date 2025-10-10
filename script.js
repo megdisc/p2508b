@@ -4,10 +4,12 @@ document.addEventListener('DOMContentLoaded', function() {
     renderFinanceAggregation(); // テーブルとサマリーの両方を描画
     renderCustomerList(); // 顧客一覧の初期描画
     renderSubcontractorList(); // 外注先一覧の初期描画
+    renderUserList(); // 利用者一覧の初期描画
 
     // --- イベントリスナーのセットアップ ---
     setupEventListeners(); // ログイン、ログアウトなど汎用的なものをまとめる想定
     setupClientManagementEventListeners(); // 取引先管理画面のイベントリスナーを追加
+    setupUserDetailEventListeners(); // 利用者詳細画面のイベントリスナーを追加
 
     // スキル設定タブの初期化処理
     const skillTabContainer = document.getElementById('settings-skills');
@@ -195,6 +197,81 @@ function createSkillItem(skillName) {
 }
 
 /**
+ * 【利用者詳細用】HTML生成関数：ジャンルのアコーディオン部分を作成（表示のみ）
+ */
+function createUserSkillGenreAccordion(genre, categories) {
+    let categoryHtml = '';
+    for (const category in categories) {
+        categoryHtml += createUserSkillCategoryAccordion(category, categories[category]);
+    }
+
+    return `
+        <div class="genre-item border rounded" data-genre="${genre}">
+            <div class="accordion-header bg-[var(--main-color)] text-white p-3 flex justify-between items-center cursor-pointer">
+                <div class="flex-grow flex items-center">
+                    <span class="accordion-toggle mr-2">▼</span>
+                    <span class="font-bold text-lg">${genre}</span>
+                </div>
+            </div>
+            <div class="accordion-content hidden p-3 pl-6 space-y-2">
+                ${categoryHtml}
+            </div>
+        </div>
+    `;
+}
+
+/**
+ * 【利用者詳細用】HTML生成関数：カテゴリのアコーディオン部分を作成（表示のみ）
+ */
+function createUserSkillCategoryAccordion(category, skills) {
+    let skillHtml = '<ul class="list-disc pl-4 space-y-2 skill-list">';
+    skills.forEach(skill => {
+        skillHtml += createUserSkillItem(skill);
+    });
+    skillHtml += '</ul>';
+
+    return `
+        <div class="category-item border rounded" data-category="${category}">
+            <div class="accordion-header bg-gray-50 p-3 flex justify-between items-center cursor-pointer">
+                <div class="flex-grow flex items-center">
+                    <span class="accordion-toggle mr-2">▼</span>
+                    <span class="font-semibold text-md">${category}</span>
+                </div>
+            </div>
+            <div class="accordion-content hidden p-3 pl-6">
+                ${skillHtml}
+            </div>
+        </div>
+    `;
+}
+
+/**
+ * 【利用者詳細用】HTML生成関数：スキル項目（li要素）を作成（表示のみ、Lv選択付き）
+ */
+function createUserSkillItem(skill) {
+    const skillName = skill.skillName;
+    const level = skill.level || 1;
+
+    let options = '';
+    for (let i = 1; i <= 5; i++) {
+        options += `<option value="${i}" ${i === level ? 'selected' : ''}>${i}</option>`;
+    }
+
+    return `
+        <li class="skill-item flex justify-between items-center">
+            <span>${skillName}</span>
+            <div class="flex items-center">
+                <label class="mr-2 text-sm">Lv.</label>
+                <select class="border rounded px-2 py-1 text-sm">
+                    ${options}
+                </select>
+            </div>
+        </li>
+    `;
+}
+
+
+/**
  * スキル設定タブのイベントリスナー設定関数
  */
 function setupSkillSettingsEventListeners() {
@@ -259,7 +336,6 @@ function setupClientManagementEventListeners() {
     const container = document.getElementById('client-list-screen');
     if (!container) return;
 
-    // 新しい行のHTMLを生成する関数
     const createNewRowHtml = (placeholder) => `
         <tr class="border-b">
             <td class="py-2 px-2">
@@ -271,11 +347,9 @@ function setupClientManagementEventListeners() {
         </tr>
     `;
 
-    // イベント委譲で「+ 追加」「削除」ボタンを処理
     container.addEventListener('click', (e) => {
         const target = e.target;
 
-        // 「+ 追加」ボタンの処理
         if (target.classList.contains('add-client-row-btn')) {
             const targetTableId = target.dataset.targetTable;
             const tableBody = document.getElementById(targetTableId);
@@ -286,7 +360,6 @@ function setupClientManagementEventListeners() {
             return;
         }
 
-        // 「削除」ボタンの処理
         if (target.classList.contains('delete-client-row-btn')) {
             target.closest('tr').remove();
             return;
@@ -301,7 +374,6 @@ function renderCustomerList() {
     const tableBody = document.getElementById('customer-list-body');
     if (!tableBody) return;
 
-    // dummyData.customersが存在しない、または空の場合でもエラーにならないように修正
     const customers = dummyData.customers || [];
 
     tableBody.innerHTML = customers.map(customer => `
@@ -321,7 +393,6 @@ function renderSubcontractorList() {
     const tableBody = document.getElementById('subcontractor-list-body');
     if (!tableBody) return;
 
-    // dummyData.subcontractorsが存在しない、または空の場合でもエラーにならないように修正
     const subcontractors = dummyData.subcontractors || [];
 
     tableBody.innerHTML = subcontractors.map(subcontractor => `
@@ -333,6 +404,82 @@ function renderSubcontractorList() {
         </tr>
     `).join('');
 }
+
+/**
+ * =================================================================
+ * 利用者管理 機能
+ * =================================================================
+ */
+
+/**
+ * 利用者管理 > 利用者一覧を描画する
+ */
+function renderUserList() {
+    const userList = document.getElementById('user-list');
+    if (!userList) return;
+
+    const users = dummyData.users || [];
+
+    userList.innerHTML = users.map(user => `
+        <tr class="border-b hover:bg-gray-50">
+            <td class="py-3 px-4">${user.userName}</td>
+            <td class="py-3 px-4">${user.status}</td>
+            <td class="py-3 px-4 text-center">
+                <button onclick="showScreen('user-detail-screen')" class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+/**
+ * 利用者管理 > 利用者詳細 > スキル一覧を描画する
+ */
+function renderUserSkillList() {
+    const container = document.getElementById('user-skill-accordion-container');
+    if (!container) return;
+
+    const userSkills = dummyData.users[0].skills || [];
+    
+    const groupedSkills = userSkills.reduce((acc, skill) => {
+        const { genre, category } = skill;
+        if (!acc[genre]) {
+            acc[genre] = {};
+        }
+        if (!acc[genre][category]) {
+            acc[genre][category] = [];
+        }
+        acc[genre][category].push(skill);
+        return acc;
+    }, {});
+    
+    let html = '';
+    for (const genre in groupedSkills) {
+        html += createUserSkillGenreAccordion(genre, groupedSkills[genre]);
+    }
+    container.innerHTML = html;
+}
+
+/**
+ * 利用者詳細画面のイベントリスナー設定関数
+ */
+function setupUserDetailEventListeners() {
+    const container = document.getElementById('user-detail-screen');
+    if (!container) return;
+
+    container.addEventListener('click', function(event) {
+        const target = event.target;
+        const header = target.closest('.accordion-header');
+
+        if (header && header.querySelector('.accordion-toggle')) {
+            const content = header.nextElementSibling;
+            const toggle = header.querySelector('.accordion-toggle');
+            content.classList.toggle('hidden');
+            toggle.textContent = content.classList.contains('hidden') ? '▼' : '▲';
+            return; 
+        }
+    });
+}
+
 
 /**
  * =================================================================
@@ -537,9 +684,14 @@ function showScreen(screenId, navLink, isFinance = false) {
     if (isFinance) {
         showFinanceTab('finance-aggregation-wrapper', document.querySelector('#finance-sub-nav a'));
     }
-    // 取引先管理画面を表示した際に、デフォルトで顧客タブを表示する
     if (screenId === 'client-list-screen') {
         showClientTab('client-customer-tab', document.querySelector('#client-sub-nav a'));
+    }
+    if (screenId === 'user-list-screen') {
+        renderUserList();
+    }
+    if (screenId === 'user-detail-screen') {
+        renderUserSkillList();
     }
 }
 
@@ -550,7 +702,7 @@ function showSettingsTab(tabId, navLink) {
     navLink.classList.add('active');
     
     if (tabId === 'settings-facility') {
-        showFacilityDetailScreen(false); // 事業所一覧をデフォルトで表示
+        showFacilityDetailScreen(false);
     }
     if (tabId === 'settings-skills') {
         renderSkillList();
@@ -818,7 +970,7 @@ function toggleTimePicker(show) {
  * =================================================================
  */
 
-let currentCalendarDate = new Date(2025, 9, 1); // 2025年10月を初期値とする
+let currentCalendarDate = new Date(2025, 9, 1);
 
 function renderBusinessCalendar() {
     const calendarMonthYear = document.getElementById('calendar-month-year');
