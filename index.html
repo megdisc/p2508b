@@ -640,26 +640,28 @@
                 </div>
 
 <div class="screen-content hidden" id="user-list-screen">
-                    <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">利用者管理</h1>
-                    <div class="card rounded-lg p-6 shadow-sm">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-xl font-bold text-[var(--main-color)]">利用者一覧</h2>
-                            <button onclick="showScreen('user-detail-screen')"
-                                class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
+                    <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">利用者一覧</h1>
+                    <div class="space-y-6">
+                        <div class="card rounded-lg p-6 shadow-sm">
+                            <div class="flex justify-between items-center mb-4">
+                                <h2 class="text-xl font-bold text-[var(--main-color)]">利用者リスト</h2>
+                                <button onclick="showScreen('user-detail-screen')"
+                                    class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
+                            </div>
+                            <table class="min-w-full bg-white">
+                                <thead class="bg-[var(--main-color)] text-white">
+                                    <tr>
+                                        <th class="py-3 px-4 text-left">利用者名</th>
+                                        <th class="py-3 px-4 text-left">契約ステータス</th>
+                                        <th class="py-3 px-4 text-center">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="user-list">
+                                    </tbody>
+                            </table>
                         </div>
-                        <table class="min-w-full bg-white">
-                            <thead class="bg-[var(--main-color)] text-white">
-                                <tr>
-                                    <th class="py-3 px-4 text-left">利用者名</th>
-                                    <th class="py-3 px-4 text-left">契約ステータス</th>
-                                    <th class="py-3 px-4 text-center">操作</th>
-                                </tr>
-                            </thead>
-                            <tbody id="user-list">
-                                </tbody>
-                        </table>
-                        </div>
-                </div>
+                    </div>
+                    </div>
 
 <div class="screen-content hidden" id="user-detail-screen">
                     <div class="flex justify-between items-center mb-6">
@@ -778,29 +780,79 @@
                     </div>
                     </div>
 
-                <div class="screen-content hidden" id="project-list-screen">
-                    <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">案件管理</h1>
-                    <div class="card rounded-lg p-6 shadow-sm">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-xl font-bold text-[var(--main-color)]">案件一覧</h2>
-                            <button onclick="showScreen('project-detail-screen')"
-                                class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
-                        </div>
-                        <p>案件一覧のテーブルがここに表示されます。</p>
-                    </div>
-                </div>
-
-                <div class="screen-content hidden" id="project-detail-screen">
-                    <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">案件詳細</h1>
+<div class="screen-content hidden" id="project-list-screen">
+                    <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">案件一覧</h1>
                     <div class="space-y-6">
                         <div class="card rounded-lg p-6 shadow-sm">
-                            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">案件基本情報</h2>
-                            <p>フォーム</p>
+                            <div class="flex justify-between items-center mb-4">
+                                <h2 class="text-xl font-bold text-[var(--main-color)]">案件リスト</h2>
+                                <button onclick="showScreen('project-detail-screen')"
+                                    class="primary-button font-bold py-2 px-4 rounded">新規作成</button>
+                            </div>
+                            <table class="min-w-full bg-white">
+                                <thead class="bg-[var(--main-color)] text-white">
+                                    <tr>
+                                        <th class="py-3 px-4 text-left">案件名</th>
+                                        <th class="py-3 px-4 text-left">進捗ステータス</th>
+                                        <th class="py-3 px-4 text-center">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="project-list">
+                                    </tbody>
+                            </table>
                         </div>
+                    </div>
+                    </div>
+
+<div class="screen-content hidden" id="project-detail-screen">
+                    <div class="flex justify-between items-center mb-6">
+                        <h1 class="text-3xl font-bold text-[var(--main-color)]">案件詳細</h1>
+                        <button onclick="showScreen('project-list-screen', document.querySelector('a[onclick*=\'project-list-screen\']'))" class="detail-button font-bold py-2 px-4 rounded">戻る</button>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="card rounded-lg p-6 shadow-sm">
+                            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">基本情報</h2>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="font-semibold text-gray-700">案件名</label>
+                                    <input type="text" class="border rounded w-full mt-1 px-2 py-1">
+                                </div>
+                                <div>
+                                    <label class="font-semibold text-gray-700">顧客名</label>
+                                    <select class="border rounded w-full mt-1 px-2 py-1">
+                                        <option>株式会社サンプル取引先</option>
+                                        <option>合同会社テスト顧客</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="font-semibold text-gray-700">進捗ステータス</label>
+                                    <select class="border rounded w-full mt-1 px-2 py-1">
+                                        <option>未着手</option>
+                                        <option>進行中</option>
+                                        <option>完了</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="font-semibold text-gray-700">プロジェクトマネージャー</label>
+                                    <select class="border rounded w-full mt-1 px-2 py-1">
+                                        <option>田中 太郎</option>
+                                        <option>鈴木 一郎</option>
+                                        <option>佐藤 花子</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="card rounded-lg p-6 shadow-sm">
                             <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">受託料</h2>
-                            <p>フォーム</p>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="font-semibold text-gray-700">受託料</label>
+                                    <input type="number" class="border rounded w-full mt-1 px-2 py-1">
+                                </div>
+                            </div>
                         </div>
+                        
                         <div class="card rounded-lg p-6 shadow-sm">
                             <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">タスク基本情報</h2>
                             <p>フォーム</p>

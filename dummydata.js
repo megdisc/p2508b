@@ -127,7 +127,7 @@ const dummyData = {
     ],
     users: [
         {
-            userName: '山田 太郎', 
+            userName: '山田 太郎',
             status: '契約中',
             skills: [
                 { genre: "マーケティング", category: "SEO", skillName: "キーワードリサーチ", level: 3 },
@@ -137,5 +137,10 @@ const dummyData = {
         },
         { userName: '佐藤 次郎', status: '契約中', skills: [] },
         { userName: '鈴木 三郎', status: '契約終了', skills: [] }
+    ],
+    projects: [
+        { projectName: 'Webサイト制作A', status: '進行中' },
+        { projectName: 'デザイン制作B', status: '完了' },
+        { projectName: 'データ入力C', status: '進行中' }
     ]
 };

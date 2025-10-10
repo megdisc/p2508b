@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     renderCustomerList(); // 顧客一覧の初期描画
     renderSubcontractorList(); // 外注先一覧の初期描画
     renderUserList(); // 利用者一覧の初期描画
+    renderProjectList(); // 案件一覧の初期描画
 
     // --- イベントリスナーのセットアップ ---
     setupEventListeners(); // ログイン、ログアウトなど汎用的なものをまとめる想定
@@ -480,6 +481,31 @@ function setupUserDetailEventListeners() {
     });
 }
 
+/**
+ * =================================================================
+ * 案件管理 機能
+ * =================================================================
+ */
+
+/**
+ * 案件管理 > 案件一覧を描画する
+ */
+function renderProjectList() {
+    const projectList = document.getElementById('project-list');
+    if (!projectList) return;
+
+    const projects = dummyData.projects || [];
+
+    projectList.innerHTML = projects.map(project => `
+        <tr class="border-b hover:bg-gray-50">
+            <td class="py-3 px-4">${project.projectName}</td>
+            <td class="py-3 px-4">${project.status}</td>
+            <td class="py-3 px-4 text-center">
+                <button onclick="showScreen('project-detail-screen')" class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button>
+            </td>
+        </tr>
+    `).join('');
+}
 
 /**
  * =================================================================
@@ -692,6 +718,9 @@ function showScreen(screenId, navLink, isFinance = false) {
     }
     if (screenId === 'user-detail-screen') {
         renderUserSkillList();
+    }
+    if (screenId === 'project-list-screen') {
+        renderProjectList();
     }
 }
 
