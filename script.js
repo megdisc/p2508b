@@ -38,6 +38,16 @@ document.addEventListener('DOMContentLoaded', function() {
             closeCalendarModal();
         });
     }
+
+    // 【追加】利用者個別カレンダーのモーダルフォーム送信イベント
+    const userAttendanceForm = document.getElementById('user-attendance-form');
+    if (userAttendanceForm) {
+        userAttendanceForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('保存機能は未実装です。');
+            closeUserAttendanceModal();
+        });
+    }
 });
 
 
@@ -378,9 +388,11 @@ function renderCustomerList() {
     const customers = dummyData.customers || [];
 
     tableBody.innerHTML = customers.map(customer => `
-        <tr class="border-b hover:bg-gray-50">
-            <td class="py-3 px-4">${customer.customerName}</td>
-            <td class="py-3 px-4 text-center">
+        <tr class="border-b">
+            <td class="py-2 px-2">
+                <input type="text" value="${customer.customerName}" class="border rounded w-full px-2 py-1">
+            </td>
+            <td class="py-2 px-2 text-center">
                 <button class="danger-button font-bold py-1 px-3 rounded text-sm delete-client-row-btn">削除</button>
             </td>
         </tr>
@@ -397,9 +409,11 @@ function renderSubcontractorList() {
     const subcontractors = dummyData.subcontractors || [];
 
     tableBody.innerHTML = subcontractors.map(subcontractor => `
-        <tr class="border-b hover:bg-gray-50">
-            <td class="py-3 px-4">${subcontractor.subcontractorName}</td>
-            <td class="py-3 px-4 text-center">
+        <tr class="border-b">
+            <td class="py-2 px-2">
+                <input type="text" value="${subcontractor.subcontractorName}" class="border rounded w-full px-2 py-1">
+            </td>
+            <td class="py-2 px-2 text-center">
                 <button class="danger-button font-bold py-1 px-3 rounded text-sm delete-client-row-btn">削除</button>
             </td>
         </tr>
@@ -722,6 +736,10 @@ function showScreen(screenId, navLink, isFinance = false) {
     if (screenId === 'project-list-screen') {
         renderProjectList();
     }
+    if (screenId === 'attendance-screen') {
+        showAttendanceTab('attendance-business-calendar-wrapper', document.querySelector('#attendance-sub-nav a'));
+        renderBusinessCalendar();
+    }
 }
 
 function showSettingsTab(tabId, navLink) {
@@ -767,6 +785,13 @@ function showClientTab(tabId, navLink) {
     document.querySelectorAll('.client-tab-content').forEach(tab => tab.classList.add('hidden'));
     document.getElementById(tabId).classList.remove('hidden');
     document.querySelectorAll('#client-sub-nav .sub-nav-link').forEach(link => link.classList.remove('active'));
+    navLink.classList.add('active');
+}
+
+function showAttendanceTab(tabId, navLink) {
+    document.querySelectorAll('.attendance-tab-content').forEach(tab => tab.classList.add('hidden'));
+    document.getElementById(tabId).classList.remove('hidden');
+    document.querySelectorAll('#attendance-sub-nav .sub-nav-link').forEach(link => link.classList.remove('active'));
     navLink.classList.add('active');
 }
 
@@ -995,23 +1020,47 @@ function toggleTimePicker(show) {
 
 /**
  * =================================================================
+ * 【追加】利用者個別カレンダー編集モーダル機能
+ * =================================================================
+ */
+function openUserAttendanceModal(day) {
+    const modal = document.getElementById('user-attendance-modal');
+    const modalTitle = document.getElementById('user-attendance-modal-title');
+    const dateInput = document.getElementById('user-attendance-date');
+    
+    modalTitle.textContent = `勤怠編集（${currentCalendarDate.getMonth() + 1}月${day}日）`;
+    dateInput.value = day;
+    
+    modal.classList.remove('hidden');
+}
+
+function closeUserAttendanceModal() {
+    const modal = document.getElementById('user-attendance-modal');
+    modal.classList.add('hidden');
+}
+
+function toggleUserTimePicker(show) {
+    const timePickerWrapper = document.getElementById('user-time-picker-wrapper');
+    if (show) {
+        timePickerWrapper.classList.remove('hidden');
+    } else {
+        timePickerWrapper.classList.add('hidden');
+    }
+}
+
+
+/**
+ * =================================================================
  * 事業所カレンダー 月変更機能
  * =================================================================
  */
 
 let currentCalendarDate = new Date(2025, 9, 1);
 
-function renderBusinessCalendar() {
-    const calendarMonthYear = document.getElementById('calendar-month-year');
-    const calendarBody = document.getElementById('calendar-body');
-
-    if (!calendarMonthYear || !calendarBody) return;
-
-    const year = currentCalendarDate.getFullYear();
-    const month = currentCalendarDate.getMonth();
-
-    calendarMonthYear.textContent = `${year}年 ${month + 1}月`;
-
+/**
+ * 【変更】カレンダー描画処理を共通化
+ */
+function generateCalendarBodyHTML(year, month, dayClickHandlerName) {
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
@@ -1040,14 +1089,36 @@ function renderBusinessCalendar() {
                      content = `<div class="font-bold inline-block bg-[var(--accent-color)] rounded-full w-6 h-6 leading-6">${day}</div><div class="text-sm"><div>10:00</div><div>～</div><div>16:00</div></div>`;
                 }
 
-                html += `<td onclick="openCalendarModal('${day}')" class="py-3 px-4 h-32 text-center border align-top ${cellClass}">${content}</td>`;
+                html += `<td onclick="${dayClickHandlerName}('${day}')" class="py-3 px-4 h-32 text-center border align-top ${cellClass}">${content}</td>`;
                 day++;
             }
         }
         html += '</tr>';
         if (day > daysInMonth) break;
     }
-    calendarBody.innerHTML = html;
+    return html;
+}
+
+/**
+ * 【変更】共通化された描画処理を呼び出すように修正
+ */
+function renderBusinessCalendar() {
+    const calendarMonthYear = document.getElementById('calendar-month-year');
+    const calendarBody = document.getElementById('calendar-body');
+    const userCalendarMonthYear = document.getElementById('user-calendar-month-year');
+    const userCalendarBody = document.getElementById('user-calendar-body');
+
+    if (!calendarMonthYear || !calendarBody || !userCalendarMonthYear || !userCalendarBody) return;
+
+    const year = currentCalendarDate.getFullYear();
+    const month = currentCalendarDate.getMonth();
+
+    const monthYearText = `${year}年 ${month + 1}月`;
+    calendarMonthYear.textContent = monthYearText;
+    userCalendarMonthYear.textContent = monthYearText;
+    
+    calendarBody.innerHTML = generateCalendarBodyHTML(year, month, 'openCalendarModal');
+    userCalendarBody.innerHTML = generateCalendarBodyHTML(year, month, 'openUserAttendanceModal');
 }
 
 function changeCalendarMonth(offset) {
