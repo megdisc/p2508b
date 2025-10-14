@@ -577,7 +577,7 @@
                     </div>
                 </div>
 
-<div class="screen-content hidden" id="client-list-screen">
+                <div class="screen-content hidden" id="client-list-screen">
                     <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">取引先管理</h1>
                     <div class="mb-6 border-b border-gray-200">
                         <nav id="client-sub-nav" class="-mb-px flex space-x-6">
@@ -593,7 +593,7 @@
                         <div class="card rounded-lg p-6 shadow-sm">
                             <div class="flex justify-between items-center mb-4">
                                 <h3 class="text-xl font-bold text-[var(--main-color)]">顧客一覧</h3>
-                                </div>
+                            </div>
                             <table class="min-w-full bg-white">
                                 <thead class="bg-[var(--main-color)] text-white">
                                     <tr>
@@ -602,10 +602,11 @@
                                     </tr>
                                 </thead>
                                 <tbody id="customer-list-body" class="text-gray-700">
-                                    </tbody>
+                                </tbody>
                             </table>
                             <div class="mt-2">
-                                <button class="secondary-button-outline text-xs py-1 px-2 rounded add-client-row-btn" data-target-table="customer-list-body">+ 追加</button>
+                                <button class="secondary-button-outline text-xs py-1 px-2 rounded add-client-row-btn"
+                                    data-target-table="customer-list-body">+ 追加</button>
                             </div>
                         </div>
                         <div class="mt-6 text-right">
@@ -618,7 +619,7 @@
                         <div class="card rounded-lg p-6 shadow-sm">
                             <div class="flex justify-between items-center mb-4">
                                 <h3 class="text-xl font-bold text-[var(--main-color)]">外注先一覧</h3>
-                                </div>
+                            </div>
                             <table class="min-w-full bg-white">
                                 <thead class="bg-[var(--main-color)] text-white">
                                     <tr>
@@ -627,10 +628,11 @@
                                     </tr>
                                 </thead>
                                 <tbody id="subcontractor-list-body" class="text-gray-700">
-                                    </tbody>
+                                </tbody>
                             </table>
                             <div class="mt-2">
-                                <button class="secondary-button-outline text-xs py-1 px-2 rounded add-client-row-btn" data-target-table="subcontractor-list-body">+ 追加</button>
+                                <button class="secondary-button-outline text-xs py-1 px-2 rounded add-client-row-btn"
+                                    data-target-table="subcontractor-list-body">+ 追加</button>
                             </div>
                         </div>
                         <div class="mt-6 text-right">
@@ -639,7 +641,7 @@
                     </div>
                 </div>
 
-<div class="screen-content hidden" id="user-list-screen">
+                <div class="screen-content hidden" id="user-list-screen">
                     <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">利用者一覧</h1>
                     <div class="space-y-6">
                         <div class="card rounded-lg p-6 shadow-sm">
@@ -657,16 +659,18 @@
                                     </tr>
                                 </thead>
                                 <tbody id="user-list">
-                                    </tbody>
+                                </tbody>
                             </table>
                         </div>
                     </div>
-                    </div>
+                </div>
 
-<div class="screen-content hidden" id="user-detail-screen">
+                <div class="screen-content hidden" id="user-detail-screen">
                     <div class="flex justify-between items-center mb-6">
                         <h1 class="text-3xl font-bold text-[var(--main-color)]">利用者詳細</h1>
-                        <button onclick="showScreen('user-list-screen', document.querySelector('a[onclick*=\'user-list-screen\']'))" class="detail-button font-bold py-2 px-4 rounded">戻る</button>
+                        <button
+                            onclick="showScreen('user-list-screen', document.querySelector('a[onclick*=\'user-list-screen\']'))"
+                            class="detail-button font-bold py-2 px-4 rounded">戻る</button>
                     </div>
 
                     <div class="space-y-6">
@@ -712,7 +716,7 @@
                                 </div>
                             </div>
                         </div>
-<div class="card rounded-lg p-6 shadow-sm">
+                        <div class="card rounded-lg p-6 shadow-sm">
                             <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">基本シフト</h2>
                             <table class="min-w-full bg-white">
                                 <thead class="bg-gray-50">
@@ -726,44 +730,84 @@
                                 <tbody class="text-gray-700">
                                     <tr class="border-b">
                                         <td class="py-2 px-4">日</td>
-                                        <td class="py-2 px-4"><div class="flex items-center space-x-2"><input type="time" class="border rounded px-2 py-1 w-32"><span>～</span><input type="time" class="border rounded px-2 py-1 w-32"></div></td>
-                                        <td class="py-2 px-4"><input type="number" class="border rounded px-2 py-1 w-32"></td>
+                                        <td class="py-2 px-4">
+                                            <div class="flex items-center space-x-2"><input type="time"
+                                                    class="border rounded px-2 py-1 w-32"><span>～</span><input
+                                                    type="time" class="border rounded px-2 py-1 w-32"></div>
+                                        </td>
+                                        <td class="py-2 px-4"><input type="number"
+                                                class="border rounded px-2 py-1 w-32"></td>
                                         <td class="py-2 px-4 text-center"><input type="checkbox"></td>
                                     </tr>
                                     <tr class="border-b">
                                         <td class="py-2 px-4">月</td>
-                                        <td class="py-2 px-4"><div class="flex items-center space-x-2"><input type="time" value="10:00" class="border rounded px-2 py-1 w-32"><span>～</span><input type="time" value="16:00" class="border rounded px-2 py-1 w-32"></div></td>
-                                        <td class="py-2 px-4"><input type="number" value="60" class="border rounded px-2 py-1 w-32"></td>
+                                        <td class="py-2 px-4">
+                                            <div class="flex items-center space-x-2"><input type="time" value="10:00"
+                                                    class="border rounded px-2 py-1 w-32"><span>～</span><input
+                                                    type="time" value="16:00" class="border rounded px-2 py-1 w-32">
+                                            </div>
+                                        </td>
+                                        <td class="py-2 px-4"><input type="number" value="60"
+                                                class="border rounded px-2 py-1 w-32"></td>
                                         <td class="py-2 px-4 text-center"><input type="checkbox" checked></td>
                                     </tr>
                                     <tr class="border-b">
                                         <td class="py-2 px-4">火</td>
-                                        <td class="py-2 px-4"><div class="flex items-center space-x-2"><input type="time" value="10:00" class="border rounded px-2 py-1 w-32"><span>～</span><input type="time" value="16:00" class="border rounded px-2 py-1 w-32"></div></td>
-                                        <td class="py-2 px-4"><input type="number" value="60" class="border rounded px-2 py-1 w-32"></td>
+                                        <td class="py-2 px-4">
+                                            <div class="flex items-center space-x-2"><input type="time" value="10:00"
+                                                    class="border rounded px-2 py-1 w-32"><span>～</span><input
+                                                    type="time" value="16:00" class="border rounded px-2 py-1 w-32">
+                                            </div>
+                                        </td>
+                                        <td class="py-2 px-4"><input type="number" value="60"
+                                                class="border rounded px-2 py-1 w-32"></td>
                                         <td class="py-2 px-4 text-center"><input type="checkbox" checked></td>
                                     </tr>
                                     <tr class="border-b">
                                         <td class="py-2 px-4">水</td>
-                                        <td class="py-2 px-4"><div class="flex items-center space-x-2"><input type="time" value="10:00" class="border rounded px-2 py-1 w-32"><span>～</span><input type="time" value="16:00" class="border rounded px-2 py-1 w-32"></div></td>
-                                        <td class="py-2 px-4"><input type="number" value="60" class="border rounded px-2 py-1 w-32"></td>
+                                        <td class="py-2 px-4">
+                                            <div class="flex items-center space-x-2"><input type="time" value="10:00"
+                                                    class="border rounded px-2 py-1 w-32"><span>～</span><input
+                                                    type="time" value="16:00" class="border rounded px-2 py-1 w-32">
+                                            </div>
+                                        </td>
+                                        <td class="py-2 px-4"><input type="number" value="60"
+                                                class="border rounded px-2 py-1 w-32"></td>
                                         <td class="py-2 px-4 text-center"><input type="checkbox" checked></td>
                                     </tr>
                                     <tr class="border-b">
                                         <td class="py-2 px-4">木</td>
-                                        <td class="py-2 px-4"><div class="flex items-center space-x-2"><input type="time" value="10:00" class="border rounded px-2 py-1 w-32"><span>～</span><input type="time" value="16:00" class="border rounded px-2 py-1 w-32"></div></td>
-                                        <td class="py-2 px-4"><input type="number" value="60" class="border rounded px-2 py-1 w-32"></td>
+                                        <td class="py-2 px-4">
+                                            <div class="flex items-center space-x-2"><input type="time" value="10:00"
+                                                    class="border rounded px-2 py-1 w-32"><span>～</span><input
+                                                    type="time" value="16:00" class="border rounded px-2 py-1 w-32">
+                                            </div>
+                                        </td>
+                                        <td class="py-2 px-4"><input type="number" value="60"
+                                                class="border rounded px-2 py-1 w-32"></td>
                                         <td class="py-2 px-4 text-center"><input type="checkbox" checked></td>
                                     </tr>
                                     <tr class="border-b">
                                         <td class="py-2 px-4">金</td>
-                                        <td class="py-2 px-4"><div class="flex items-center space-x-2"><input type="time" value="10:00" class="border rounded px-2 py-1 w-32"><span>～</span><input type="time" value="16:00" class="border rounded px-2 py-1 w-32"></div></td>
-                                        <td class="py-2 px-4"><input type="number" value="60" class="border rounded px-2 py-1 w-32"></td>
+                                        <td class="py-2 px-4">
+                                            <div class="flex items-center space-x-2"><input type="time" value="10:00"
+                                                    class="border rounded px-2 py-1 w-32"><span>～</span><input
+                                                    type="time" value="16:00" class="border rounded px-2 py-1 w-32">
+                                            </div>
+                                        </td>
+                                        <td class="py-2 px-4"><input type="number" value="60"
+                                                class="border rounded px-2 py-1 w-32"></td>
                                         <td class="py-2 px-4 text-center"><input type="checkbox" checked></td>
                                     </tr>
                                     <tr class="border-b">
                                         <td class="py-2 px-4">土</td>
-                                        <td class="py-2 px-4"><div class="flex items-center space-x-2"><input type="time" class="border rounded px-2 py-1 w-32"><span>～</span><input type="time" class="border rounded px-2 py-1 w-32"></div></td>
-                                        <td class="py-2 px-4"><input type="number" class="border rounded px-2 py-1 w-32"></td>
+                                        <td class="py-2 px-4">
+                                            <div class="flex items-center space-x-2"><input type="time"
+                                                    class="border rounded px-2 py-1 w-32"><span>～</span><input
+                                                    type="time" class="border rounded px-2 py-1 w-32"></div>
+                                        </td>
+                                        <td class="py-2 px-4"><input type="number"
+                                                class="border rounded px-2 py-1 w-32"></td>
                                         <td class="py-2 px-4 text-center"><input type="checkbox"></td>
                                     </tr>
                                 </tbody>
@@ -772,15 +816,15 @@
                         <div class="card rounded-lg p-6 shadow-sm">
                             <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">スキル</h2>
                             <div id="user-skill-accordion-container" class="space-y-2">
-                                </div>
+                            </div>
                         </div>
                         <div class="mt-6 flex justify-end">
                             <button class="primary-button font-bold py-2 px-6 rounded">保存</button>
                         </div>
                     </div>
-                    </div>
+                </div>
 
-<div class="screen-content hidden" id="project-list-screen">
+                <div class="screen-content hidden" id="project-list-screen">
                     <h1 class="text-3xl font-bold mb-6 text-[var(--main-color)]">案件一覧</h1>
                     <div class="space-y-6">
                         <div class="card rounded-lg p-6 shadow-sm">
@@ -798,16 +842,18 @@
                                     </tr>
                                 </thead>
                                 <tbody id="project-list">
-                                    </tbody>
+                                </tbody>
                             </table>
                         </div>
                     </div>
-                    </div>
+                </div>
 
-<div class="screen-content hidden" id="project-detail-screen">
+                <div class="screen-content hidden" id="project-detail-screen">
                     <div class="flex justify-between items-center mb-6">
                         <h1 class="text-3xl font-bold text-[var(--main-color)]">案件詳細</h1>
-                        <button onclick="showScreen('project-list-screen', document.querySelector('a[onclick*=\'project-list-screen\']'))" class="detail-button font-bold py-2 px-4 rounded">戻る</button>
+                        <button
+                            onclick="showScreen('project-list-screen', document.querySelector('a[onclick*=\'project-list-screen\']'))"
+                            class="detail-button font-bold py-2 px-4 rounded">戻る</button>
                     </div>
                     <div class="space-y-6">
                         <div class="card rounded-lg p-6 shadow-sm">
@@ -852,7 +898,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="card rounded-lg p-6 shadow-sm">
                             <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">タスク基本情報</h2>
                             <p>フォーム</p>
@@ -877,6 +923,7 @@
         <nav id="attendance-sub-nav" class="-mb-px flex space-x-6">
             <a href="#" onclick="showAttendanceTab('attendance-business-calendar-wrapper', this)" class="sub-nav-link active py-4 px-1 text-gray-500 hover:text-gray-700">事業所カレンダー</a>
             <a href="#" onclick="showAttendanceTab('attendance-user-calendar-wrapper', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">利用者個別カレンダー</a>
+            <a href="#" onclick="showAttendanceTab('attendance-daily-status-wrapper', this)" class="sub-nav-link py-4 px-1 text-gray-500 hover:text-gray-700">日次状況</a>
         </nav>
     </div>
 
@@ -937,7 +984,32 @@
                     </tr>
                 </thead>
                 <tbody id="user-calendar-body" class="text-gray-700">
-                    </tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="attendance-daily-status-wrapper" class="attendance-tab-content hidden">
+        <div class="card rounded-lg p-6 shadow-sm">
+            <h2 class="text-xl font-bold mb-4 text-[var(--main-color)]">日次状況</h2>
+            <div class="flex items-center justify-center space-x-4 mb-4">
+                <button onclick="changeDailyStatusDate(-1)" class="primary-button p-2 rounded-full text-lg">&lt;</button>
+                <div class="text-center">
+                    <p id="daily-status-date-display" class="text-4xl font-bold text-[var(--main-color)]"></p>
+                </div>
+                <button onclick="changeDailyStatusDate(1)" class="primary-button p-2 rounded-full text-lg">&gt;</button>
+            </div>
+            <table class="min-w-full bg-white">
+                <thead class="bg-[var(--main-color)] text-white">
+                    <tr>
+                        <th class="py-3 px-4 text-left">利用者名</th>
+                        <th class="py-3 px-4 text-left">利用ステータス</th>
+                        <th class="py-3 px-4 text-left">利用時間</th>
+                        <th class="py-3 px-4 text-left">休憩時間(分)</th>
+                    </tr>
+                </thead>
+                <tbody id="daily-status-list" class="text-gray-700">
+                </tbody>
             </table>
         </div>
     </div>
@@ -945,8 +1017,7 @@
     <div id="calendar-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-6">
             <div class="flex justify-between items-center border-b pb-3 mb-4">
-                <h3 id="calendar-modal-title" class="text-xl font-bold text-[var(--main-color)]">日付設定
-                </h3>
+                <h3 id="calendar-modal-title" class="text-xl font-bold text-[var(--main-color)]">日付設定</h3>
                 <button onclick="closeCalendarModal()" class="text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
             </div>
             <form id="calendar-form">
@@ -1641,6 +1712,11 @@
                         <input type="email" id="account-email"
                             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[var(--main-color)] focus:border-[var(--main-color)]"
                             required>
+                    </div>
+                    <div id="account-password-wrapper">
+                        <label for="account-password" class="block text-sm font-medium text-gray-700">初期パスワード</label>
+                        <input type="password" id="account-password"
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[var(--main-color)] focus:border-[var(--main-color)]">
                     </div>
                 </div>
                 <div class="mt-6 flex justify-end space-x-3">

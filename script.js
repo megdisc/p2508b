@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     renderSubcontractorList(); // 外注先一覧の初期描画
     renderUserList(); // 利用者一覧の初期描画
     renderProjectList(); // 案件一覧の初期描画
+    renderDailyStatus(); // 日次状況の初期描画を追加
 
     // --- イベントリスナーのセットアップ ---
     setupEventListeners(); // ログイン、ログアウトなど汎用的なものをまとめる想定
@@ -39,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 【追加】利用者個別カレンダーのモーダルフォーム送信イベント
+    // 利用者個別カレンダーのモーダルフォーム送信イベント
     const userAttendanceForm = document.getElementById('user-attendance-form');
     if (userAttendanceForm) {
         userAttendanceForm.addEventListener('submit', (e) => {
@@ -739,6 +740,7 @@ function showScreen(screenId, navLink, isFinance = false) {
     if (screenId === 'attendance-screen') {
         showAttendanceTab('attendance-business-calendar-wrapper', document.querySelector('#attendance-sub-nav a'));
         renderBusinessCalendar();
+        renderDailyStatus();
     }
 }
 
@@ -859,6 +861,7 @@ function openAccountModal(account = null) {
     const modal = document.getElementById('account-modal');
     const modalTitle = document.getElementById('account-modal-title');
     const form = document.getElementById('account-form');
+    const passwordWrapper = document.getElementById('account-password-wrapper');
     
     form.reset();
     document.getElementById('account-id').value = '';
@@ -870,9 +873,11 @@ function openAccountModal(account = null) {
         document.getElementById('account-username').value = account.userName;
         document.getElementById('account-email').value = account.email;
         document.getElementById('account-email').readOnly = true;
+        passwordWrapper.classList.add('hidden'); // 編集時はパスワード欄を隠す
     } else {
         modalTitle.textContent = 'アカウント新規作成';
         document.getElementById('account-email').readOnly = false;
+        passwordWrapper.classList.remove('hidden'); // 新規作成時はパスワード欄を表示
     }
     
     modal.classList.remove('hidden');
@@ -993,12 +998,12 @@ function setupPaymentWageSettingsEventListeners() {
  * =================================================================
  */
 
-function openCalendarModal(day) {
+function openCalendarModal(day, month) {
     const modal = document.getElementById('calendar-modal');
     const modalTitle = document.getElementById('calendar-modal-title');
     const dateInput = document.getElementById('calendar-date');
     
-    modalTitle.textContent = `日付設定（${currentCalendarDate.getMonth() + 1}月${day}日）`;
+    modalTitle.textContent = `日付設定（${month}月${day}日）`;
     dateInput.value = day;
     
     modal.classList.remove('hidden');
@@ -1020,15 +1025,15 @@ function toggleTimePicker(show) {
 
 /**
  * =================================================================
- * 【追加】利用者個別カレンダー編集モーダル機能
+ * 利用者個別カレンダー編集モーダル機能
  * =================================================================
  */
-function openUserAttendanceModal(day) {
+function openUserAttendanceModal(day, month) {
     const modal = document.getElementById('user-attendance-modal');
     const modalTitle = document.getElementById('user-attendance-modal-title');
     const dateInput = document.getElementById('user-attendance-date');
     
-    modalTitle.textContent = `勤怠編集（${currentCalendarDate.getMonth() + 1}月${day}日）`;
+    modalTitle.textContent = `勤怠編集（${month}月${day}日）`;
     dateInput.value = day;
     
     modal.classList.remove('hidden');
@@ -1058,7 +1063,7 @@ function toggleUserTimePicker(show) {
 let currentCalendarDate = new Date(2025, 9, 1);
 
 /**
- * 【変更】カレンダー描画処理を共通化
+ * カレンダー描画処理を共通化
  */
 function generateCalendarBodyHTML(year, month, dayClickHandlerName) {
     const firstDay = new Date(year, month, 1).getDay();
@@ -1089,7 +1094,7 @@ function generateCalendarBodyHTML(year, month, dayClickHandlerName) {
                      content = `<div class="font-bold inline-block bg-[var(--accent-color)] rounded-full w-6 h-6 leading-6">${day}</div><div class="text-sm"><div>10:00</div><div>～</div><div>16:00</div></div>`;
                 }
 
-                html += `<td onclick="${dayClickHandlerName}('${day}')" class="py-3 px-4 h-32 text-center border align-top ${cellClass}">${content}</td>`;
+                html += `<td onclick="${dayClickHandlerName}('${day}', '${month + 1}')" class="py-3 px-4 h-32 text-center border align-top ${cellClass}">${content}</td>`;
                 day++;
             }
         }
@@ -1100,7 +1105,7 @@ function generateCalendarBodyHTML(year, month, dayClickHandlerName) {
 }
 
 /**
- * 【変更】共通化された描画処理を呼び出すように修正
+ * 共通化された描画処理を呼び出すように修正
  */
 function renderBusinessCalendar() {
     const calendarMonthYear = document.getElementById('calendar-month-year');
@@ -1124,4 +1129,40 @@ function renderBusinessCalendar() {
 function changeCalendarMonth(offset) {
     currentCalendarDate.setMonth(currentCalendarDate.getMonth() + offset);
     renderBusinessCalendar();
+}
+
+
+/**
+ * =================================================================
+ * 勤怠管理 日次状況 機能
+ * =================================================================
+ */
+let currentDailyStatusDate = new Date(); // 今日の日付を初期値に
+
+/**
+ * 日次状況のテーブルを描画する
+ */
+function renderDailyStatus() {
+    const dateDisplay = document.getElementById('daily-status-date-display');
+    const tableBody = document.getElementById('daily-status-list');
+    if (!dateDisplay || !tableBody) return;
+
+    dateDisplay.textContent = `${currentDailyStatusDate.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' })}`;
+
+    tableBody.innerHTML = dummyData.users.map((user, index) => `
+        <tr class="border-b hover:bg-gray-50 cursor-pointer" onclick="openUserAttendanceModal('${currentDailyStatusDate.getDate()}', '${currentDailyStatusDate.getMonth() + 1}')">
+            <td class="py-3 px-4">${user.userName}</td>
+            <td class="py-3 px-4">${index % 2 === 0 ? '利用' : '欠席'}</td>
+            <td class="py-3 px-4">${index % 2 === 0 ? '10:00 ~ 16:00' : '-'}</td>
+            <td class="py-3 px-4">${index % 2 === 0 ? '60' : '-'}</td>
+        </tr>
+    `).join('');
+}
+
+/**
+ * 日次状況の表示日付を変更する
+ */
+function changeDailyStatusDate(offset) {
+    currentDailyStatusDate.setDate(currentDailyStatusDate.getDate() + offset);
+    renderDailyStatus();
 }
