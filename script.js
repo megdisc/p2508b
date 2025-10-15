@@ -54,6 +54,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function setupEventListeners() {
     // ログイン、ログアウト、画面遷移などの既存のイベントリスナーがあればここにまとめる
+
+    // 案件詳細 > 実行段階テーブルのアコーディオンイベントリスナー
+    const execList = document.getElementById('task-execution-list');
+    if (execList) {
+        execList.addEventListener('click', (e) => {
+            const target = e.target;
+            if (target.classList.contains('toggle-details-btn')) {
+                const detailRow = document.getElementById(`task-detail-${target.dataset.taskId}`);
+                if (detailRow) {
+                    detailRow.classList.toggle('hidden');
+                    target.textContent = detailRow.classList.contains('hidden') ? '詳細' : '閉じる';
+                }
+            }
+        });
+    }
 }
 
 // 通貨フォーマット用の関数
@@ -516,10 +531,142 @@ function renderProjectList() {
             <td class="py-3 px-4">${project.projectName}</td>
             <td class="py-3 px-4">${project.status}</td>
             <td class="py-3 px-4 text-center">
-                <button onclick="showScreen('project-detail-screen')" class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button>
+                <button onclick="showScreen('project-detail-screen', document.querySelector('a[onclick*=\\'project-list-screen\\']'))" class="detail-button font-bold py-1 px-3 rounded text-sm">詳細</button>
             </td>
         </tr>
     `).join('');
+}
+
+/**
+ * 案件管理 > 案件詳細 > タスク一覧を描画する（3段階）
+ */
+function renderProjectTasks() {
+    const plan1List = document.getElementById('task-planning-1-list');
+    const plan2List = document.getElementById('task-planning-2-list');
+    const execList = document.getElementById('task-execution-list');
+
+    if (!plan1List || !plan2List || !execList) return;
+
+    // 便宜上、最初のプロジェクトのタスクを表示
+    const tasks = dummyData.projects[0].tasks || [];
+
+    // 実行段階テーブルのヘッダーを先にクリアして再描画
+    const execThead = execList.previousElementSibling;
+    execThead.innerHTML = `
+        <tr>
+            <th class="py-3 px-4 text-left w-1/4">タスク名</th>
+            <th class="py-3 px-4 text-left w-1/6">時期</th>
+            <th class="py-3 px-4 text-left">担当</th>
+            <th class="py-3 px-4 text-right">貢献度(%)</th>
+            <th class="py-3 px-4 text-right">進捗率(%)</th>
+            <th class="py-3 px-4 text-right">月次インセンティブ</th>
+            <th class="py-3 px-4 text-center w-24">操作</th>
+        </tr>
+    `;
+    
+    let plan1Html = '';
+    let plan2Html = '';
+    let execHtml = '';
+
+    tasks.forEach(task => {
+        const getAssigneeName = (assignee) => Object.values(assignee).join(', ');
+
+        // --- 計画段階1 & 2 （変更なし）---
+        plan1Html += `
+            <tr class="border-b">
+                <td class="py-2 px-2"><input type="text" value="${task.taskName}" class="border rounded w-full px-2 py-1"></td>
+                <td class="py-2 px-2">
+                    <select class="border rounded w-full px-2 py-1">
+                        <option value="内製" ${task.type === '内製' ? 'selected' : ''}>内製</option>
+                        <option value="外注" ${task.type === '外注' ? 'selected' : ''}>外注</option>
+                    </select>
+                </td>
+                <td class="py-2 px-2"><input type="number" value="${task.allocatedFee}" class="border rounded w-full px-2 py-1 text-right"></td>
+                <td class="py-2 px-2 text-center"><button class="danger-button font-bold py-1 px-3 rounded text-sm">削除</button></td>
+            </tr>
+        `;
+        plan2Html += `
+            <tr class="border-b">
+                <td class="py-2 px-4 align-middle">${task.taskName}</td>
+                <td class="py-2 px-4 align-middle">${task.type}</td>
+                <td class="py-2 px-2">
+                     <input type="text" value="${getAssigneeName(task.assignee)}" class="border rounded w-full px-2 py-1" readonly>
+                </td>
+            </tr>
+        `;
+
+        // --- 実行段階 ---
+        const sortedHistory = task.monthlyData.sort((a, b) => new Date(b.year, b.month - 1) - new Date(a.year, a.month - 1));
+        const latestMonthData = sortedHistory[0];
+        const pastMonthData = sortedHistory.slice(1);
+
+        // 共通の行HTML生成関数
+        const createRowHtml = (monthData, isLatest, isSubRow = false) => {
+            let contributionHtml = '';
+            let assigneeHtml = '';
+            let incentive = 0;
+
+            for (const role in task.assignee) {
+                const contributorName = task.assignee[role];
+                const contributionValue = monthData.contribution[role] || 0;
+                incentive += task.allocatedFee * (monthData.progress / 100) * (contributionValue / 100);
+
+                assigneeHtml += `<div class="h-9 flex items-center">${contributorName}</div>`;
+                if (isLatest) {
+                     contributionHtml += `<div class="h-9 flex items-center justify-end"><input type="number" value="${contributionValue}" class="border rounded w-20 px-2 py-1 text-right"></div>`;
+                } else {
+                     contributionHtml += `<div class="h-9 flex items-center justify-end">${contributionValue}</div>`;
+                }
+            }
+
+            return `
+                <td class="py-3 px-4 align-top">${!isSubRow ? task.taskName : ''}</td>
+                <td class="py-3 px-4 align-top">${monthData.year}年${monthData.month}月</td>
+                <td class="py-2 px-2 text-sm">${assigneeHtml}</td>
+                <td class="py-2 px-2 text-sm">${contributionHtml}</td>
+                <td class="py-2 px-2 align-top">
+                     ${isLatest ? `<input type="number" value="${monthData.progress}" class="border rounded w-full px-2 py-1 text-right">` : `<div class="text-right">${monthData.progress}</div>`}
+                </td>
+                <td class="py-3 px-4 text-right align-top">${formatCurrency(incentive)}</td>
+                <td class="py-3 px-4 text-center align-top">
+                    ${!isSubRow ? `<button class="detail-button font-bold py-1 px-3 rounded text-sm toggle-details-btn" data-task-id="${task.id}">実績</button>` : ''}
+                </td>
+            `;
+        };
+
+        // 最新月の行
+        execHtml += `<tr class="border-b">${createRowHtml(latestMonthData, true)}</tr>`;
+        
+        // 過去月の行（アコーディオンの中身）
+        pastMonthData.forEach(data => {
+            execHtml += `<tr class="border-b hidden task-detail-${task.id}">${createRowHtml(data, false, true)}</tr>`;
+        });
+    });
+
+    plan1List.innerHTML = plan1Html;
+    plan2List.innerHTML = plan2Html;
+    execList.innerHTML = execHtml;
+
+    // ボタンのテキストとイベントリスナーを再設定
+    document.querySelectorAll('.toggle-details-btn').forEach(btn => {
+        const detailRows = document.querySelectorAll(`.task-detail-${btn.dataset.taskId}`);
+        const isHidden = Array.from(detailRows).every(row => row.classList.contains('hidden'));
+        
+        btn.textContent = isHidden ? '実績' : '閉じる';
+
+        // 既存のイベントリスナーを削除してから追加（重複防止）
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+
+        newBtn.addEventListener('click', (e) => {
+            document.querySelectorAll(`.task-detail-${e.target.dataset.taskId}`).forEach(row => {
+                row.classList.toggle('hidden');
+            });
+            // ボタンテキストを再トグル
+            const isNowHidden = document.querySelector(`.task-detail-${e.target.dataset.taskId}`).classList.contains('hidden');
+            e.target.textContent = isNowHidden ? '実績' : '閉じる';
+        });
+    });
 }
 
 /**
@@ -736,6 +883,9 @@ function showScreen(screenId, navLink, isFinance = false) {
     }
     if (screenId === 'project-list-screen') {
         renderProjectList();
+    }
+    if (screenId === 'project-detail-screen') {
+        renderProjectTasks();
     }
     if (screenId === 'attendance-screen') {
         showAttendanceTab('attendance-business-calendar-wrapper', document.querySelector('#attendance-sub-nav a'));

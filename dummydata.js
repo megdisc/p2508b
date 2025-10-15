@@ -115,16 +115,6 @@ const dummyData = {
         { role: 'スタッフ', userName: '鈴木 一郎', email: 'suzuki@example.com', status: '有効' },
         { role: 'スタッフ', userName: '佐藤 花子', email: 'sato@example.com', status: '無効' }
     ],
-    // 施設情報設定 > 事業所設定
-    facilities: [
-        { officeNumber: '1234567890', officeName: 'サンプル事業所', status: '有効' }
-    ],
-    // ...（既存のデータは省略）
-    accounts: [
-        { role: '管理者', userName: '田中 太郎', email: 'tanaka@example.com', status: '有効' },
-        { role: 'スタッフ', userName: '鈴木 一郎', email: 'suzuki@example.com', status: '有効' },
-        { role: 'スタッフ', userName: '佐藤 花子', email: 'sato@example.com', status: '無効' }
-    ],
     users: [
         {
             userName: '山田 太郎',
@@ -138,9 +128,66 @@ const dummyData = {
         { userName: '佐藤 次郎', status: '契約中', skills: [] },
         { userName: '鈴木 三郎', status: '契約終了', skills: [] }
     ],
-    projects: [
-        { projectName: 'Webサイト制作A', status: '進行中' },
-        { projectName: 'デザイン制作B', status: '完了' },
-        { projectName: 'データ入力C', status: '進行中' }
+projects: [
+        {
+            projectName: 'Webサイト制作A',
+            status: '進行中',
+            tasks: [
+                {
+                    id: 1,
+                    taskName: '要件定義',
+                    type: '内製',
+                    assignee: { pm: '田中 太郎' },
+                    allocatedFee: 50000,
+                    monthlyData: [
+                        { year: 2025, month: 9, progress: 100, contribution: { pm: 100 } }
+                    ]
+                },
+                {
+                    id: 2,
+                    taskName: 'デザイン',
+                    type: '内製',
+                    assignee: { member: '山田 太郎' },
+                    allocatedFee: 150000,
+                    monthlyData: [
+                        { year: 2025, month: 9, progress: 100, contribution: { member: 100 } }
+                    ]
+                },
+                {
+                    id: 3,
+                    taskName: 'フロントエンド開発',
+                    type: '内製',
+                    assignee: { member: '佐藤 次郎' },
+                    allocatedFee: 150000,
+                    monthlyData: [
+                        { year: 2025, month: 9, progress: 50, contribution: { member: 100 } },
+                        { year: 2025, month: 10, progress: 30, contribution: { member: 100 } }
+                    ]
+                },
+                {
+                    id: 4,
+                    taskName: 'バックエンド開発',
+                    type: '外注',
+                    assignee: { subcontractor: '株式会社B' },
+                    allocatedFee: 100000,
+                    monthlyData: [
+                        { year: 2025, month: 9, progress: 60, contribution: { subcontractor: 100 } },
+                        { year: 2025, month: 10, progress: 30, contribution: { subcontractor: 100 } }
+                    ]
+                },
+                {
+                    id: 5,
+                    taskName: 'テスト・デプロイ',
+                    type: '内製',
+                    assignee: { pm: '田中 太郎', member: '佐藤 次郎' },
+                    allocatedFee: 50000,
+                    monthlyData: [
+                         { year: 2025, month: 10, progress: 0, contribution: { pm: 50, member: 50 } }
+                    ]
+                }
+            ]
+        },
+        { projectName: 'デザイン制作B', status: '完了', tasks: [] },
+        { projectName: 'データ入力C', status: '進行中', tasks: [] }
     ]
 };
